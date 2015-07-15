@@ -1,12 +1,12 @@
 module ApplicationHelper
 	
 	# Returns the full title on a per-page basis.
-	def full_title(page_title)
+	def full_title()
 		base_title = "ZEDK"
-		if page_title.empty?
+		if (!@maintitle.nil? && @maintitle.empty?)
 			base_title
 		else
-			"#{base_title} | #{page_title}"
+			"#{base_title}. #{@maintitle}"
 		end
 	end
 

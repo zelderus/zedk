@@ -33,28 +33,4 @@ $(function () {
 
 
 
-zerura.GoGo = function(txt) {
-	var dataSend = { msg: txt };
-	
-	$.ajax({
-		url: "/test",
-		data: dataSend,
-		success: function(jo){ 
-			zerura.Sucu(jo.tob);
-		},
-	  	error: function(x,m,e){ 
-	  		console.log("error " + m);
-	  	}
-	});
-	
-	return false;
-};
-
-
-
-
-zerura.Sucu = function(tob) {
- 	console.log(tob.name);
-};
-
 

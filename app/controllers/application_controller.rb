@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
 	# For APIs, you may want to use :null_session instead.
 	protect_from_forgery with: :exception
 
+	# установка заголовка странице
+	def set_title(title)
+		@maintitle = title
+	end
+
+	
 
 	# подключение стилей на страницу
 	def add_css(cssname, isExcplicitLink=false)

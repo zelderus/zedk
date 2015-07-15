@@ -5,3 +5,10 @@
 
 .jsgo_btn { padding: 4px; margin:4px 0; cursor: pointer; background-color: #FFF; width: 150px; text-align: center; border: 1px solid #666; }
 .jsgo_btn:hover { background-color: #DDD; }
+
+
+.ModuleLink { text-decoration: none; border-bottom: 2px dotted #229; color: #229; }
+.ModuleLink:hover {border-bottom: 2px dotted #779; color: #779;}
+
+.ModuleBlock { margin: 10px 0; padding: 20px; overflow: hidden;}
+.ModuleBlock .ModuleBlockLine { margin: 10px 0;}

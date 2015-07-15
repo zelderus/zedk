@@ -4,13 +4,11 @@ Blog2::Application.routes.draw do
 	root    'welcome#index'
 
 
-	resources :users
+
+	#shcoder
+	get    "shcoder" => "shcoder#index"
 
 
-	resources :articles
-	patch  "articles/:id/update" => "articles#update"
-	post   "articles/create" => "articles#create"
-	
 	
 	# test
 	match  "do/:name(/:text)", to: "welcome#txt", as: :bot, defaults: { name: 'bote', text: 'woop' }, via: [:get, :post]
@@ -18,8 +16,7 @@ Blog2::Application.routes.draw do
 	get    "testjson" => "welcome#testjson"
 	get    "ss" => "welcome#ss"
   
-	# redirect
-	get     "boton(/:name)", to: redirect("do/%{name}"), defaults: { name: 'boton' }
+
   
 
 end
