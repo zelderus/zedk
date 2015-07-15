@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= full_title(yield(:title)) %></title>
+
+  <%= stylesheet_link_tag 		"jquery-last" %>
+  <%= stylesheet_link_tag 		"zelder" %>
+  <%= stylesheet_link_tag    	"application", media: "all", "data-turbolinks-track" => false %>
+  <% get_csss do |c| %>
+		<%= stylesheet_link_tag(c) %>
+  <% end %>
+  <%= javascript_include_tag 	"jquery-last" %>
+  <%= javascript_include_tag 	"zelder" %>  
+  <%= javascript_include_tag 	"application", "data-turbolinks-track" => false %>
+  <%= javascript_include_tag 	"modules/modules" %>
+  <% get_jss do |j| %>
+		<%= javascript_include_tag(j) %>
+  <% end %>
+  <%= csrf_meta_tags %>
+
+
+
+	<script type="text/javascript">
+    $(function () {
+        zedk.DebugEnable();
+		//zedk.About();
+    });
+	</script>
+
+</head>
+<body>
+
+	<div class="header">
+		<div class="straight">
+			<div class="header_title">zldr rails</div>
+		</div>
+	</div>
+	
+	
+	
+	<div class="content">
+		<div class="straight">
+			<%= yield %>
+		</div>
+	</div>
+	
+	
+	
+	<div class="footer">
+		<div class="straight">
+			<span>zelder 2015</span>
+			<%= link_to 'Home', root_path %>
+		</div>
+	</div>
+
+</body>
+</html>

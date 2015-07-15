@@ -1,0 +1,13 @@
+<% provide(:title, 'BotoPage')%>
+
+<div>
+	hello, <%= @tob.name %> with '<%= @tob.text %>'
+</div>
+
+
+
+<%= link_to 'bot', controller: 'welcome', action: 'txt', name: @tbot.name, text: @tbot.text %>
+
+<%= link_to 'bot', bot_path, { 'name' => @tbot.name, 'text' => @tbot.text } %>
+
+
