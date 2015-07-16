@@ -1,4 +1,4 @@
-wd = '/home/zelder/rails/zerura/'
+wd = '/home/zelder/rails/zedk/'
 
 worker_processes 2
 working_directory wd

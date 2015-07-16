@@ -5,13 +5,13 @@
 
   <%= stylesheet_link_tag 		"jquery-last" %>
   <%= stylesheet_link_tag 		"zelder" %>
-  <%= stylesheet_link_tag    	"application", media: "all", "data-turbolinks-track" => false %>
+  <%= stylesheet_link_tag    	"application", media: "all" %>
   <% get_csss do |c| %>
 		<%= stylesheet_link_tag(c) %>
   <% end %>
   <%= javascript_include_tag 	"jquery-last" %>
   <%= javascript_include_tag 	"zelder" %>  
-  <%= javascript_include_tag 	"application", "data-turbolinks-track" => false %>
+  <%= javascript_include_tag 	"application" %>
   <%= javascript_include_tag 	"modules/modules" %>
   <% get_jss do |j| %>
 		<%= javascript_include_tag(j) %>
@@ -21,13 +21,17 @@
 
 
 	<script type="text/javascript">
-    $(function () {
-        zedk.DebugEnable();
+	$(function () {
+		<% if (Rails.env.development? || params['_jsdebug'] == '1' || params['_jsd'] == '1') %>
+			zedk.DebugEnable();
+		<% end %>
 		//zedk.About();
-    });
+	});
 	</script>
 
 </head>
+
+
 <body>
 
 	<div class="header">
@@ -36,7 +40,7 @@
 		</div>
 	</div>
 	
-	
+
 	
 	<div class="content">
 		<div class="straight">

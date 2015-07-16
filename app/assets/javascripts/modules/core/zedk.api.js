@@ -28,7 +28,7 @@ zedk.api.SendAjax = function(method, /*GET|POST*/type, dataSend, onSuccess, onEr
 		success: function(jo){ 
 			if (!jo || !jo.JsonZedk) { 
 				var errs = "Result is not a Json in '"+method+"' request"; 
-				zedk.ConsoleRed(errs); 
+				zedk.DebugError(errs); 
 				if (onError) onError(errs); 
 				return false; 
 			}
@@ -36,7 +36,7 @@ zedk.api.SendAjax = function(method, /*GET|POST*/type, dataSend, onSuccess, onEr
 			else if (onError) onError(jo.Message); 
 		},
 	  	error: function(x,m,e){ 
-	  		zedk.ConsoleRed("SendAjax error: " + e);
+	  		zedk.DebugError("SendAjax error: " + e);
 			if (onError) onError(m);
 	  	}
 	});

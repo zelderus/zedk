@@ -7,7 +7,7 @@
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-UNISERV=unicornserv
+UNISERV=zedkunicorn
 POSTGRESERV=postgresql	# zepostgre
 
 cRED='\033[0;31m'

@@ -3,7 +3,7 @@ module ApplicationHelper
 	# Returns the full title on a per-page basis.
 	def full_title()
 		base_title = "ZEDK"
-		if (!@maintitle.nil? && @maintitle.empty?)
+		if (@maintitle.nil? || @maintitle.empty?)
 			base_title
 		else
 			"#{base_title}. #{@maintitle}"

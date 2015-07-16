@@ -22,7 +22,7 @@ DESC=unico
 
 RUNAS=zelder
 UPATH=/home/zelder/rails/zedk/
-NAME=unicornserv
+NAME=zedkunicorn
 
 
 start() {

@@ -42,8 +42,8 @@ zedk.ConsoleYellow = function(msg) {
 zedk._debugIsEnabled = false;
 zedk.DebugEnable = function () { zedk._debugIsEnabled = true; }
 zedk.DebugMsg = function(msg) { if (zedk._debugIsEnabled) zedk.ConsoleYellow("-> " + msg); };
-
-
+zedk.Debug = function(msg) { zedk.DebugMsg(msg); };
+zedk.DebugError = function(msg) { if (zedk._debugIsEnabled) zedk.ConsoleRed("-> " + msg); };
 
 
 
