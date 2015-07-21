@@ -18,6 +18,11 @@ class Zeho
 	def get_all
 		@client.get_all(method(:on_error))	# передача метода, как аргумент
 	end
+
+	def get_test
+		@client.test_sql(method(:on_error))	# передача метода, как аргумент
+	end
+	
   
 	def insert(num, text)
 		@client.insert(num, text, method(:on_error))

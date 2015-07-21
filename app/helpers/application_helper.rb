@@ -9,6 +9,14 @@ module ApplicationHelper
 			"#{base_title}. #{@maintitle}"
 		end
 	end
+	# headers
+	def get_headers
+		html = "";
+		if (!@keyword.nil? && !@keyword.empty?) then html += "<meta content='#{@keyword}' name='keywords' />" end
+		if (!@desc.nil? && !@desc.empty?) then html += "<meta content='#{@desc}' name='description' />" end
+		
+		return html.html_safe
+	end
 
 
 	def get_csss

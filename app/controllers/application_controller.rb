@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require "protocols/json"
 
 class ApplicationController < ActionController::Base
@@ -9,7 +11,11 @@ class ApplicationController < ActionController::Base
 	def set_title(title)
 		@maintitle = title
 	end
-
+	# метатеги
+	def set_headers(keyword, desc)
+		@keyword = keyword
+		@desc = desc
+	end
 	
 
 	# подключение стилей на страницу

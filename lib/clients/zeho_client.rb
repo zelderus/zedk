@@ -18,6 +18,14 @@ module Clients
 		end
 
 
+		def test_sql(onError=nil)
+			sql = 'SELECT "Text" FROM "Zeho" WHERE "Id" = 8;'
+			dts = raw_sql(sql, onError)
+			dts = dts.map {|r| { 'Text' => r['Text'] } }
+			dts
+		end
+
+
 		def insert(num, text, onError=nil)
 			sql = 'INSERT INTO "Zeho"("Id", "Text") VALUES (@num, @text);'
 			req = DataLayer::Request.new	# безопасная передача параметров

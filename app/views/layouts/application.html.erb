@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= full_title() %></title>
-
-  <%= stylesheet_link_tag 		"jquery-last" %>
-  <%= stylesheet_link_tag 		"zelder" %>
-  <%= stylesheet_link_tag    	"application", media: "all" %>
-  <% get_csss do |c| %>
+	<title><%= full_title() %></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<%= get_headers %>
+	
+	<%= stylesheet_link_tag 		"jquery-last" %>
+	<%= stylesheet_link_tag 		"zelder" %>
+	<%= stylesheet_link_tag    		"application", media: "all" %>
+	<% get_csss do |c| %>
 		<%= stylesheet_link_tag(c) %>
-  <% end %>
-  <%= javascript_include_tag 	"jquery-last" %>
-  <%= javascript_include_tag 	"zelder" %>  
-  <%= javascript_include_tag 	"application" %>
-  <%= javascript_include_tag 	"modules/modules" %>
-  <% get_jss do |j| %>
+	<% end %>
+	<%= javascript_include_tag 		"jquery-last" %>
+	<%= javascript_include_tag 		"zelder" %>  
+	<%= javascript_include_tag 		"application" %>
+	<%= javascript_include_tag 		"modules/modules" %>
+	<% get_jss do |j| %>
 		<%= javascript_include_tag(j) %>
-  <% end %>
-  <%= csrf_meta_tags %>
+	<% end %>
+	<%= csrf_meta_tags %>
 
 
 
@@ -39,17 +41,17 @@
 			<div class="header_title">ZeDK</div>
 		</div>
 	</div>
-	
 
-	
+
+
 	<div class="content">
 		<div class="straight">
 			<%= yield %>
 		</div>
 	</div>
-	
-	
-	
+
+
+
 	<div class="footer">
 		<div class="straight">
 			<span>zelder 2015</span>
