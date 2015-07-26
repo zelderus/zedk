@@ -43,6 +43,26 @@
 		</div>
 	</div>
 
+	<% if (has_menu) then
+	mmFirst = true
+	%>
+	<div class="menu">
+		<div class="m-line menu-line">
+			<div class='m-separ-empty'></div>
+			<% get_menus do |mn| %>
+				<% if (!mmFirst) %>
+					<div class='m-separ'></div>
+				<% end %>
+				<% if (!mn[1].nil? && !mn[1].empty?) then %>
+					<a class='m-button' href='<%= mn[1] %>'><%= mn[0] %></a>
+				<% else %>
+					<div class='m-path'><%= mn[0] %></div>
+				<% end %>
+				<% mmFirst = false; %>
+			<% end %>
+		</div>
+	</div>
+	<% end %>
 
 
 	<div class="content">

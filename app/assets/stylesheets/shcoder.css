@@ -2,3 +2,7 @@
 
 .shcoder-main { padding: 20px 0 20px 0;}
 .shcoder-main .shc-title {}
+
+.shc-list { margin: 10px 0; padding: 8px;}
+.shc-list .shc-list_link { display: block; margin: 2px 0 4px 0;}
+

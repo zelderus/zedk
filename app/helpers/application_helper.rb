@@ -18,14 +18,25 @@ module ApplicationHelper
 		return html.html_safe
 	end
 
-
+	# menu
+	def has_menu
+		return !@menus.nil?
+	end
+	def get_menus
+		if (!has_menu) then return end
+		@menus.each do |mn|
+			yield mn
+		end
+	end
+	
+	# styles
 	def get_csss
 		if (@csss.nil?) then return end
 		@csss.each do |css|
 			yield css
 		end
 	end
-
+	# scripts
 	def get_jss
 		if (@jss.nil?) then return end
 		@jss.each do |js|

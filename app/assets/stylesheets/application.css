@@ -44,6 +44,15 @@ table td { padding: 4px; }
 .header .header_title { display: inline-block; width: 120px; height: 40px; margin: 0;  padding: 0;}
 .header .logo_link { display: block;width: 100%; height: 100%; margin: 0;  padding: 0;background-image: url("logo.svg?v=1.2");  background-position: 0 0;  color: transparent;  outline: 0;  -webkit-background-size: 100% 100%;  background-size: 100% 100%;}
 
+/*
+ *	Menu 
+ */
+.menu { margin: 0; padding: 0px;  background-color: #5274BC; color: #fefefe; border-bottom: 1px solid #666699;	overflow:hidden; font: 16px/20px Arial,Helvetica,sans-serif;color:#FFF;}
+.menu-line { max-width: 1500px;  min-width: 820px!important;   height: 36px; padding: 6px 0 1px;  margin-bottom: 0px; }
+.menu .m-button { text-align: center; padding: 4px 2px; display: inline-block; color:#FFF;position: relative; top: -10px;}
+.menu .m-path {display: inline-block; color:#DDD;position: relative; top: -10px;}
+.menu .m-separ-empty {display: inline-block; width: 1px; height:30px;}
+.menu .m-separ { display: inline-block; width: 10px; height:30px; border-right: 2px; color: #800;background-image: url("m-separ.svg?v=1.2");  background-position: 0 0;  color: transparent;  outline: 0;}
 
 /*
  *	Content 

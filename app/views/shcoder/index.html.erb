@@ -10,6 +10,14 @@
 <div class='shcoder-main'>
 	<h1 class='shc-title page_title'>shcoder</h1>
 	
+	
+	<div class='shc-list'>
+		<% @lastArticles.each do |article| %>
+			<a class='shc-list_link' href='<%=url_for controller: 'shcoder', action: 'article', idname: article[0] %>'><%= article[1] %></a>
+		<% end %>
+	</div>
+	
+	
 </div>
 
 

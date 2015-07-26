@@ -17,6 +17,11 @@ class ApplicationController < ActionController::Base
 		@desc = desc
 	end
 	
+	# меню
+	def set_menu(hashMenu)
+		@menus = hashMenu #Hash.new
+		
+	end
 
 	# подключение стилей на страницу
 	def add_css(cssname, isExcplicitLink=false)

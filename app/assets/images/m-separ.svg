@@ -1,0 +1,15 @@
+<svg width="10" height="30" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <radialGradient cy="0.46875" cx="0.510437" spreadMethod="pad" id="svg_1">
+   <stop offset="0" stop-color="#115191"/>
+   <stop offset="0.725281" stop-color="#eeae6e"/>
+   <stop offset="0.733093" stop-opacity="0" stop-color="0"/>
+  </radialGradient>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <line id="svg_4" y2="7.5625" x2="4.564618" y1="7.5625" x1="0.875" stroke-width="5" stroke="#124d87" fill="none"/>
+  <line id="svg_5" y2="22.5625" x2="4.689618" y1="22.5625" x1="1" stroke-width="5" stroke="#124d87" fill="none"/>
+  <line stroke="#124d87" id="svg_6" y2="15" x2="9.002118" y1="15" x1="6.5625" stroke-width="5" fill="none"/>
+ </g>
+</svg>

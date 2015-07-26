@@ -7,7 +7,7 @@ Blog2::Application.routes.draw do
 
 	#shcoder
 	get    "shcoder" => "shcoder#index"
-
+	get    "shcoder/article(/:idname)" => "shcoder#article"
 
 	
 	# test
