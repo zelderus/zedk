@@ -20,6 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ru:
+  main_headers_title: "Сервисы"
+  main_headers_keyword: "ZeDK, services"
+  main_headers_desc: "Сборник сервисов."
+  
   shcoder_headers_title: "Shcoder"
   shcoder_headers_keyword: "Shcoder"
   shcoder_headers_desc: "Статьи, триксы и полезности в коде и не только."

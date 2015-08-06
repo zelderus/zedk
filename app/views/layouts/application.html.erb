@@ -3,6 +3,9 @@
 <head>
 	<title><%= full_title() %></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Kirill Kotenko">
 	<%= get_headers %>
 	
 	<%= stylesheet_link_tag 		"jquery-last" %>
@@ -43,27 +46,8 @@
 		</div>
 	</div>
 
-	<% if (has_menu) then
-	mmFirst = true
-	%>
-	<div class="menu">
-		<div class="m-line menu-line">
-			<div class='m-separ-empty'></div>
-			<% get_menus do |mn| %>
-				<% if (!mmFirst) %>
-					<div class='m-separ'></div>
-				<% end %>
-				<% if (!mn[1].nil? && !mn[1].empty?) then %>
-					<a class='m-button' href='<%= mn[1] %>'><%= mn[0] %></a>
-				<% else %>
-					<div class='m-path'><%= mn[0] %></div>
-				<% end %>
-				<% mmFirst = false; %>
-			<% end %>
-		</div>
-	</div>
-	<% end %>
-
+	<%= render "shared/menu" %>
+	
 
 	<div class="content">
 		<div class="m-line content-line">

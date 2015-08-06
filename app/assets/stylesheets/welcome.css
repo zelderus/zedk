@@ -7,8 +7,9 @@
 .jsgo_btn:hover { background-color: #DDD; }
 
 
-.ModuleLink { text-decoration: none; border-bottom: 2px dotted #229; color: #229; }
+.ModuleLink { float: left;text-decoration: none; border-bottom: 2px dotted #229; color: #229; font: 28px/32px Arial,Helvetica,sans-serif;}
 .ModuleLink:hover {border-bottom: 2px dotted #779; color: #779;}
+.ModuleTitle {  float: left;  margin: 4px 0 0 10px;  font: 22px/26px Arial,Helvetica,sans-serif;}
 
 .ModuleBlock { margin: 10px 0; padding: 20px; overflow: hidden;}
 .ModuleBlock .ModuleBlockLine { margin: 10px 0;}
