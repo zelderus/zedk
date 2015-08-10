@@ -7,8 +7,19 @@
 </script>
 	
 
-<div class='shcoder-main'>
-	<h1 class='shc-title page_title'><%= @article.name %></h1>
+<div class='ShcoderMain'>
+
+	<div class='ShcArticle'>
+		<div class='ShcArticle_Date'><%= @article.date %></div>
+		<h1 class='ShcArticle_Title page_title'><%= @article.title %></h1>	
+		<div class='ShcArticle_Teaser'><%= @article.teaser %></div>
+
+		<div class='ShcArticle_Text'>
+			<%= @article.text %>
+		</div>
+
+	</div>
+	
 	
 </div>
 

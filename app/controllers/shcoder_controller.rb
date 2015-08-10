@@ -37,10 +37,10 @@ class ShcoderController < ApplicationController
 		end
 	
 		# page
-		set_title(@article.name)
-		set_headers(@article.name, @article.teaser)
+		set_title(@article.title)
+		set_headers(@article.title, @article.teaser)
 		add_js('shcoder')
-		set_menu([ ['Shcoder', '/shcoder'], [@article.name, ''] ])
+		set_menu([ ['Shcoder', '/shcoder'], [@article.title, ''] ])
 		
 	end
 	

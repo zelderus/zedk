@@ -1,5 +1,5 @@
 require "datalayer/baseclient"
-require "models/shcoder/shcoder_article"
+#require "models/shcoder/shcoder_article"
 
 module Clients
 
@@ -12,27 +12,25 @@ module Clients
 
 
 		def get_last_articles(count = 10, onError=nil)
-			lastArticles = Hash.new
-			#lastArticles['Arttt1'] = 'Article 1'
-			#lastArticles['Arttt2'] = 'Article 2'
-			#lastArticles['Arttt3'] = 'Article 3'
+			#lastArticles = Hash.new
 			
-			sql = 'SELECT z.* FROM "Shcoder_Article" z order by "Name" desc limit @top'
+			sql = 'SELECT z.* FROM "tShcoder_Article" z order by "CreateDate" desc limit @top'
 			req = DataLayer::Request.new
 			req.set sql
 			req.set_int("top", count)
 			dts = raw_sql(req, onError)
 			
 			# to model
-			dts.each {|r| lastArticles[r['IdName']] = r['Name'] }
-			lastArticles
+			#dts.each {|r| lastArticles[r['IdName']] = r['IdName'] }
+			#lastArticles
+			dts
 		end
 		
 		
 		def get_article_by_idname(idname, onError=nil)
 			articleIdName = idname
 			# sql
-			sql = 'SELECT z.* FROM "Shcoder_Article" z Where z."IdName" = @idname limit 1;'
+			sql = 'SELECT z.* FROM "tShcoder_Article" z Where z."IdName" = @idname limit 1;'
 			req = DataLayer::Request.new
 			req.set sql
 			req.set_str("idname", articleIdName)
@@ -41,12 +39,11 @@ module Clients
 			entity = dts[0]
 			
 			# to model
-			article = ::ShcoderArticle.new
-			article.name = entity['Name']
-			article.teaser = entity['Teaser']
-			
-			
-			return article
+			#article = ::ShcoderArticle.new
+			#article.name = entity['Title']
+			#article.teaser = entity['Teaser']
+			#return article
+			return entity;
 		end
 
 

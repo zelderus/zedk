@@ -7,13 +7,18 @@
 </script>
 	
 
-<div class='shcoder-main'>
-	<h1 class='shc-title page_title'>shcoder</h1>
+<div class='ShcoderMain'>
+	<h1 class='ShcTitle page_title'>Последние обновления</h1>
 	
 	
-	<div class='shc-list'>
+	<div class='ShcList'>
 		<% @lastArticles.each do |article| %>
-			<a class='shc-list_link' href='<%=url_for controller: 'shcoder', action: 'article', idname: article[0] %>'><%= article[1] %></a>
+			<div class='ShcList_Block'>
+				<div class='ShcBlock_Date'><%= article.date %></div>
+				<a class='ShcBlock_Link' href='<%=url_for controller: 'shcoder', action: 'article', idname: article.idname %>'><%= article.title %></a>	
+				<div class='ShcBlock_Teaser'><%= article.teaser %></div>
+				<div class='clear'></div>
+			</div>
 		<% end %>
 	</div>
 	

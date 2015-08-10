@@ -1,8 +1,16 @@
 
 
-.shcoder-main { padding: 20px 0 20px 0;}
-.shcoder-main .shc-title {}
+.ShcoderMain { padding: 20px 0 20px 0;}
+.ShcoderMain .ShcTitle {}
 
-.shc-list { margin: 10px 0; padding: 8px;}
-.shc-list .shc-list_link { display: block; margin: 2px 0 4px 0;}
+.ShcList { margin: 10px 0; padding: 8px;}
+.ShcList .ShcList_Block { overflow: hidden; margin: 8px 0 0 0; padding: 0 0 4px 0; border-bottom:1px dotted #666;}
+.ShcList .ShcList_Block .ShcBlock_Date { margin: 2px 12px 0px 0px; font: 16px/22px Arial,Helvetica,sans-serif; float:left;color:#aaa;}
+.ShcList .ShcList_Block .ShcBlock_Link { display: block; margin: 0; font: 22px/26px Arial,Helvetica,sans-serif;}
+.ShcList .ShcList_Block .ShcBlock_Teaser { font-size: 16px; margin: 6px 0 0 92px;font-style: italic;}
 
+.ShcArticle {}
+.ShcArticle .ShcArticle_Date {font: 16px/22px Arial,Helvetica,sans-serif; color:#aaa;}
+.ShcArticle .ShcArticle_Title { display: block; margin: 0; font: 24px/28px Arial,Helvetica,sans-serif;}
+.ShcArticle .ShcArticle_Teaser { font-size: 16px; color:#666; font-style: italic; margin: 10px 0 0 0;}
+.ShcArticle .ShcArticle_Text { font-size: 14px; margin: 20px 0 10px 0px; padding: 10px; border-left: 1px solid #aaa; border-top: 1px solid #aaa;}
