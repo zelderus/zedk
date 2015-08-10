@@ -11,10 +11,9 @@ class ShcoderController < ApplicationController
 		add_js('shcoder')
 		set_menu([ ['Shcoder'] ])
 		
-		# client
-		client = ShcoderHelper::ShcoderManager.new
 		# get articles
 		pageSize = 10
+		client = ShcoderHelper::ShcoderManager.new
 		@lastArticles = client.get_last_articles(pageSize)
 		
 		
@@ -25,10 +24,10 @@ class ShcoderController < ApplicationController
 	
 	
 	def article
-		# client
-		client = ShcoderHelper::ShcoderManager.new
-		# get article
+		# params
 		articleIdName = params[:idname]
+		# get article
+		client = ShcoderHelper::ShcoderManager.new
 		@article = client.get_article_by_idname(articleIdName)
 
 		if (@article.nil?)

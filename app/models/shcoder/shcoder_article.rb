@@ -28,9 +28,11 @@ end
 class ShcoderArticle < ShcoderArticleTeaser
 	attr_accessor :text
   
-  	def initialize()
+  	def initialize(entity = nil)
+  		if (!entity.nil?) then from_entity entity end
 
 	end
+
 
   	# на основе сущности
 	def from_entity entity

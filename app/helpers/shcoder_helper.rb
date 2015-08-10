@@ -36,9 +36,7 @@ module ShcoderHelper
 			entity = @client.get_article_by_idname(idname, method(:on_error))
 			if (entity.nil?) then return nil end
 			# to model
-			article = ::ShcoderArticle.new
-			article.from_entity entity
-			return article
+			return ::ShcoderArticle.new entity
 		end
 		
 		
