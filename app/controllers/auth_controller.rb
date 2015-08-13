@@ -44,9 +44,7 @@ class AuthController < BaseController
 		# текущий пользователь из сессии
 		def current_user_from_session
 			@user ||= session[:current_user_id] && get_user_manager().find_by(id: session[:current_user_id])
-			to_d (session)
-
-			@user
+			return @user
 		end
 		# очиска сессии
 		def user_session_clear

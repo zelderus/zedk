@@ -1,8 +1,17 @@
 
+<% if (!Rails.env.development?) then return end %>
 
-<% if (Rails.env.development? && (!@debug_text.nil? || !@debug_model.nil?)) %>
+<% if (!@debug_text.nil? || !@debug_model.nil?) %>
 	<div class='debug-block'>
 		<div><%= @debug_text %></div>
 		<div><%= @debug_model %></div>
+	</div>
+<% end %>
+
+<% if (flash.count > 0) %>
+	<div class='debug-flash'>
+		<% flash.each do |f| %>
+			<div><%= f %></div>
+		<% end %>
 	</div>
 <% end %>

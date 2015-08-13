@@ -25,6 +25,7 @@ module AuthHelper
 		def find_by id
 			# TODO: поиск пользователя в базе по ID
 			user = AuthHelper::SiteUser.new
+			user.id = id;
 			user.name = 'user 1';
 			
 			return user

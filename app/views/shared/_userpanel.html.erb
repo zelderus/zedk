@@ -1,8 +1,5 @@
 
 
-
-<div><%= flash['user_logined_now'] %></div>
-
 <% if (@user.nil?) %>
 
 	<div>
@@ -18,9 +15,12 @@
 else
 %>
 
-	<div>
-		<%= @user.name %>
-	</div>
+	<div class='usp-user'><%= @user.name %></div>
+	<a href='<%= url_for :controller => 'auth', :action => 'user_destroy' %>' class='ctrl-btn ctrl-btn-exit'>Выход</a>
 
 
+<% end %>
+
+<% if (!flash['user_logined_now'].nil?) %>
+	<div class='usp-flash'><%= flash['user_logined_now'] %></div>
 <% end %>
