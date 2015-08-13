@@ -1,12 +1,15 @@
 
 
-class AuthController < ActionController::Base
+class AuthController < BaseController
 	before_filter :authorize
 	
 
 	# "Create" a login, aka "log the user in"
 	def user_login
-		if @user = get_user_manager().authenticate(params[:username], params[:password])
+		data = get_auth_params()
+		@user = get_user_manager().authenticate(data['name'], data['pass'])
+		if !@user.nil?
+			flash['user_logined_now'] = t('auth_welcome_text', :name => @user.name);
 			current_user_to_session()
 			current_user_to_cookie()
 			redirect_to root_url
@@ -19,7 +22,7 @@ class AuthController < ActionController::Base
 		redirect_to root_url
 	end
 
-
+	
 
 
 	protected
@@ -41,6 +44,9 @@ class AuthController < ActionController::Base
 		# текущий пользователь из сессии
 		def current_user_from_session
 			@user ||= session[:current_user_id] && get_user_manager().find_by(id: session[:current_user_id])
+			to_d (session)
+
+			@user
 		end
 		# очиска сессии
 		def user_session_clear
@@ -76,6 +82,15 @@ class AuthController < ActionController::Base
 				current_user_to_session()
 			end
 			return @user
+		end
+
+		# параметры аторизации присланные пользователем
+		def get_auth_params
+			un = params[:un];
+			up = params[:up];
+			# TODO: расшифровка после скрипта
+
+			return { name: un, pass: up };
 		end
 
 end

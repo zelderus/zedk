@@ -3,6 +3,9 @@ Blog2::Application.routes.draw do
 	get     "welcome/index"
 	root    'welcome#index'
 
+	# auth
+	get    "usrlog" => "auth#user_login"
+	get    "usrext" => "auth#user_destroy"
 
 
 	#shcoder

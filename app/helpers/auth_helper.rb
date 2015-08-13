@@ -15,17 +15,19 @@ module AuthHelper
 		# определение пользователя
 		def authenticate userName, userPass
 			# TODO: определение пользователя
-
-			return false;
+			userId = 1
+			#return nil;
+			
+			return find_by userId
 		end
 
 		# пользователь
 		def find_by id
 			# TODO: поиск пользователя в базе по ID
-			@user = AuthHelper::SiteUser.new
-			@user.name = 'user 1';
-
-			return @user
+			user = AuthHelper::SiteUser.new
+			user.name = 'user 1';
+			
+			return user
 		end
 
 

@@ -5,10 +5,10 @@ module ShcoderHelper
 
 
 	class ShcoderManager
+
 		def initialize()
 			@deb = ""
 			@client = Clients::ShcoderClient.new
-
 		end
 
 		# отладочная информация
@@ -47,6 +47,7 @@ module ShcoderHelper
 		def on_error e
 			@deb = e.to_s
 		end
+		
 	end
 
 

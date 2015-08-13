@@ -1,0 +1,26 @@
+
+
+
+<div><%= flash['user_logined_now'] %></div>
+
+<% if (@user.nil?) %>
+
+	<div>
+		<span>log in..</span>
+		<form action='<%= url_for :controller => 'auth', :action => 'user_login'  %>'>
+			<span><input type='text' name='un'/></span>
+			<span><input type='password' name='up'/></span>
+			<input type='submit' name='LogIn' value='LogIn'/>
+		</form>
+	</div>
+
+<% 
+else
+%>
+
+	<div>
+		<%= @user.name %>
+	</div>
+
+
+<% end %>

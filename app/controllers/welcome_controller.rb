@@ -6,7 +6,6 @@ class WelcomeController < ApplicationController
 		set_headers(t('main_headers_keyword'), t('main_headers_desc'))
 
 
-
 	end
 
 
