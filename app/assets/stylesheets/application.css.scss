@@ -37,13 +37,20 @@ table td { padding: 4px; }
 .m-line {   white-space: nowrap;  max-width: 1040px;  margin: 0 auto;  padding: 0 20px 0 72px;  min-width: 820px!important;}
 .page_title {  font: 28px/32px Arial,Helvetica,sans-serif;}
 
-
+/*
+ *	Controls 
+ */
 .ctrl-btn { vertical-align: top; text-decoration: none;  padding: 4px 12px 9px 12px;    color: #292f33; background-color: #f5f8fa;   background-image: linear-gradient(#fff,#f5f8fa); background-repeat: no-repeat;    border: 1px solid #e1e8ed;    border-radius: 4px;    color: #66757f;    cursor: pointer;    display: inline-block;    font-size: 14px;    font-weight: bold;    line-height: normal;    padding: 8px 16px;    position: relative;}
 .ctrl-btn:hover {color: #292f33;    text-decoration: none;    background-color: #e1e8ed;    background-image: linear-gradient(#fff,#e1e8ed);   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)";    border-color: #e1e8ed;}
 .ctrl-btn.ctrl-btn-normal {background-color: #f5f8fa;   background-image: linear-gradient(#fff,#f5f8fa);}
 .ctrl-btn.ctrl-btn-normal:hover {}
 .ctrl-btn.ctrl-btn-exit {}
 .ctrl-btn.ctrl-btn-exit:hover {}
+.ctrl-btn.ctrl-btn-enter {}
+.ctrl-btn.ctrl-btn-enter:hover {}
+
+.ctrl-inp {width: 150px;height: 28px;padding: 2px 4px;font-size: 14px;font-family: Arial,Helvetica,sans-serif;}
+.ctrl-inp.ctrl-inp-norm {}
 
 
 /*
@@ -59,9 +66,9 @@ table td { padding: 4px; }
  */
 .user-panel {height: 36px;top: 15px;position: absolute;float: right;right: 10px;}
 .user-panel .usp-flash {overflow: hidden;padding: 20px;border: 1px solid #006622;background-color: #E5FFEE;z-index: 1;top: 42px;position: absolute;float: left;box-shadow: 2px 2px 3px #666;color: #006622;width: 240px;right: 10px;text-align: center;}
-.user-panel .usp-user {float: right;margin: 0px 10px 0px 0px;padding: 3px 0px 0px;font: 22px/26px Arial,Helvetica,sans-serif;}
-.user-panel .ctrl-btn-exit {float: right;}
-
+.user-panel .usp-user {display: inline-block;margin: 0px 10px 0px 0px;padding: 3px 0px 0px;font: 22px/26px Arial,Helvetica,sans-serif;}
+.user-panel .ctrl-btn-exit {display: inline-block;}
+.user-panel .ctrl-inp-norm {width: 150px;}
 
 /*
  *	Menu 

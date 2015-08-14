@@ -7,7 +7,7 @@ class AuthController < BaseController
 	# "Create" a login, aka "log the user in"
 	def user_login
 		data = get_auth_params()
-		@user = get_user_manager().authenticate(data['name'], data['pass'])
+		@user = get_user_manager().authenticate(data[:name], data[:pass])
 		if !@user.nil?
 			flash['user_logined_now'] = t('auth_welcome_text', :name => @user.name);
 			current_user_to_session()
@@ -86,6 +86,7 @@ class AuthController < BaseController
 		def get_auth_params
 			un = params[:un];
 			up = params[:up];
+			ub = params[:ub];
 			# TODO: расшифровка после скрипта
 
 			return { name: un, pass: up };

@@ -3,11 +3,10 @@
 <% if (@user.nil?) %>
 
 	<div>
-		<span>log in..</span>
-		<form action='<%= url_for :controller => 'auth', :action => 'user_login'  %>'>
-			<span><input type='text' name='un'/></span>
-			<span><input type='password' name='up'/></span>
-			<input type='submit' name='LogIn' value='LogIn'/>
+		<form class='upanel-from-login' action='<%= url_for :controller => 'auth', :action => 'user_login'  %>'>
+			<span><%= render "controls/input", type: 'text', name: 'un' %></span>
+			<span><%= render "controls/input", type: 'password', name: 'up' %></span>
+			<%= render "controls/button", name: 'LogIn', submit: 'Вход', run: 'zedk.panel.UserLoginFromForm', title: 'Выход', style: 'enter', datas: { 'url' => url_for(:controller => 'auth', :action => 'user_login') } %>
 		</form>
 	</div>
 
@@ -16,10 +15,16 @@ else
 %>
 
 	<div class='usp-user'><%= @user.name %></div>
-	<a href='<%= url_for :controller => 'auth', :action => 'user_destroy' %>' class='ctrl-btn ctrl-btn-exit'>Выход</a>
+	<%= render "controls/button", name: 'ExitBtn', href: url_for(controller: 'auth', action: 'user_destroy'), title: 'Выход', style: 'exit' %>
 
+	
 
 <% end %>
+
+
+
+
+
 
 <% if (!flash['user_logined_now'].nil?) %>
 	<div class='usp-flash'><%= flash['user_logined_now'] %></div>

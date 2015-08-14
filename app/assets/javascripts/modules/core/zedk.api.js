@@ -57,5 +57,20 @@ zedk.api.Post = function(method, dataSend, onSuccess, onError) {
 
 
 
-
+/*
+*	Execute - вызов функции по имени
+*
+*		zedk.api.Execute('zedk.controls.Test', window, this)
+*		zedk.api.Execute('controls.Test', zedk, this)
+*/
+zedk.api.Execute = function (functionName, context /*, args */) {
+	if (!context) context = window;
+	var args = [].slice.call(arguments).splice(2);
+	var namespaces = functionName.split(".");
+	var func = namespaces.pop();
+	for(var i = 0; i < namespaces.length; i++) {
+		context = context[namespaces[i]];
+	}
+	return context[func].apply(this, args);
+};
 

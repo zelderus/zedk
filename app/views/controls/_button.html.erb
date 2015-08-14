@@ -1,0 +1,73 @@
+
+<%# 
+	name 	- имя
+
+	href 	- линк, как правило через url_for :controller => 'welcome', :action => 'index'
+	run		- имя метода скрипта для выполнения
+	submit	- название кнопки отправки формы
+
+	title 	- название
+	style 	- тип
+	clss 	- имя классса стиля
+	datas	- хэш данных, аля datas: {'txt'=>'some hello1', 'val'=>'vall2'}
+ %>
+
+ <%
+ 	type = 'anchor'
+ 	if (defined? href) then type = 'anchor' end
+ 	if (defined? run) then type = 'btn' end
+ 	if (defined? submit) then type = 'submit' end
+
+	if (!defined? href) then href = url_for(:controller => 'welcome', :action => 'index') end
+	if (!defined? style) then style = 'normal' end
+	if (!defined? clss) then clss = '' end
+	if (!defined? name) then name = SecureRandom.uuid end
+	if (!defined? datas) then datas = Hash.new end
+
+ %>
+
+
+ <% if (type == 'anchor') %>
+
+	<a 
+		href='<%=href%>' 
+		name='<%=name%>' 
+		class='ctrl-btn ctrl-btn-<%=style%> <%=clss%>' 
+		<% datas.each {|key, value| %>
+			data-<%=key%>='<%=value%>'
+		<% } %> 
+	>
+	<%=title%>
+	</a>
+
+<% 
+elsif (type == 'btn')
+%>
+
+	<div 
+		data-run='<%=run%>' 
+		name='<%=name%>' 
+		class='ctrl-btn ctrl-btn-<%=style%> <%=clss%>' 
+		<% datas.each {|key, value| %>
+			data-<%=key%>='<%=value%>'
+		<% } %> 
+	>
+	<%=title%>
+	</div>
+
+<% 
+elsif (type == 'submit')
+%>
+
+	<input 
+		class='ctrl-btn ctrl-btn-enter' 
+		type='submit' 
+		data-run='<%=run%>' 
+		name='<%=name%>' 
+		value='<%=submit%>'
+		<% datas.each {|key, value| %>
+			data-<%=key%>='<%=value%>'
+		<% } %> 
+		/>
+
+<% end %>

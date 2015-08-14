@@ -17,8 +17,12 @@ module AuthHelper
 			# TODO: определение пользователя
 			userId = 1
 			#return nil;
+			user = AuthHelper::SiteUser.new
+			user.id = userId;
+			user.name = userName;
+			return user;
 			
-			return find_by userId
+			#return find_by userId
 		end
 
 		# пользователь
