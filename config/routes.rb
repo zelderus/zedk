@@ -4,8 +4,8 @@ Blog2::Application.routes.draw do
 	root    'welcome#index'
 
 	# auth
-	get    "usrlog" => "auth#user_login"
-	get    "usrext" => "auth#user_destroy"
+	match	"usrlog" => "auth#user_login", via: [:get, :post]
+	get		"usrext" => "auth#user_destroy"
 
 
 	#shcoder

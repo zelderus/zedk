@@ -27,5 +27,5 @@ else
 
 
 <% if (!flash['user_logined_now'].nil?) %>
-	<div class='usp-flash'><%= flash['user_logined_now'] %></div>
+	<div class='usp-flash <%= if (flash['user_logined_error']) then 'err' end %>'><%= flash['user_logined_now'] %></div>
 <% end %>

@@ -13,7 +13,11 @@ class AuthController < BaseController
 			current_user_to_session()
 			current_user_to_cookie()
 			redirect_to root_url
+			return
 		end
+		flash['user_logined_now'] = t('auth_welcome_err');
+		flash['user_logined_error'] = 1;
+		redirect_to root_url
 	end
 	# "Delete" a login, aka "log the user out"
 	def user_destroy
@@ -43,7 +47,7 @@ class AuthController < BaseController
 		end
 		# текущий пользователь из сессии
 		def current_user_from_session
-			@user ||= session[:current_user_id] && get_user_manager().find_by(id: session[:current_user_id])
+			@user ||= session[:current_user_id] && get_user_manager().find_by(session[:current_user_id])
 			return @user
 		end
 		# очиска сессии
@@ -53,19 +57,38 @@ class AuthController < BaseController
 
 		# в куки
 		def current_user_to_cookie
-			# TODO: пользователь в куки
-			
+			if (!@user || @user.nil?) then return end
+			cook_user = cookie_user_parse_to()
+			cookies.signed[:zka] = { 
+				value: cook_user, 
+				expires: 1.year.from_now,
+				domain: :all
+			}
 		end
 		# текущий пользователь из кук
 		def current_user_from_cookie
-			# TODO: текущий пользователь из кук
-			@user = nil
+			userId = cookie_user_parse_from()
+			@user ||= get_user_manager().find_by(userId)
+			return @user
 		end
 		# очиска куков
 		def user_cookie_clear
-			# TODO: очиска куков
-			
+			cookies.delete :zka
 		end
+		# id пользователя для кук
+		def cookie_user_parse_to
+			userId = @user.id
+			# TODO: добавить соль и прочее
+			return userId
+		end
+		# id пользователя из кук
+		def cookie_user_parse_from
+			if (!cookies.signed[:zka]) then return -1 end
+			cook_user = cookies.signed[:zka]
+			# TODO: убрать соль и прочее
+			return cook_user
+		end
+
 
 
 		# авторизация по кукам и сессии

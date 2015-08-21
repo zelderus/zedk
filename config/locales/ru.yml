@@ -25,6 +25,7 @@ ru:
   main_headers_desc: "Сборник сервисов."
   
   auth_welcome_text: "Добро пожаловать, %{name}!"
+  auth_welcome_err: "Неверный логин или пароль"
 
   shcoder_headers_title: "Shcoder"
   shcoder_headers_keyword: "Shcoder"
