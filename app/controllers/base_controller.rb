@@ -1,6 +1,7 @@
 
 class BaseController < ActionController::Base
 
+	
 
 	# в модель для отладки
 	def to_d model
@@ -13,9 +14,23 @@ class BaseController < ActionController::Base
 	end
 	
 
+	protected
 
+		# лог авторизации
+		def log_auth msg
+			get_logger().log_auth msg
+		end
+		# лог авторизации
+		def log msg
+			get_logger().log msg
+		end
 
 	private
+
+		def get_logger
+			if (@logger.nil?) then @logger = LogHelper::LogManager.new end
+			return @logger
+		end
 
 		def to_d_object builder, model, depth
 			depth = depth + 1

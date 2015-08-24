@@ -4,7 +4,7 @@ class AuthController < BaseController
 	before_filter :authorize
 	
 
-	# "Create" a login, aka "log the user in"
+	# Авторизация пользователя
 	def user_login
 		data = get_auth_params()
 		@user = get_user_manager().authenticate(data[:name], data[:pass])
@@ -19,7 +19,7 @@ class AuthController < BaseController
 		flash['user_logined_error'] = 1;
 		redirect_to root_url
 	end
-	# "Delete" a login, aka "log the user out"
+	# Выход пользователя
 	def user_destroy
 		user_session_clear()
 		user_cookie_clear()
@@ -33,7 +33,9 @@ class AuthController < BaseController
 
 		# манагер пользователями
 		def get_user_manager
-			if (@userManager.nil?) then @userManager = AuthHelper::UserManager.new end
+			if (@userManager.nil?) 
+				@userManager = AuthHelper::UserManager.new method(:log_auth)
+			end
 			return @userManager
 		end
 
@@ -47,6 +49,7 @@ class AuthController < BaseController
 		end
 		# текущий пользователь из сессии
 		def current_user_from_session
+			return nil
 			@user ||= session[:current_user_id] && get_user_manager().find_by(session[:current_user_id])
 			return @user
 		end
@@ -67,8 +70,27 @@ class AuthController < BaseController
 		end
 		# текущий пользователь из кук
 		def current_user_from_cookie
-			userId = cookie_user_parse_from()
-			@user ||= get_user_manager().find_by(userId)
+			cook = cookie_user_parse_from()
+			if (cook.nil?) then return end
+			@user ||= get_user_manager().find_by(cook[:userId])
+			if (!@user.nil?)
+				# проверяем дату создания куки
+				cookDateStr = cook[:cookDate]
+				if (cookDateStr.nil?) 
+					user_cookie_clear()
+					return nil 
+				end
+				# сверяем дату
+				begin
+					if (!@user.check_cookdate(cookDateStr))
+						user_cookie_clear()
+						return nil
+					end
+				rescue => e
+					user_cookie_clear()
+					return nil
+				end
+			end
 			return @user
 		end
 		# очиска куков
@@ -78,15 +100,25 @@ class AuthController < BaseController
 		# id пользователя для кук
 		def cookie_user_parse_to
 			userId = @user.id
-			# TODO: добавить соль и прочее
-			return userId
+			dd = Time.now.strftime("%d.%m.%Y")
+			cook_user = "#{userId}||#{dd}"
+			return cook_user
 		end
 		# id пользователя из кук
 		def cookie_user_parse_from
-			if (!cookies.signed[:zka]) then return -1 end
-			cook_user = cookies.signed[:zka]
-			# TODO: убрать соль и прочее
-			return cook_user
+			if (!cookies.signed[:zka]) then return nil end
+			userId = nil
+			cookDate = nil
+			begin
+				cook_user = cookies.signed[:zka]
+				u = cook_user.split("||")
+				userId = u[0]
+				cookDate = u[1] #дата создания куки
+			rescue
+				userId = nil
+				cookDate = nil
+			end
+			return { userId: userId, cookDate: cookDate };
 		end
 
 

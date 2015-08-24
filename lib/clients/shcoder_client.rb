@@ -7,7 +7,7 @@ module Clients
 	class ShcoderClient < DataLayer::BaseClient
 
 		def initialize()
-			init('some_raw_data');
+			init('services_data');
 		end
 
 

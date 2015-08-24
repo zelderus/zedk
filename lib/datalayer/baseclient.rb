@@ -59,6 +59,20 @@ module DataLayer
 			dts
 		end
 
+		#
+		# Прямой запрос в базу (с открытием и закрытием соединения) 
+		# и возврат первого результата либо nil
+		#
+		#	sql			- sql запрос (названия полей и таблиц обернуты в кавычки)
+		#	onError		- ссылка на метод принимающий Exception (пример, method(:on_error))
+		#
+		def one_sql (sql, onError=nil)
+			dts = raw_sql(sql, onError)
+			if (dts.nil? || dts.count <= 0) then return nil end
+			return dts[0]
+		end
+
+
 
 		#
 		#	get - создает соединение к базе
