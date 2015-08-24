@@ -21,6 +21,11 @@
 			</div>
 		<% end %>
 	</div>
+
+
+	<% if (!@user.nil? && @user.service.have_write(Conventions::ServiceNames::Shcoder)) %>
+		<div>Добавить статью..</div>
+	<% end %>
 	
 	
 </div>

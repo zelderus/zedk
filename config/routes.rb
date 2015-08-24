@@ -8,16 +8,13 @@ Blog2::Application.routes.draw do
 	get		"usrext" => "auth#user_destroy"
 
 
-	#shcoder
-	get    "shcoder" => "shcoder#index"
+	# shcoder
+	get    "shcoder" => "shcoder#index", :as => :Shcoder
 	get    "shcoder/article(/:idname)" => "shcoder#article"
 
 	
-	# test
-	match  "do/:name(/:text)", to: "welcome#txt", as: :bot, defaults: { name: 'bote', text: 'woop' }, via: [:get, :post]
-	get    "test" => "welcome#test"
-	get    "testjson" => "welcome#testjson"
-	get    "ss" => "welcome#ss"
+	# projector
+	get    "projector" => "projector#index", :as => :Projector
   
 
   

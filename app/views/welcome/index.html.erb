@@ -2,11 +2,19 @@
 
 <div class='ModuleBlock'>
 
-	<div class='ModuleBlockLine'>
-		<a class='ModuleLink' href="<%=url_for controller: 'shcoder', action: 'index' %>">Shcoder</a>
-		<div class='ModuleTitle'> - Модуль статей.</div>
-		<div class='clear'></div>
-	</div>
+
+	<% @services.each do |service|%>
+
+		<div class='ModuleBlockLine'>
+			<a class='ModuleLink' href="<%=url_for Conventions::ServiceData.service_url(service.code) %>"><%=service.code %></a>
+			<div class='ModuleTitle'> - <%=service.title %></div>
+			<div class='clear'></div>
+		</div>
+
+
+	<% end %>
+
+	
 	
 
 </div>

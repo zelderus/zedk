@@ -72,22 +72,40 @@ module AuthHelper
 		# На основе данных из базы
 		def from_entity entity
 			if (entity.nil?) then return end
-			# TODO: services data to model
-			@size = entity.count
+			# services data to model
 			entity.each do |r| 
-				sd = SiteUserServiceData.new
-				# TODO
-				sd.id = r['ServiceId']
-				sd.title = r['ServiceName']
-				sd.role = r['ServiceRoleId']
-
-				@services.push sd
+				rid = r['ServiceId']
+				sd = @services.find {|s| s.id == rid}
+				if (sd.nil?)
+					sd = SiteUserServiceData.new
+					sd.id = rid
+					sd.code = r['ServiceCode']
+					sd.title = r['ServiceName']
+					@services.push sd
+				end
+				sd.flags = sd.flags | r['ServiceRoleFlag'].to_i
 			end
+			@size = @services.count
 		end
 
-		def debug
-			return @services[0].title
+		# Флаги сервиса (Conventions::ServiceNames::)
+		def get_flags serviceCode
+			sd = @services.find { |s| s.code == serviceCode }
+			if (sd.nil?) then return 0 end
+			return sd.flags
 		end
+		# Есть права на чтение (Conventions::ServiceNames::)
+		def have_read serviceCode
+			flags = get_flags serviceCode
+			return (flags & Conventions::ServiceRoles::READ) == Conventions::ServiceRoles::READ
+		end
+		# Есть права на запись (Conventions::ServiceNames::)
+		def have_write serviceCode 
+			flags = get_flags serviceCode
+			return (flags & Conventions::ServiceRoles::WRITE) == Conventions::ServiceRoles::WRITE
+		end
+
+
 
 
 	end
@@ -97,10 +115,10 @@ module AuthHelper
 	# Данные сервиса пользователя
 	#
 	class SiteUserServiceData
-		attr_accessor :id, :title, :role
+		attr_accessor :id, :code, :title, :flags
 
 		def initialize()
-			
+			@flags = 0
 		end
 
 		

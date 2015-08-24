@@ -39,9 +39,12 @@ module Clients
 				SELECT 
 					"tAuth_User"."Name" AS "UserName", 
 					"tSite_Services"."Title" AS "ServiceName", 
+					"tSite_Services"."Code" AS "ServiceCode",
 					"tSite_ServiceRoles"."Title" AS "ServiceRole",  
+					"tSite_ServiceRoles"."Flag" AS "ServiceRoleFlag",
 					"tAuth_UserServices"."ServiceId" AS "ServiceId", 
 					"tAuth_UserServices"."ServiceRoleId" AS "ServiceRoleId"
+
 				FROM 
 					public."tAuth_User", 
 					public."tAuth_UserServices", 

@@ -30,3 +30,7 @@ ru:
   shcoder_headers_title: "Shcoder"
   shcoder_headers_keyword: "Shcoder"
   shcoder_headers_desc: "Статьи, триксы и полезности в коде и не только."
+
+  projector_headers_title: "Projector"
+  projector_headers_keyword: "Projector"
+  projector_headers_desc: "Управление проектами."
