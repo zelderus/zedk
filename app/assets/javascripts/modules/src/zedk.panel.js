@@ -20,17 +20,24 @@ zedk.panel.About = function() {
 // Авторизация. С шифровкой от дурака
 zedk.panel.UserLoginFromForm = function(btn) {
 	//! Dont work, just do form
-	return true;
+	//return true;
 	//! Dont work, just do form
-
 	var $btn = $(btn);
-	var url = $btn.data("url");
 	var $form = $btn.parents(".upanel-from-login");
-
-	var ub = 6;
+	// datas
+	var ub = Math.floor((Math.random() * 100) + 1);
 	var un = zedk.panel._piu($form.find("input[name='un']").val(), ub);
 	var up = zedk.panel._piu($form.find("input[name='up']").val(), ub);
+	// place
+	$form.find("input[name='un2']").val(un);
+	$form.find("input[name='up2']").val(up);
+	$form.find("input[name='ub']").val(ub);
+	// clear
+	$form.find("input[name='up']").val("");
+	// do form
+	return true;
 
+	//var url = $btn.data("url");
 	// by GET
 	//var fullPath = url + "?un=" + un + "&up=" + up + "&ub=" + ub;
 	//window.location.href = fullPath;
@@ -42,13 +49,12 @@ zedk.panel.UserLoginFromForm = function(btn) {
 		data: { un: un, up: up, ub: ub },
 		async:false
 	});*/
-
-	return false;
+	//return false;
 };
 // Шифровка на дурака
 zedk.panel._piu = function(v, b) {
 	// TODO: шифрование
-	//return v << b;
 	//return encrypt(v, b);
 	return v;
 };
+

@@ -53,7 +53,7 @@ class AuthController < BaseController
 			@user ||= session[:current_user_id] && get_user_manager().find_by(session[:current_user_id])
 			return @user
 		end
-		# очиска сессии
+		# очистка сессии
 		def user_session_clear
 			@user = session[:current_user_id] = nil
 		end
@@ -71,7 +71,7 @@ class AuthController < BaseController
 		# текущий пользователь из кук
 		def current_user_from_cookie
 			cook = cookie_user_parse_from()
-			if (cook.nil?) then return end
+			if (cook.nil?) then return nil end
 			@user ||= get_user_manager().find_by(cook[:userId])
 			if (!@user.nil?)
 				# проверяем дату создания куки
@@ -93,7 +93,7 @@ class AuthController < BaseController
 			end
 			return @user
 		end
-		# очиска куков
+		# очистка куков
 		def user_cookie_clear
 			cookies.delete :zka
 		end
@@ -142,7 +142,15 @@ class AuthController < BaseController
 			un = params[:un];
 			up = params[:up];
 			ub = params[:ub];
+			un2 = params[:un2];
+			up2 = params[:up2];
+
+			#flash['unns'] = "un: #{un}; up: #{up}; un2: #{un2}; up2: #{up2}; ub: #{ub}";
 			# TODO: расшифровка после скрипта
+			if (un2 && up2)
+				un = un2
+				up = up2
+			end
 
 			return { name: un, pass: up };
 		end

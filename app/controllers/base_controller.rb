@@ -20,7 +20,7 @@ class BaseController < ActionController::Base
 		def log_auth msg
 			get_logger().log_auth msg
 		end
-		# лог авторизации
+		# лог общий
 		def log msg
 			get_logger().log msg
 		end

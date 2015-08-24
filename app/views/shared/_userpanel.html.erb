@@ -6,6 +6,11 @@
 		<form class='upanel-from-login' action='<%= url_for :controller => 'auth', :action => 'user_login'  %>'>
 			<span><%= render "controls/input", type: 'text', name: 'un' %></span>
 			<span><%= render "controls/input", type: 'password', name: 'up' %></span>
+			<span style='display:none;'>
+				<%= render "controls/input", type: 'hidden', name: 'un2' %>
+				<%= render "controls/input", type: 'hidden', name: 'up2' %>
+				<%= render "controls/input", type: 'hidden', name: 'ub' %>
+			</span>
 			<%= render "controls/button", name: 'LogIn', submit: 'Вход', run: 'zedk.panel.UserLoginFromForm', title: 'Выход', style: 'enter', datas: { 'url' => url_for(:controller => 'auth', :action => 'user_login') } %>
 		</form>
 	</div>
