@@ -2,4 +2,13 @@
 #
 # To ban all spiders from the entire site uncomment the next two lines:
 # User-agent: *
-# Disallow: /
+
+Disallow: /admin/
+Disallow: /*.asp
+Disallow: /*.asp?*
+Disallow: /*.htm
+Disallow: /*.htm*
+Disallow: /*.html
+Disallow: /*.html*
+Disallow: /srv/*
+Disallow: /shcoder/srv/*

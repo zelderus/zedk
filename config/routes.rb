@@ -11,7 +11,7 @@ Blog2::Application.routes.draw do
 	# shcoder
 	get    "shcoder" => "shcoder#index", :as => :Shcoder
 	get    "shcoder/article(/:idname)" => "shcoder#article"
-
+	get    "shcoder/srv/edit(/:idname)" => "shcoder#edit_article"
 	
 	# projector
 	get    "projector" => "projector#index", :as => :Projector

@@ -1,0 +1,32 @@
+
+
+<script type="text/javascript">
+	$(function () {
+		shcoder.Init({});
+	});
+</script>
+	
+
+<div class='ShcoderMain ShcEdit'>
+	<h1 class='ShcTitle page_title'><%=@article.isNew ? "Добавление статьи" : "Редактирование" %></h1>
+	
+	
+	<div class="ShcEdit_Line">
+		<div class="ShcEdit_Line_Title">Название</div>
+		<div class="ShcEdit_Line_Body">
+			<input type="text" name="title" value="<%=@article.title %>" />
+		</div>
+	</div>
+
+	<div class="ShcEdit_Line">
+		<div class="ShcEdit_Line_Title">Тизер</div>
+		<div class="ShcEdit_Line_Body">
+			<input type="text" name="teaser" value="<%=@article.teaser %>" />
+		</div>
+	</div>
+	
+
+	
+</div>
+
+

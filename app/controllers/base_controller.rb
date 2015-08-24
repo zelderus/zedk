@@ -2,6 +2,11 @@
 class BaseController < ActionController::Base
 
 	
+	# Ошибка 404
+	def error_404
+		raise ActionController::RoutingError.new('Not Found')
+	end
+
 
 	# в модель для отладки
 	def to_d model

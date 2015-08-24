@@ -19,6 +19,12 @@
 		</div>
 
 	</div>
+
+
+
+	<% if (ShcoderHelper.user_access_article(@user, @article)) %>
+		<div><%= render "controls/button", name: 'editArticleBtn', href: url_for(controller: 'shcoder', action: 'edit_article', idname: @article.idname), title: 'Редактировать статью', style: 'normal'  %></div>
+	<% end %>
 	
 	
 </div>

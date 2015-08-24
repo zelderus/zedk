@@ -14,3 +14,11 @@
 .ShcArticle .ShcArticle_Title { display: block; margin: 0; font: 24px/28px Arial,Helvetica,sans-serif;}
 .ShcArticle .ShcArticle_Teaser { font-size: 16px; color:#666; font-style: italic; margin: 10px 0 0 0;}
 .ShcArticle .ShcArticle_Text { font-size: 14px; margin: 20px 0 10px 0px; padding: 10px; border-left: 1px solid #aaa; border-top: 1px solid #aaa;}
+
+.ShcEdit {}
+.ShcEdit .ShcEdit_Line { margin: 10px 0 5px 0; padding: 4px;width: 90%;}
+.ShcEdit .ShcEdit_Line .ShcEdit_Line_Title {}
+.ShcEdit .ShcEdit_Line .ShcEdit_Line_Body {}
+.ShcEdit .ShcEdit_Line .ShcEdit_Line_Body input { width: 100%;}
+.ShcEdit .ShcEdit_Line .ShcEdit_Line_Body select { width: 100%;}
+.ShcEdit .ShcEdit_Line .ShcEdit_Line_Body textarea { width: 100%;}

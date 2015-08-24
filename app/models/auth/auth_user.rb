@@ -13,6 +13,12 @@ module AuthHelper
 
 		end
 
+		# Самый главный админ
+		def have_grand_access
+			# TODO: права пользователя на сайт (админ)
+			return false
+		end
+
 
 		# На основе данных из базы
 		def from_entity entity

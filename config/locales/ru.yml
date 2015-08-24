@@ -21,7 +21,7 @@
 
 ru:
   main_headers_title: "Сервисы"
-  main_headers_keyword: "ZeDK, services"
+  main_headers_keyword: "ZeDK,services,сервисы"
   main_headers_desc: "Сборник сервисов."
   
   auth_welcome_text: "Добро пожаловать, %{name}!"
@@ -30,6 +30,7 @@ ru:
   shcoder_headers_title: "Shcoder"
   shcoder_headers_keyword: "Shcoder"
   shcoder_headers_desc: "Статьи, триксы и полезности в коде и не только."
+  shcoder_menu_add: "Добавление статьи"
 
   projector_headers_title: "Projector"
   projector_headers_keyword: "Projector"

@@ -23,8 +23,8 @@
 	</div>
 
 
-	<% if (!@user.nil? && @user.service.have_write(Conventions::ServiceNames::Shcoder)) %>
-		<div>Добавить статью..</div>
+	<% if (ShcoderHelper.user_access(@user)) %>
+		<div><%= render "controls/button", name: 'addArticleBtn', href: url_for(controller: 'shcoder', action: 'edit_article'), title: 'Добавить статью', style: 'normal'  %></div>
 	<% end %>
 	
 	

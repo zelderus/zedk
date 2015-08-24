@@ -4,6 +4,22 @@ require "shcoder/shcoder_article"
 module ShcoderHelper
 
 
+	# Пользователь имеет права на запись в Шкодер
+	def self.user_access user
+		if (user.nil?) then return false end
+		if (user.have_grand_access()) then return true end
+		if (user.service.have_write(Conventions::ServiceNames::Shcoder)) then return true end
+		return false
+	end
+	# Пользователь имеет доступ к статье
+	def self.user_access_article user, article
+		if (!user_access user) then return false end
+		if (user.have_grand_access()) then return true end
+		return article.is_user_creator user
+	end
+
+
+	# Manager
 	class ShcoderManager
 
 		def initialize()

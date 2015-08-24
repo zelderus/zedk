@@ -10,6 +10,12 @@
 	style 	- тип
 	clss 	- имя класса стиля
 	datas	- хэш данных, аля datas: {'txt'=>'some hello1', 'val'=>'vall2'}
+
+	Примеры:
+		= render "controls/button", name: 'LogIn', submit: 'Вход', run: 'zedk.panel.UserLoginFromForm', title: 'Выход', style: 'enter', datas: { 'url' => url_for(:controller => 'auth', :action => 'user_login') } 
+		= render "controls/button", name: 'ExitBtn', href: url_for(controller: 'auth', action: 'user_destroy'), title: 'Выход', style: 'exit' 
+		
+
  %>
 
  <%
