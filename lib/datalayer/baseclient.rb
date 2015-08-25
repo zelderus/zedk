@@ -44,7 +44,7 @@ module DataLayer
 			# all postgresql queries will be normalized to lower case, so to quote Table and Column names
 			# http://stackoverflow.com/questions/10628917/rails-reports-cant-find-a-column-that-is-there
 			# like 'SELECT * from "Zeho"' not 'SELECT * from Zeho'
-			dts = []
+			dts = nil
 			con = nil
 			set_errorno ""
 			begin
@@ -71,6 +71,14 @@ module DataLayer
 			dts = raw_sql(sql, onError)
 			if (dts.nil? || dts.count <= 0) then return nil end
 			return dts[0]
+		end
+
+
+		# Является ли ответ успешным
+		# как правило при insert и прочих проверяется
+		def is_succ_response response
+			if (response.nil? || !response.is_a?(PG::Result) ) then return false end#raise "the data is not a PG::Result" end
+			return response.result_status == PG::PGRES_COMMAND_OK
 		end
 
 

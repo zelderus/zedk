@@ -3,6 +3,9 @@
 <script type="text/javascript">
 	$(function () {
 		shcoder.Init({});
+		shcoder.InitEditor({
+			urlEdit: "<%= url_for(controller: 'shcoder', action: 'edit_article_do') %>"
+		});
 	});
 </script>
 	
@@ -10,6 +13,11 @@
 <div class='ShcoderMain ShcEdit'>
 	<h1 class='ShcTitle page_title'><%=@article.isNew ? "Добавление статьи" : "Редактирование" %></h1>
 	
+	<div class="ShcEdit_Datas" style="display:none;">
+		<input type="hidden" name="id" value="<%=@article.id %>" />
+	</div>
+
+
 	
 	<div class="ShcEdit_Line">
 		<div class="ShcEdit_Line_Title">Название</div>
@@ -24,7 +32,18 @@
 			<input type="text" name="teaser" value="<%=@article.teaser %>" />
 		</div>
 	</div>
+
+	<div class="ShcEdit_Line">
+		<div class="ShcEdit_Line_Title">Статья</div>
+		<div class="ShcEdit_Line_Body">
+			<textarea name="text"><%=@article.text %></textarea>
+		</div>
+	</div>
 	
+
+
+
+	<div><%= render "controls/button", name: 'saveArticleBtn', run: 'shcoder.Edit', title: 'Сохранить', style: 'success'  %></div>
 
 	
 </div>

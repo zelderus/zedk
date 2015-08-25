@@ -5,7 +5,7 @@
 #
 ########################
 class ShcoderArticleTeaser
-	attr_accessor :title, :teaser, :idname, :date, :creatorId, :lastModificatorId
+	attr_accessor :id, :title, :teaser, :idname, :dateDate, :date, :lastDateDate, :lastDate, :creatorId, :lastModificatorId
 
 	def initialize()
 
@@ -13,12 +13,18 @@ class ShcoderArticleTeaser
 
 	# на основе сущности
 	def from_entity entity
+		@id = entity['Id']
 		@idname = entity['IdName']
 		@title = entity['Title']
 		@teaser = entity['Teaser']
 		@creatorId = entity['UserCreator_ID']
 		@lastModificatorId = entity['UserLastModificator_ID']
-		@date = Date.parse(entity['CreateDate']).strftime('%d.%m.%Y')
+
+		@dateDate = entity['CreateDate'];
+		@date = Date.parse(@dateDate).strftime('%d.%m.%Y')
+
+		@lastDateDate = entity['ModificateDate'];
+		@lastDate = @lastDateDate.nil? ? '' : Date.parse(entity['ModificateDate']).strftime('%d.%m.%Y')
 	end
 end
 

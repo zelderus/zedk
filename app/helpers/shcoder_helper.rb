@@ -1,5 +1,5 @@
 require "clients/shcoder_client"
-require "shcoder/shcoder_article"
+require "models/shcoder/shcoder_article"
 
 module ShcoderHelper
 
@@ -22,7 +22,8 @@ module ShcoderHelper
 	# Manager
 	class ShcoderManager
 
-		def initialize()
+		def initialize(onError)
+			@onError = onError
 			@deb = ""
 			@client = Clients::ShcoderClient.new
 		end
@@ -54,7 +55,22 @@ module ShcoderHelper
 			# to model
 			return ::ShcoderArticle.new entity
 		end
-		
+		# статья
+		def get_article_by_id(id)
+			entity = @client.get_article_by_id(id, method(:on_error))
+			if (entity.nil?) then return nil end
+			# to model
+			return ::ShcoderArticle.new entity
+		end
+
+		# редактирование статьи
+		def edit_article(article)
+			return @client.edit_article(article, method(:on_error))
+		end
+
+
+
+
 		
 	  
 	  private
@@ -62,6 +78,7 @@ module ShcoderHelper
 		# метод при ошибке запросов
 		def on_error e
 			@deb = e.to_s
+			@onError.call(e.to_s)
 		end
 		
 	end

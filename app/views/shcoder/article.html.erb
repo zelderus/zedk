@@ -10,7 +10,7 @@
 <div class='ShcoderMain'>
 
 	<div class='ShcArticle'>
-		<div class='ShcArticle_Date'><%= @article.date %></div>
+		<div class='ShcArticle_Date'><%= @article.date %> <%= @article.lastDateDate.nil? ? '' : "(последнее изменение #{@article.lastDate})" %></div>
 		<h1 class='ShcArticle_Title page_title'><%= @article.title %></h1>	
 		<div class='ShcArticle_Teaser'><%= @article.teaser %></div>
 

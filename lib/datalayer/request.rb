@@ -72,12 +72,15 @@ module DataLayer
 				prm = prm.to_s
 				bigkey = "___!!_#{key}_!!___"	# вставка сложных ключей, на выходе будут заменены на реальные значения
 				@prs[bigkey] = prm;
-				@templ.gsub! key, bigkey
+				#@templ.gsub! key, bigkey
+				rg = Regexp.new "(?<key>#{key})(?<end>[ ,)'\n\r;])"
+				@templ = @templ.gsub(rg, bigkey+'\k<end>')
 			end
 
 
 			def is_number? str
-				true if Float(str) rescue false
+				#true if Float(str) rescue false
+				return ValidatorHelper.is_number? str
 			end
 		
 
