@@ -32,6 +32,32 @@ module Clients
 			return entity;
 		end
 
+		# данные по сервисам пользователя c id
+		def extra_services(id, onError=nil)
+			req = DataLayer::Request.new
+			req.set '
+				SELECT 
+					"tAuth_User"."Name" AS "UserName", 
+					"tSite_Services"."Title" AS "ServiceName", 
+					"tSite_ServiceRoles"."Title" AS "ServiceRole",  
+					"tAuth_UserServices"."ServiceId" AS "ServiceId", 
+					"tAuth_UserServices"."ServiceRoleId" AS "ServiceRoleId"
+				FROM 
+					public."tAuth_User", 
+					public."tAuth_UserServices", 
+					public."tSite_Services", 
+					public."tSite_ServiceRoles" 
+				WHERE 
+					"tAuth_UserServices"."UserId" = "tAuth_User"."Id" 
+					AND "tAuth_UserServices"."ServiceId" = "tSite_Services"."Id" 
+					AND "tAuth_UserServices"."ServiceRoleId" = "tSite_ServiceRoles"."Id" 
+					AND "tAuth_User"."Id" = @idname;
+			'
+			req.set_str("idname", id)
+			dts = raw_sql(req, onError)
+			return dts;
+		end
+
 
 
 

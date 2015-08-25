@@ -35,6 +35,7 @@ module DataLayer
 
 		#
 		# Прямой запрос в базу (с открытием и закрытием соединения)
+		# возвращает тип PG:Result (http://www.rubydoc.info/gems/pg/PG/Result)
 		#
 		#	sql			- sql запрос (названия полей и таблиц обернуты в кавычки)
 		#	onError		- ссылка на метод принимающий Exception (пример, method(:on_error))

@@ -49,7 +49,6 @@ class AuthController < BaseController
 		end
 		# текущий пользователь из сессии
 		def current_user_from_session
-			return nil
 			@user ||= session[:current_user_id] && get_user_manager().find_by(session[:current_user_id])
 			return @user
 		end

@@ -1,13 +1,16 @@
 
 module AuthHelper
 
+	#
 	# Пользователь системы
+	#
 	class SiteUser
-		attr_accessor :id, :idname, :name, :activated, :cookDate
+		attr_accessor :id, :idname, :name, :activated, :cookDate, :service
 
 		def initialize()
 			@cookDate = nil
-			
+			@service = SiteUserService.new
+
 		end
 
 
@@ -20,6 +23,12 @@ module AuthHelper
 			init_cookdate(entity["CookDate"]);
 			
 		end
+
+		# Данные по сервисам из базы
+		def from_service_entity entity
+			@service.from_entity entity
+		end
+
 
 		
 		# Возвращает true, если дата кук не устарела
@@ -45,6 +54,56 @@ module AuthHelper
 					@cookDate = nil # в базе не может лежать неверное значение
 				end
 			end
+
+	end
+
+
+	#
+	# Данные по сервисам к пользователю
+	#
+	class SiteUserService
+		attr_accessor :size, :services
+
+		def initialize()
+			@size = 0
+			@services = []
+		end
+
+		# На основе данных из базы
+		def from_entity entity
+			if (entity.nil?) then return end
+			# TODO: services data to model
+			@size = entity.count
+			entity.each do |r| 
+				sd = SiteUserServiceData.new
+				# TODO
+				sd.id = r['ServiceId']
+				sd.title = r['ServiceName']
+				sd.role = r['ServiceRoleId']
+
+				@services.push sd
+			end
+		end
+
+		def debug
+			return @services[0].title
+		end
+
+
+	end
+
+
+	#
+	# Данные сервиса пользователя
+	#
+	class SiteUserServiceData
+		attr_accessor :id, :title, :role
+
+		def initialize()
+			
+		end
+
+		
 
 	end
 

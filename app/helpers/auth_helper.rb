@@ -25,7 +25,16 @@ module AuthHelper
 			if (id.nil?) then return nil end
 			entity = @client.find_by(id, method(:on_error))
 			user = entity_user_to_model entity
+			load_extra_data(user)
 			return user
+		end
+
+		# extra данные пользователя текущего
+		def load_extra_data user
+			if (user.nil?) then return end
+			# services
+			user.from_service_entity(@client.extra_services(user.id))
+			# TODO: load other datas for user
 		end
 
 
@@ -49,6 +58,8 @@ module AuthHelper
 				user.from_entity entity;
 				return user
 			end
+
+
 
 
 	end
