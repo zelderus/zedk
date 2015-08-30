@@ -21,22 +21,25 @@
 	
 	<div class="ShcEdit_Line">
 		<div class="ShcEdit_Line_Title">Название</div>
+		<div class="ShcEdit_Line_ErrorWrapper"><div class="ShcEdit_Line_Error"></div></div>
 		<div class="ShcEdit_Line_Body">
-			<input type="text" name="title" value="<%=@article.title %>" />
+			<input class="ShcEditInp" type="text" name="title" value="<%=@article.title %>" />
 		</div>
 	</div>
 
 	<div class="ShcEdit_Line">
 		<div class="ShcEdit_Line_Title">Тизер</div>
+		<div class="ShcEdit_Line_ErrorWrapper"><div class="ShcEdit_Line_Error"></div></div>
 		<div class="ShcEdit_Line_Body">
-			<input type="text" name="teaser" value="<%=@article.teaser %>" />
+			<input class="ShcEditInp" type="text" name="teaser" value="<%=@article.teaser %>" />
 		</div>
 	</div>
 
 	<div class="ShcEdit_Line">
 		<div class="ShcEdit_Line_Title">Статья</div>
+		<div class="ShcEdit_Line_ErrorWrapper"><div class="ShcEdit_Line_Error"></div></div>
 		<div class="ShcEdit_Line_Body">
-			<textarea name="text"><%=@article.text %></textarea>
+			<textarea class="ShcEditInp" name="text"><%=@article.text %></textarea>
 		</div>
 	</div>
 	

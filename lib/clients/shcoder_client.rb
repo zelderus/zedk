@@ -25,7 +25,8 @@ module Clients
 		def get_article_by_idname(idname, onError=nil)
 			articleIdName = idname
 			# sql
-			sql = 'SELECT z.* FROM "tShcoder_Article" z Where z."IdName" = @idname limit 1;'
+			sql = get_sqlbody_findarticle(); #'SELECT z.* FROM "tShcoder_Article" z Where z."IdName" = @idname limit 1;'
+			sql += 'AND z."IdName" = @idname limit 1;';
 			req = DataLayer::Request.new
 			req.set sql
 			req.set_str("idname", articleIdName)
@@ -37,7 +38,9 @@ module Clients
 
 		def get_article_by_id(id, onError=nil)
 			# sql
-			sql = 'SELECT z.* FROM "tShcoder_Article" z Where z."Id" = @idname limit 1;'
+			#sql = 'SELECT z.* FROM "tShcoder_Article" z Where z."Id" = @idname limit 1;'
+			sql = get_sqlbody_findarticle();
+			sql += 'AND z."Id" = @idname limit 1;';
 			req = DataLayer::Request.new
 			req.set sql
 			req.set_str("idname", id)
@@ -124,6 +127,34 @@ module Clients
 			dts = raw_sql(req, onError)
 			return dts;
 		end
+
+
+
+		private
+
+			# общее начало запроса для поиска статьи
+			def get_sqlbody_findarticle
+				sql = '
+				SELECT 
+				  z."CreateDate", 
+				  z."Id", 
+				  z."Title", 
+				  z."Teaser", 
+				  z."Text", 
+				  z."IdName", 
+				  z."UserCreator_ID", 
+				  z."UserLastModificator_ID", 
+				  z."ModificateDate", 
+				  u."Name" AS "UserName"
+				FROM 
+				  public."tShcoder_Article" z, 
+				  public."tAuth_User" u
+				WHERE 
+				  1 = 1
+				  AND z."UserCreator_ID" = u."Id"
+				'
+				return sql
+			end
 
 
 

@@ -11,6 +11,10 @@ class ApplicationController < AuthController
 	def set_title(title)
 		@maintitle = title
 	end
+	# метатег автор
+	def set_autor(name)
+		@autor = name
+	end
 	# метатеги
 	def set_headers(keyword, desc)
 		@keyword = keyword

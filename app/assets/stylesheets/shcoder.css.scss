@@ -15,10 +15,26 @@
 .ShcArticle .ShcArticle_Teaser { font-size: 16px; color:#666; font-style: italic; margin: 10px 0 0 0;}
 .ShcArticle .ShcArticle_Text { font-size: 14px; margin: 20px 0 10px 0px; padding: 10px; border-left: 1px solid #aaa; border-top: 1px solid #aaa;}
 
+/*
+*	Edit
+*/
 .ShcEdit {}
-.ShcEdit .ShcEdit_Line { margin: 10px 0 5px 0; padding: 4px;width: 90%;}
-.ShcEdit .ShcEdit_Line .ShcEdit_Line_Title {}
+/* edit inputs */
+.ShcEdit .ShcEdit_Line { margin: 20px 0 5px 0; padding: 4px;width: 90%;}
+.ShcEdit .ShcEdit_Line .ShcEdit_Line_Title { font-weight: bold; margin: 0 0 0 0;  font: 18px/20px Arial,Helvetica,sans-serif;}
+.ShcEdit .ShcEdit_Line .ShcEdit_Line_ErrorWrapper { display: block; min-height: 12px;}
+.ShcEdit .ShcEdit_Line .ShcEdit_Line_ErrorWrapper .ShcEdit_Line_Error { color:#CC3300; font-size: 10px; display: none;}
 .ShcEdit .ShcEdit_Line .ShcEdit_Line_Body {}
-.ShcEdit .ShcEdit_Line .ShcEdit_Line_Body input { width: 100%;}
-.ShcEdit .ShcEdit_Line .ShcEdit_Line_Body select { width: 100%;}
-.ShcEdit .ShcEdit_Line .ShcEdit_Line_Body textarea { width: 100%;}
+.ShcEdit .ShcEdit_Line .ShcEdit_Line_Body input { width: 100%; border:1px solid #aaa; padding: 8px;background-color: #fafafa;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;}
+.ShcEdit .ShcEdit_Line .ShcEdit_Line_Body input:focus {outline: 0;}
+.ShcEdit .ShcEdit_Line .ShcEdit_Line_Body select { width: 100%;border:1px solid #aaa;padding: 8px;background-color: #fafafa;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;}
+.ShcEdit .ShcEdit_Line .ShcEdit_Line_Body select:focus {outline: 0;}
+.ShcEdit .ShcEdit_Line .ShcEdit_Line_Body textarea { width: 100%;border:1px solid #aaa;padding: 8px;background-color: #fafafa; min-height: 300px;resize: vertical; -webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;}
+.ShcEdit .ShcEdit_Line .ShcEdit_Line_Body textarea:focus {outline: 0;}
+/* edit inputs with error */
+.ShcEdit .ShcEdit_Line.Error {}
+.ShcEdit .ShcEdit_Line.Error .ShcEdit_Line_ErrorWrapper {}
+.ShcEdit .ShcEdit_Line.Error .ShcEdit_Line_ErrorWrapper .ShcEdit_Line_Error { display: block;}
+.ShcEdit .ShcEdit_Line.Error .ShcEdit_Line_Body input { border:1px solid #CC3300; background-color: #FFECE5;}
+.ShcEdit .ShcEdit_Line.Error .ShcEdit_Line_Body select { border:1px solid #CC3300;background-color: #FFECE5;}
+.ShcEdit .ShcEdit_Line.Error .ShcEdit_Line_Body textarea { border:1px solid #CC3300;background-color: #FFECE5;}

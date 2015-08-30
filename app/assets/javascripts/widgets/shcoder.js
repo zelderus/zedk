@@ -31,8 +31,11 @@ shcoder.InitEditor = function(opts) {
 	shcoder._editOpts  = opts;
 	shcoder.$editMain = $(".ShcEdit");
 
-	// TODO: событие на инпуты, при редактировании снимаем ошибку
-
+	//! Events
+	// событие на инпуты, при редактировании снимаем ошибку
+	shcoder.$editMain.find(".ShcEditInp").on("change", function(){
+		shcoder.EditIputErrorMessage($(this), null, false);
+	});
 };
 
 
@@ -59,7 +62,6 @@ shcoder.Edit = function(t, btn) {
  		dataSend, 
  		function(model){
  			zedk.ui.Message(model.message, false);
- 			console.log(model);
  			// updates
  			if (model.isnew){
  				$inpId.val(model.id);
@@ -79,16 +81,22 @@ shcoder._editShowErrors = function(errors) {
 	if (!errors || errors == null) return;
  	//- controls
  	var $editMain = shcoder.$editMain;
- 	var $inpId = $editMain.find("input[name='id']");
- 	var $inpTitle = $editMain.find("input[name='title']");
- 	var $inpTeaser = $editMain.find("input[name='teaser']");
- 	var $inpText = $editMain.find("textarea[name='text']");
-
- 	// TODO: отображение ошибки у инпутов
- 	console.log(errors);
-
+ 	// отображение ошибки у инпутов
+ 	for (keyname in errors) {
+ 		var k = keyname;
+ 		var v = errors[k];
+ 		var $inp = $editMain.find(".ShcEditInp[name='" +k+ "']");
+ 		shcoder.EditIputErrorMessage($inp, v, true);
+ 	}
 };
-
+// Отображение/Скрытие ошибки у инпута формы
+shcoder.EditIputErrorMessage = function(inp, msg, isShow) {
+	var $inp = $(inp);
+	if ($inp.length == 0) return;
+	var $p = $inp.parents(".ShcEdit_Line");
+	if (isShow) $p.addClass("Error"); else $p.removeClass("Error");
+	$p.find(".ShcEdit_Line_Error").html(msg?msg:"");
+};
 
 
 

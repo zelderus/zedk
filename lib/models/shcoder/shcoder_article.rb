@@ -5,7 +5,13 @@
 #
 ########################
 class ShcoderArticleTeaser
-	attr_accessor :id, :title, :teaser, :idname, :dateDate, :date, :lastDateDate, :lastDate, :creatorId, :lastModificatorId
+	attr_accessor 	:id, 
+					:title, 
+					:teaser, 
+					:idname, 
+					:autor,
+					:dateDate, :date, :lastDateDate, :lastDate, 
+					:creatorId, :lastModificatorId
 
 	def initialize()
 
@@ -19,6 +25,7 @@ class ShcoderArticleTeaser
 		@teaser = entity['Teaser']
 		@creatorId = entity['UserCreator_ID']
 		@lastModificatorId = entity['UserLastModificator_ID']
+		@autor = entity['UserName']
 
 		@dateDate = entity['CreateDate'];
 		@date = Date.parse(@dateDate).strftime('%d.%m.%Y')

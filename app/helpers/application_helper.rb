@@ -9,6 +9,12 @@ module ApplicationHelper
 			"#{base_title}. #{@maintitle}"
 		end
 	end
+	# meta autor
+	def get_autor
+		html = "";
+		if (!@autor.nil? && !@autor.empty?) then html += "<meta content='#{@autor}' name='author' />" end
+		return html.html_safe
+	end
 	# headers
 	def get_headers
 		html = "";
