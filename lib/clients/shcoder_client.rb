@@ -115,6 +115,16 @@ module Clients
 			return false
 		end
 
+		# существующие такие названия
+		def exist_article_idname(idname, onError=nil)
+			# sql
+			req = DataLayer::Request.new
+			req.set 'SELECT "IdName" FROM "tShcoder_Article" WHERE "IdName" LIKE @idname;'
+			req.set_str("idname", idname)
+			dts = raw_sql(req, onError)
+			return dts;
+		end
+
 
 
 	end

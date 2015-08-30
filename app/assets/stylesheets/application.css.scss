@@ -37,11 +37,29 @@ table td { padding: 4px; }
 .m-line {   white-space: nowrap;  /*max-width: 1040px; min-width: 820px!important;*/  margin: 0 auto;  padding: 0 20px 0 72px;  }
 .page_title {  font: 28px/32px Arial,Helvetica,sans-serif;}
 
+
+/*
+ *	Global message 
+ */
+.gl-msg { padding: 10px; border:1px solid #666; color:#666; display: none; position: fixed; top: 10px; left: 10px; background-color: #fff;}
+/* Megafon
+-----------------------------------------------------------*/
+.gl-msg { display:block; width:100%; height:40px; z-index:99999;}
+.gl-msg .gl-msg-megafon { z-index:99999; display:none; margin:0 auto; width:500px; display:none; height:20px; font-weight:bold; padding:8px; text-align: center;    color:#289E00;    -webkit-border-radius: 3px;    -khtml-border-radius: 3px;    border-radius: 3px;    border:1px solid #218500;    box-shadow:#289E00 1px 1px 2px;    background-color:#EFFFEB;}
+.gl-msg .gl-msg-megafon.Error { color:#9E2800; background-color:#FFF1EB; box-shadow:#9E2800 1px 1px 2px; border:1px solid #C23000;}
+.gl-msg-slider { position:fixed; left:40px; top:20px; z-index:99999; margin:0 auto; width:500px; display:none; height:20px; font-weight:bold; padding:8px; text-align: center;    color:#289E00;    -webkit-border-radius: 3px;    -khtml-border-radius: 3px;    border-radius: 3px;    border:1px solid #218500;    box-shadow:#289E00 1px 1px 2px;    background-color:#EFFFEB;}
+.gl-msg-slider.Error { z-index:99999; color:#9E2800; background-color:#FFF1EB; box-shadow:#9E2800 1px 1px 2px; border:1px solid #C23000;}
+
+
+
 /*
  *	Controls 
  */
 .ctrl-btn { vertical-align: top; text-decoration: none;  padding: 4px 12px 9px 12px;    color: #292f33; background-color: #f5f8fa;   background-image: linear-gradient(#fff,#f5f8fa); background-repeat: no-repeat;    border: 1px solid #e1e8ed;    border-radius: 4px;    color: #66757f;    cursor: pointer;    display: inline-block;    font-size: 14px;    font-weight: bold;    line-height: normal;    padding: 8px 16px;    position: relative;}
 .ctrl-btn:hover {color: #292f33;    text-decoration: none;    background-color: #e1e8ed;    background-image: linear-gradient(#fff,#e1e8ed);   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)";    border-color: #e1e8ed;}
+.ctrl-btn.Disabled { cursor: default;color: #ddd; background-color: #fdfdfd;background-image:none;}
+.ctrl-btn.Disabled:hover {color: #ddd; background-color: #fdfdfd; background-image:none;}
+
 .ctrl-btn.ctrl-btn-normal {background-color: #f5f8fa;   background-image: linear-gradient(#fff,#f5f8fa);}
 .ctrl-btn.ctrl-btn-normal:hover {}
 .ctrl-btn.ctrl-btn-exit {}
@@ -51,6 +69,8 @@ table td { padding: 4px; }
 
 .ctrl-inp {width: 150px;height: 28px;padding: 2px 4px;font-size: 14px;font-family: Arial,Helvetica,sans-serif;}
 .ctrl-inp.ctrl-inp-norm {}
+
+
 
 
 /*

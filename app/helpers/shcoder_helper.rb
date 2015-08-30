@@ -68,7 +68,19 @@ module ShcoderHelper
 			return @client.edit_article(article, method(:on_error))
 		end
 
-
+		# возвращает доступное уникальное название
+		def generate_article_idname(idname)
+			idname = idname.downcase;
+			idnamework = idname
+			ind = 1
+			while true do
+				names = @client.exist_article_idname(idnamework, method(:on_error))
+				if (names.nil? || names.count == 0) then break end
+				idnamework = "#{idname}_#{ind}"
+				ind += 1
+			end
+			return idnamework;
+		end
 
 
 		

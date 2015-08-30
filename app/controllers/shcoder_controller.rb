@@ -86,7 +86,7 @@ class ShcoderController < ApplicationController
 	def edit_article_do
 		response = JsonResponse.new
 		response.Success = false;
-		response.Model = { message: 'ok', errors: Hash.new };
+		response.Model = { message: 'ok', isnew: false, id: '', idname: '', errors: Hash.new };
 		# permission
 		if (!ShcoderHelper.user_access(@user))
 			response.Model[:message] = 'access denied'
@@ -109,6 +109,9 @@ class ShcoderController < ApplicationController
 				send_json response
 				return
 			end
+			response.Model[:id] = exist.id;
+			response.Model[:idname] = exist.idname;
+			response.Model[:message] = 'edit success.'
 		end
 		# проверка пришедших данных
 		response.Success = check_article(article, response.Model[:errors])
@@ -120,13 +123,19 @@ class ShcoderController < ApplicationController
 
 		# генерируем необходимые данные
 		gen_article_data(article)
+		# отдаем клиенту новые данные
+		if (article.isNew)
+			response.Model[:isnew] = true;
+			response.Model[:id] = article.id;
+			response.Model[:idname] = article.idname;
+			response.Model[:message] = 'created success.'
+		end 
 
 		# применяем в базе
 		response.Success = client.edit_article(article)
 		if (!response.Success)
 			response.Model[:message] = 'error on submit.'
 		end
-
 		# отправляем
 		send_json response
 	end
@@ -168,22 +177,21 @@ class ShcoderController < ApplicationController
 				article.id = SecureRandom.uuid;
 				article.creatorId = @user.id;
 				article.idname = gen_url_title(article.title)
-
-
 			end
 			article.lastModificatorId = @user.id;
-
 		end
 
 		# генерация url для статьи
 		def gen_url_title articleTitle
 			title = articleTitle
-			urlTitle = StringHelper.translateRusToEng(title)
-			urlTitle = urlTitle.gsub(" ", "")
-			urlTitle = StringHelper.trimMaxSize(urlTitle, 10, '')
-			urlTitle = urlTitle.downcase
-			# TODO: проверить в базе на совпадение
-
+			urlTitle = title.gsub(" ", "")
+			urlTitle = StringHelper.toUrlPath(urlTitle)
+			urlTitle = StringHelper.trimMaxSize(urlTitle, 90, '')
+			urlTitle = StringHelper.downcase urlTitle
+			urlTitle = "#{Time.now.strftime('%Y%m%d')}_#{urlTitle}"
+			# проверить в базе на совпадение
+			client = get_manager();
+			urlTitle = client.generate_article_idname(urlTitle);
 			return urlTitle
 		end
 

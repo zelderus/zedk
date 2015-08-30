@@ -22,6 +22,7 @@ module WelcomeHelper
 		def get_services()
 			dts = @client.get_services(method(:on_error))
 			services = []
+			if (dts.nil?) then return services end
 			dts.each do |e| 
 				ss = SiteService.new
 				ss.from_entity e
