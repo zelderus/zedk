@@ -6,20 +6,20 @@ module ApplicationHelper
 		if (@maintitle.nil? || @maintitle.empty?)
 			base_title
 		else
-			"#{base_title}. #{@maintitle}"
+			"#{base_title}. #{StringHelper.removeTags(@maintitle)}"
 		end
 	end
 	# meta autor
 	def get_autor
 		html = "";
-		if (!@autor.nil? && !@autor.empty?) then html += "<meta content='#{@autor}' name='author' />" end
+		if (!@autor.nil? && !@autor.empty?) then html += "<meta content='#{StringHelper.removeTags(@autor)}' name='author' />" end
 		return html.html_safe
 	end
 	# headers
 	def get_headers
 		html = "";
-		if (!@keyword.nil? && !@keyword.empty?) then html += "<meta content='#{@keyword}' name='keywords' />" end
-		if (!@desc.nil? && !@desc.empty?) then html += "<meta content='#{@desc}' name='description' />" end
+		if (!@keyword.nil? && !@keyword.empty?) then html += "<meta content='#{StringHelper.removeTags(@keyword)}' name='keywords' />" end
+		if (!@desc.nil? && !@desc.empty?) then html += "<meta content='#{StringHelper.removeTags(@desc)}' name='description' />" end
 		
 		return html.html_safe
 	end
