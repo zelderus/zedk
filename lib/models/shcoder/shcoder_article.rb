@@ -9,7 +9,7 @@ class ShcoderArticleTeaser
 					:title, 
 					:teaser, 
 					:idname, 
-					:autor,
+					:autor, :lastAutor,
 					:dateDate, :date, :lastDateDate, :lastDate, 
 					:creatorId, :lastModificatorId
 
@@ -25,8 +25,10 @@ class ShcoderArticleTeaser
 		@teaser = entity['Teaser']
 		@creatorId = entity['UserCreator_ID']
 		@lastModificatorId = entity['UserLastModificator_ID']
-		@autor = entity['UserName']
 
+		@autor = entity['UserName']
+		@lastAutor = entity['LastUserName']
+		
 		@dateDate = entity['CreateDate'];
 		@date = Date.parse(@dateDate).strftime('%d.%m.%Y')
 

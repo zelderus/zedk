@@ -79,10 +79,60 @@ module StringHelper
         value = translateRusToEng(value);
         if (value.nil?) then return value end
         value = StringHelper.downcase value;
-        value = value.gsub("[^a-z- 0-9 /]+", "");
+        value = value.gsub(/[^a-z- 0-9 \/]+/, "");
         value = value.gsub(" ", "_");
-        value = value.gsub("-+", "_");
-        value = value.gsub("^-+|-+$", "");
+        value = value.gsub(/-+/, "_");
+        value = value.gsub(/^-+|-+$/, "");
+        return value;
+    end
+
+
+
+    # Удаление всех тэгов
+    def self.removeTags(value)
+        str = value
+        str = StringHelper.cleanHtmlComments(str);
+        str = StringHelper.cleanHtmlBehaviour(str);
+        str = str.gsub(/<[^>]+?>/, "");
+        #value = value.trim();
+        return str;
+    end
+
+    # Удаляет тэги
+    def self.cleanHtml(value)
+        value = StringHelper.cleanHtmlComments(value);
+        value = StringHelper.cleanHtmlBehaviour(value);
+        # Remove disallowed html tags.
+        value = value.gsub(/<?(param|(no)?script|object|i?frame|body|style|font|head|link|title|h1)[^>]*?>/, "");
+        # Remove disallowed attributed.
+        #value = RemoveHtmlAttribute(value, "style");
+        # Replace links
+        value = value.gsub(/<a[^>]+href=\"?'?([^'\">]+)\"?'?[^>]*>(.*?)<\/a>/, "<a href=\"$1\" rel=\"nofollow\" target=\"_blank\">$2</a>");
+        return value;
+    end
+
+    # Удаляет тэги скриптов и стилей
+    def self.cleanHtmlBehaviour(value)
+        value = value.gsub(/(<style.+?<\/style>)|(<script.+?<\/script>)/, "");
+        return value;
+    end
+
+    # Удаляет тэги скриптов
+    def self.cleanHtmlScripts(value)
+        value = value.gsub(/(<script.+?<\/script>)/, "");
+        return value;
+    end
+
+    #
+    def  self.cleanHtmlComments(value)
+        value = value.gsub(/<!--.+?-->/, "");
+        return value;
+    end
+
+
+    # Удаляет ненужные символы
+    def self.cleanBadSymbols(value)
+        value = value.gsub(/[\/\,;<>']+/, "");
         return value;
     end
 

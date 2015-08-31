@@ -25,15 +25,53 @@ shcoder.Init = function(opts) {
 *	Редактирование
 *
 */
+// кастомные стили для редактора
+// http://www.wysibb.com/docs/p3.html
+shcoder._bbcodeCustomTags = {
+	code: {
+      hotkey: "ctrl+shift+3", //Add hotkey
+      transform: {
+        '<div class="mycode"><div class="codetop">Code:</div><div class="codemain">{SELTEXT}</div></div>':'[code]{SELTEXT}[/code]'
+      }
+    },
+    codemark: {
+      title: 'Insert codemark',
+      buttonText: 'codemark',
+      transform: {
+        '<div class="bbc_codemark">{SELTEXT}</div>':'[codemark]{SELTEXT}[/codemark]'
+      }
+    },
+    tt: {
+      title: 'TT',
+      buttonText: 'tt',
+      transform: {
+        '<span class="bbc_tt">{SELTEXT}</span>':'[tt]{SELTEXT}[/tt]'
+      }
+    },
+    br: {
+      title: 'new line',
+      buttonText: 'BR',
+      transform: {
+        '<br>':'[_br][/_br]'
+      }
+    }
+};
 shcoder._editOpts = {};
 shcoder.$editMain = null;
 shcoder.InitEditor = function(opts) {
 	shcoder._editOpts  = opts;
 	shcoder.$editMain = $(".ShcEdit");
 
+	//! Editor
+	var wbbOpt = {
+			buttons: "bold,italic,underline,|,img,link,|,quote,codemark,tt,|,br",
+			allButtons: shcoder._bbcodeCustomTags 
+		};
+	$(".BodyArea").wysibb(wbbOpt);
+
 	//! Events
 	// событие на инпуты, при редактировании снимаем ошибку
-	shcoder.$editMain.find(".ShcEditInp").on("change", function(){
+	shcoder.$editMain.on("change", ".ShcEditInp", function(){
 		shcoder.EditIputErrorMessage($(this), null, false);
 	});
 };
@@ -49,12 +87,13 @@ shcoder.Edit = function(t, btn) {
  	var $inpTitle = $editMain.find("input[name='title']");
  	var $inpTeaser = $editMain.find("input[name='teaser']");
  	var $inpText = $editMain.find("textarea[name='text']");
+
  	// data
  	dataSend = {
  		id: $inpId.val(),
  		title: $inpTitle.val(),
  		teaser: $inpTeaser.val(),
- 		text: $inpText.val()
+ 		text: $inpText.bbcode()	//$inpText.html()
  	};
  	//! отправляем
  	zedk.api.Post(

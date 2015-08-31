@@ -77,6 +77,8 @@ class ShcoderController < ApplicationController
 		end
 		# page
 		add_js('shcoder')
+		add_js('jquery.wysibb.min', true)
+		add_css('wbbtheme', true)
 	end
 	
 
@@ -96,7 +98,7 @@ class ShcoderController < ApplicationController
 		end
 		client = get_manager();
 		# статья из данных пришедших
-		article = bind_article()
+		article = bind_article();
 		# права на редактирование
 		if (!article.isNew)
 			exist = client.get_article_by_id(article.id)
@@ -161,6 +163,12 @@ class ShcoderController < ApplicationController
 			article.title = params[:title];
 			article.teaser = params[:teaser];
 			article.text = params[:text];
+			# вырезаем из данных запрещенку
+			article.title = StringHelper.removeTags(article.title);
+			article.teaser = StringHelper.removeTags(article.teaser);
+			#article.text = StringHelper.cleanHtmlBehaviour(article.text);
+			article.text = article.text.gsub(/\n/, "[_br][/_br]");
+
 			return article
 		end
 

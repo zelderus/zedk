@@ -6,16 +6,42 @@
 	});
 </script>
 	
+<%
 
+my_blockquote = {
+  'codemark' => [
+    /\[codemark\](.*?)\[\/codemark\1?\]/mi,
+    '<div class="bbc_codemark">\1</div>',
+    'Quote with citation',
+    '[codemark]please quote me[/codemark]',
+    :codemark
+  ],
+  'tt' => [
+    /\[tt\](.*?)\[\/tt\1?\]/mi,
+    '<span class="bbc_tt">\1</span>',
+    'tt',
+    '[tt]please quote me[/tt]',
+    :tt
+  ],
+  'br' => [
+    /\[_br\](.*?)\[\/_br\]/mi,
+    '<br>',
+    'br',
+    '[_br][/_br]',
+    :br
+  ]
+}
+
+%>
 <div class='ShcoderMain'>
 
 	<div class='ShcArticle'>
-		<div class='ShcArticle_Date'><%= @article.date %> <%= @article.lastDateDate.nil? ? '' : "(последнее изменение #{@article.lastDate})" %></div>
+		<div class='ShcArticle_Date'><%= @article.date %> <%= @article.lastDateDate.nil? ? '' : "(последнее изменение #{@article.lastDate} - #{@article.lastAutor})" %></div>
 		<h1 class='ShcArticle_Title page_title'><%= @article.title %></h1>	
 		<div class='ShcArticle_Teaser'><%= @article.teaser %></div>
 
 		<div class='ShcArticle_Text'>
-			<%= @article.text %>
+			<%= @article.text.bbcode_to_html(my_blockquote).html_safe %>
 		</div>
 
 	</div>

@@ -145,13 +145,18 @@ module Clients
 				  z."UserCreator_ID", 
 				  z."UserLastModificator_ID", 
 				  z."ModificateDate", 
-				  u."Name" AS "UserName"
+				  u."Name" AS "UserName",
+				  mu."Name" AS "LastUserName"
 				FROM 
-				  public."tShcoder_Article" z, 
-				  public."tAuth_User" u
+				  --public."tShcoder_Article" z, 
+				  --public."tAuth_User" u
+				  public."tShcoder_Article" z
+				  INNER JOIN public."tAuth_User" u ON z."UserCreator_ID" = u."Id"
+				  JOIN public."tAuth_User" mu ON z."UserLastModificator_ID"= mu."Id"
+
 				WHERE 
 				  1 = 1
-				  AND z."UserCreator_ID" = u."Id"
+				  --AND z."UserCreator_ID" = u."Id"
 				'
 				return sql
 			end

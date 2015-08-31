@@ -15,6 +15,16 @@
 .ShcArticle .ShcArticle_Teaser { font-size: 16px; color:#666; font-style: italic; margin: 10px 0 0 0;}
 .ShcArticle .ShcArticle_Text { font-size: 14px; margin: 20px 0 10px 0px; padding: 10px; border-left: 1px solid #aaa; border-top: 1px solid #aaa;}
 
+
+/*
+*	BBCodes
+*/
+.ShcoderMain .bbc_codemark { padding: 15px;  border-left: 3px solid #555; color: #777;}
+.ShcoderMain .bbc_tt { padding: 0 4px; background-color: #ddd; color:#666;-webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 2px;}
+.ShcoderMain fieldset { border: none; margin: 0 !important; padding: 0 !important; }
+.ShcoderMain blockquote {padding: 10px 10px 10px 30px; background-color: #eaeaea; color:#666;-webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 2px;}
+
+
 /*
 *	Edit
 */

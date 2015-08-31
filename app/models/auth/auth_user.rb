@@ -16,6 +16,7 @@ module AuthHelper
 		# Самый главный админ
 		def have_grand_access
 			# TODO: права пользователя на сайт (админ)
+			if (@idname == 'zelder') then return true end
 			return false
 		end
 
