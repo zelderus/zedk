@@ -42,7 +42,7 @@ bbc_blockquote = {
 	],
 	'zlink' => [
 		/\[zlnk=(.*?)\](.*?)\[\/zlnk\]/mi,
-		'<a href="\1">\2</a>'
+		'<a href="\1" target="_blank">\2</a>'
 	],
 	'minimark' => [
 		/\[minimark\](.*?)\[\/minimark\1?\]/mi,
@@ -73,7 +73,7 @@ bbc_blockquote = {
 
 		<h1 class='ShcArticle_Title page_title'><%= @article.title %></h1>	
 		<div class="clear"></div>
-		
+
 		<div class='ShcArticle_Teaser'><%= @article.teaser %></div>
 
 		<div class='ShcArticle_Text'>
