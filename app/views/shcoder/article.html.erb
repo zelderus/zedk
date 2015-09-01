@@ -8,28 +8,50 @@
 	
 <%
 
-my_blockquote = {
-  'codemark' => [
-    /\[codemark\](.*?)\[\/codemark\1?\]/mi,
-    '<div class="bbc_codemark">\1</div>',
-    'Quote with citation',
-    '[codemark]please quote me[/codemark]',
-    :codemark
-  ],
-  'tt' => [
-    /\[tt\](.*?)\[\/tt\1?\]/mi,
-    '<span class="bbc_tt">\1</span>',
-    'tt',
-    '[tt]please quote me[/tt]',
-    :tt
-  ],
-  'br' => [
-    /\[_br\](.*?)\[\/_br\]/mi,
-    '<br>',
-    'br',
-    '[_br][/_br]',
-    :br
-  ]
+bbc_blockquote = {
+	'h1' => [
+		/\[h1\](.*?)\[\/h1\1?\]/mi,
+		'<div class="bbc_h1">\1</div>'
+	],
+	'h2' => [
+		/\[h2\](.*?)\[\/h2\1?\]/mi,
+		'<div class="bbc_h2">\1</div>'
+	],
+	'h3' => [
+		/\[h3\](.*?)\[\/h3\1?\]/mi,
+		'<div class="bbc_h3">\1</div>'
+	],
+	'codemark' => [
+		/\[codemark\](.*?)\[\/codemark\1?\]/mi,
+		'<div class="bbc_codemark">\1</div>'
+	],
+	'tt' => [
+		/\[tt\](.*?)\[\/tt\1?\]/mi,
+		'<span class="bbc_tt">\1</span>',
+		'tt',
+		'[tt]please quote me[/tt]',
+		:tt
+	],
+	'br' => [
+		/\[_br\]/mi,
+		'<br>'
+	],
+	'zlink' => [
+		/\[zlnk=(.*?)\](.*?)\[\/zlnk\]/mi,
+		'<a href="\1">\2</a>'
+	],
+	'minimark' => [
+		/\[minimark\](.*?)\[\/minimark\1?\]/mi,
+		'<div class="bbc_minimark"><span class="bbc_minimark_block"> </span>\1</div>'
+	],
+	'bg1' => [
+		/\[bg1\](.*?)\[\/bg1\1?\]/mi,
+		'<div class="bbc_bg1"><span class="bbc_bg_text">\1</span></div>'
+	],
+	'bg2' => [
+		/\[bg2\](.*?)\[\/bg2\1?\]/mi,
+		'<div class="bbc_bg2"><span class="bbc_bg_text">\1</span></div>'
+	]
 }
 
 %>
@@ -41,7 +63,7 @@ my_blockquote = {
 		<div class='ShcArticle_Teaser'><%= @article.teaser %></div>
 
 		<div class='ShcArticle_Text'>
-			<%= @article.text.bbcode_to_html(my_blockquote).html_safe %>
+			<%= @article.text.bbcode_to_html(bbc_blockquote, true, :disable, :link).html_safe %>
 		</div>
 
 	</div>

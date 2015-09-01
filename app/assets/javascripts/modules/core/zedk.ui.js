@@ -23,14 +23,7 @@ zedk.ui.InitOnPage = function() {
 zedk.ui._initButtons = function() {
 	$(".ctrl-btn").on("click", function(e) { 
 		var $btn = $(this);
-		//- если выключена, то не работаем
-		var dis = $btn.data("ui_disabled");
-		if (dis && dis == 1) return;
-		//- функция запуска
-		var runMethod = $btn.data("run");
-		if (!runMethod) return;
-		//- выполняем
-		return zedk.api.Execute(runMethod, window, this, $btn);
+		return zedk.ui.BtnClick($btn);
 	});
 };
 
@@ -47,7 +40,22 @@ zedk.ui.BtnEnable = function(btn) {
 	$btn.data("ui_disabled", 0);
 	$btn.removeClass("Disabled");
 };
-
+zedk.ui.BtnIsEnable = function(btn) {
+	var $btn = $(btn);
+	var dis = $btn.data("ui_disabled");
+	if (dis && dis == 1) return false;
+	return true;
+};
+zedk.ui.BtnClick = function(btn) {
+	var $btn = $(btn);
+	//- если выключена, то не работаем
+	if (!zedk.ui.BtnIsEnable($btn)) return;
+	//- функция запуска
+	var runMethod = $btn.data("run");
+	if (!runMethod) return;
+	//- выполняем
+	return zedk.api.Execute(runMethod, window, this, $btn);
+};
 
 /*
 *	Глобальное сообщение

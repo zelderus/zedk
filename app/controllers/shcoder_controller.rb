@@ -167,7 +167,7 @@ class ShcoderController < ApplicationController
 			article.title = StringHelper.removeTags(article.title);
 			article.teaser = StringHelper.removeTags(article.teaser);
 			#article.text = StringHelper.cleanHtmlBehaviour(article.text);
-			article.text = article.text.gsub(/\n/, "[_br][/_br]");
+			article.text = article.text.gsub(/\n/, "[_br]");
 
 			return article
 		end
@@ -193,7 +193,7 @@ class ShcoderController < ApplicationController
 		# генерация url для статьи
 		def gen_url_title articleTitle
 			title = articleTitle
-			urlTitle = title.gsub(" ", "")
+			urlTitle = title.gsub(" ", "_")
 			urlTitle = StringHelper.toUrlPath(urlTitle)
 			urlTitle = StringHelper.trimMaxSize(urlTitle, 90, '')
 			urlTitle = StringHelper.downcase urlTitle

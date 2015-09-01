@@ -26,34 +26,97 @@ shcoder.Init = function(opts) {
 *
 */
 // кастомные стили для редактора
-// http://www.wysibb.com/docs/p3.html
+// http://www.wysibb.com/docs/p3.html (https://github.com/wbb/wysibb/blob/master/jquery.wysibb.js)
 shcoder._bbcodeCustomTags = {
-	code: {
-      hotkey: "ctrl+shift+3", //Add hotkey
-      transform: {
-        '<div class="mycode"><div class="codetop">Code:</div><div class="codemain">{SELTEXT}</div></div>':'[code]{SELTEXT}[/code]'
-      }
+	h1: {
+		hotkey: "ctrl+shift+4", //Add hotkey
+      	title: 'large header',
+      	buttonText: 'H1',
+      	transform: {
+        	'<div class="bbc_h1">{SELTEXT}</div>':'[h1]{SELTEXT}[/h1]'
+      	}
+    },
+    h2: {
+		title: 'header',
+		buttonText: 'H2',
+		transform: {
+			'<div class="bbc_h2">{SELTEXT}</div>':'[h2]{SELTEXT}[/h2]'
+		}
+    },
+    h3: {
+		title: 'small header',
+		buttonText: 'H3',
+		transform: {
+			'<div class="bbc_h3">{SELTEXT}</div>':'[h3]{SELTEXT}[/h3]'
+		}
     },
     codemark: {
-      title: 'Insert codemark',
-      buttonText: 'codemark',
-      transform: {
-        '<div class="bbc_codemark">{SELTEXT}</div>':'[codemark]{SELTEXT}[/codemark]'
-      }
+		title: 'Insert codemark',
+		buttonText: 'codemark',
+		transform: {
+			'<div class="bbc_codemark">{SELTEXT}</div>':'[codemark]{SELTEXT}[/codemark]'
+		}
     },
     tt: {
-      title: 'TT',
-      buttonText: 'tt',
-      transform: {
-        '<span class="bbc_tt">{SELTEXT}</span>':'[tt]{SELTEXT}[/tt]'
-      }
+		title: 'Text background',
+		buttonText: 'tt',
+		transform: {
+			'<span class="bbc_tt">{SELTEXT}</span>':'[tt]{SELTEXT}[/tt]'
+		}
     },
     br: {
-      title: 'new line',
-      buttonText: 'BR',
-      transform: {
-        '<br>':'[_br][/_br]'
-      }
+		title: 'new line',
+		buttonText: 'BR',
+		transform: {
+			'<br>':'[_br]'
+		}
+    },
+    zlink: {
+		title: 'ancor',
+		buttonHTML: '<span class="fonticon ve-tlb-link1">\uE007</span>',
+		modal: {
+			title: "Link",
+			width: "600px",
+			tabs: [
+				{
+					input: [ //List of form fields
+						{param: "TITLE",title:"Enter link title", type: "div"},
+						{param: "HREF",title:"Enter link URL ",validation: '^http(s)?://.*?\.'}
+					]
+				}
+			],
+			onLoad: function() {
+				//Callback function that will be called after the display of a modal window
+			},
+			onSubmit: function() {
+				//Callback function that will be called by pressing the "Save"
+				//If function return false, it means sending data WysiBB not be made
+			}
+		},
+		transform: {
+			'<a href="{HREF}">{TITLE}</a>':'[zlnk={HREF}]{TITLE}[/zlnk]'
+		}
+    },
+    minimark: {
+		title: 'Mini mark',
+		buttonText: 'MK"',
+		transform: {
+			'<div class="bbc_minimark"><span class="bbc_minimark_block"> </span>{SELTEXT}</div>':'[minimark]{SELTEXT}[/minimark]'
+		}
+    },
+    back1: {
+		title: 'Background Greed',
+		buttonText: 'BG"G',
+		transform: {
+			'<div class="bbc_bg1"><span class="bbc_bg_text">{SELTEXT}</span></div>':'[bg1]{SELTEXT}[/bg1]'
+		}
+    },
+    back2: {
+		title: 'Background Yellow',
+		buttonText: 'BG"Y',
+		transform: {
+			'<div class="bbc_bg2"><span class="bbc_bg_text">{SELTEXT}</span></div>':'[bg2]{SELTEXT}[/bg2]'
+		}
     }
 };
 shcoder._editOpts = {};
@@ -61,19 +124,29 @@ shcoder.$editMain = null;
 shcoder.InitEditor = function(opts) {
 	shcoder._editOpts  = opts;
 	shcoder.$editMain = $(".ShcEdit");
+	//! Controls
+	shcoder.$saveBtn = shcoder.$editMain.find("div[name='saveArticleBtn']");
 
-	//! Editor
-	var wbbOpt = {
-			buttons: "bold,italic,underline,|,img,link,|,quote,codemark,tt,|,br",
-			allButtons: shcoder._bbcodeCustomTags 
-		};
-	$(".BodyArea").wysibb(wbbOpt);
-
+	
 	//! Events
+	// сохранение
+	$(window).keydown(function(event) {
+		if (!(String.fromCharCode(event.which).toLowerCase() == 's' && event.ctrlKey) && !(event.which == 19)) return true;
+		zedk.ui.BtnClick(shcoder.$saveBtn);	// save
+		event.preventDefault();
+		return false;
+	});
 	// событие на инпуты, при редактировании снимаем ошибку
 	shcoder.$editMain.on("change", ".ShcEditInp", function(){
 		shcoder.EditIputErrorMessage($(this), null, false);
 	});
+
+	//! Editor
+	var wbbOpt = {
+			buttons: "bold,italic,underline,tt,|,h1,h2,h3,|,zlink,|,br,|,quote,codemark,|,minimark,back1,back2,|,",
+			allButtons: shcoder._bbcodeCustomTags 
+		};
+	$(".BodyArea").wysibb(wbbOpt);
 };
 
 
