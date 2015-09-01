@@ -79,8 +79,8 @@ module StringHelper
         value = translateRusToEng(value);
         if (value.nil?) then return value end
         value = StringHelper.downcase value;
-        value = value.gsub(/[^a-z- 0-9 \/]+/, "");
-        value = value.gsub(" ", "_");
+        value = value.gsub(/ /, "_");
+        value = value.gsub(/[^a-z- 0-9_\/]+/, "");
         value = value.gsub(/-+/, "_");
         value = value.gsub(/^-+|-+$/, "");
         return value;

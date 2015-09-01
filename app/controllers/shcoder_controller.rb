@@ -18,7 +18,16 @@ class ShcoderController < ApplicationController
 	end
 	
 	
-	
+	#
+	# => Категории
+	#
+	def category
+		# params
+		categoryIdName = params[:idname]
+		# TODO
+
+	end
+
 	
 	#
 	# => Конкретная статья
@@ -132,6 +141,7 @@ class ShcoderController < ApplicationController
 			response.Model[:id] = article.id;
 			response.Model[:idname] = article.idname;
 			response.Model[:message] = 'created success.'
+			response.Model[:href] = article.get_link();
 		end 
 
 		# применяем в базе
@@ -192,8 +202,7 @@ class ShcoderController < ApplicationController
 
 		# генерация url для статьи
 		def gen_url_title articleTitle
-			title = articleTitle
-			urlTitle = title.gsub(" ", "_")
+			urlTitle = articleTitle
 			urlTitle = StringHelper.toUrlPath(urlTitle)
 			urlTitle = StringHelper.trimMaxSize(urlTitle, 90, '')
 			urlTitle = StringHelper.downcase urlTitle

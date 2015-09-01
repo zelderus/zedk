@@ -9,6 +9,7 @@ class ShcoderArticleTeaser
 					:title, 
 					:teaser, 
 					:idname, 
+					:category, :categoryIdname,
 					:autor, :lastAutor,
 					:dateDate, :date, :lastDateDate, :lastDate, 
 					:creatorId, :lastModificatorId
@@ -26,15 +27,28 @@ class ShcoderArticleTeaser
 		@creatorId = entity['UserCreator_ID']
 		@lastModificatorId = entity['UserLastModificator_ID']
 
+		# TODO
+		@category = "cat";
+		@categoryIdname = "cattest";
+
 		@autor = entity['UserName']
 		@lastAutor = entity['LastUserName']
-		
-		@dateDate = entity['CreateDate'];
-		@date = Date.parse(@dateDate).strftime('%d.%m.%Y')
 
-		@lastDateDate = entity['ModificateDate'];
-		@lastDate = @lastDateDate.nil? ? '' : Date.parse(entity['ModificateDate']).strftime('%d.%m.%Y')
+		@dateDate = Date.parse(entity['CreateDate']);
+		@date = @dateDate.strftime('%d.%m.%Y')
+
+		@lastDateDate = entity['ModificateDate'].nil? ? nil : Date.parse(entity['ModificateDate']);
+		@lastDate = @lastDateDate.nil? ? '' : @lastDateDate.strftime('%d.%m.%Y')
 	end
+
+	# ссылка на статью внутри сайта
+	def get_link
+		Rails.application.routes.url_helpers.url_for(controller: 'shcoder', action: 'article', idname: @idname, only_path: true) 
+	end
+	def get_category_link
+		Rails.application.routes.url_helpers.url_for(controller: 'shcoder', action: 'category', idname: @categoryIdname, only_path: true) 
+	end
+
 end
 
 ########################

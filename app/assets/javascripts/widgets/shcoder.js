@@ -64,6 +64,13 @@ shcoder._bbcodeCustomTags = {
 			'<span class="bbc_tt">{SELTEXT}</span>':'[tt]{SELTEXT}[/tt]'
 		}
     },
+    ttr: {
+		title: 'Text background red',
+		buttonText: 'ttr',
+		transform: {
+			'<span class="bbc_ttr">{SELTEXT}</span>':'[ttr]{SELTEXT}[/ttr]'
+		}
+    },
     br: {
 		title: 'new line',
 		buttonText: 'BR',
@@ -105,7 +112,7 @@ shcoder._bbcodeCustomTags = {
 		}
     },
     back1: {
-		title: 'Background Greed',
+		title: 'Background Green',
 		buttonText: 'BG"G',
 		transform: {
 			'<div class="bbc_bg1"><span class="bbc_bg_text">{SELTEXT}</span></div>':'[bg1]{SELTEXT}[/bg1]'
@@ -143,7 +150,7 @@ shcoder.InitEditor = function(opts) {
 
 	//! Editor
 	var wbbOpt = {
-			buttons: "bold,italic,underline,tt,|,h1,h2,h3,|,zlink,|,br,|,quote,codemark,|,minimark,back1,back2,|,",
+			buttons: "bold,italic,underline,tt,ttr,|,h1,h2,h3,|,zlink,|,br,|,quote,codemark,|,minimark,back1,back2,|,",
 			allButtons: shcoder._bbcodeCustomTags 
 		};
 	$(".BodyArea").wysibb(wbbOpt);
@@ -177,6 +184,8 @@ shcoder.Edit = function(t, btn) {
  			// updates
  			if (model.isnew){
  				$inpId.val(model.id);
+ 				$(".ShcEdit_Reader_Link").attr("href", model.href);
+ 				$(".ShcEdit_Reader_LinkWrapper").show();
  			}
  			zedk.ui.BtnEnable(btn);
  		}, 

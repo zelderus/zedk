@@ -3,20 +3,32 @@
 .ShcoderMain { padding: 20px 0 20px 0;}
 .ShcoderMain .ShcTitle {}
 
+/*
+*	List
+*/
 .ShcList { margin: 10px 0; padding: 8px;}
-.ShcList .ShcList_Block { overflow: hidden; margin: 8px 0 0 0; padding: 0 0 4px 0; border-bottom:1px dotted #666;}
-.ShcList .ShcList_Block .ShcBlock_Date { margin: 2px 12px 0px 0px; font: 16px/22px Arial,Helvetica,sans-serif; float:left;color:#aaa;}
-.ShcList .ShcList_Block .ShcBlock_Link { display: block; margin: 0; font: 22px/26px Arial,Helvetica,sans-serif;}
+.ShcList .ShcList_Block { overflow: hidden; margin: 8px 0 0 0; padding: 0 0 4px 0; }
+.ShcList .ShcList_Block .ShcBlock_Date { margin: 2px 12px 0px 0px; font: 12px Arial,Helvetica,sans-serif; color:#aaa;}
+.ShcList .ShcList_Block .ShcBlock_Link { display: inline-block; margin: 0; font: 16px/20px Arial,Helvetica,sans-serif; text-decoration: none; border-bottom: 1px solid transparent; color:#333; font-weight: bold;}
+.ShcList .ShcList_Block .ShcBlock_Link:hover {border-bottom: 1px dotted #333;}
 .ShcList .ShcList_Block .ShcBlock_Teaser { font-size: 16px; margin: 6px 0 0 92px;font-style: italic;}
+.ShcList .ShcList_Block .ShcBlock_Category { cursor: pointer; color:#fff; text-decoration: none;background-color: #A3A3A3; padding: 1px 6px;border: 1px solid #A3A3A3;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;}
 
+
+/*
+*	Article
+*/
 .ShcArticle {}
-.ShcArticle .ShcArticle_Date {font: 16px/22px Arial,Helvetica,sans-serif; color:#aaa;}
-.ShcArticle .ShcArticle_Title { display: block; margin: 0; font: 24px/28px Arial,Helvetica,sans-serif;}
+.ShcArticle .ShcArticle_Date {font: 16px/22px Arial,Helvetica,sans-serif; color:#aaa; float: left; overflow: hidden; margin: 0 10px 10px 0;}
+.ShcArticle .ShcArticle_Date .ShcArticle_Date_Days {color:#5274BC;}
+.ShcArticle .ShcArticle_Date .ShcArticle_Date_Year {background-color: #5274BC; text-shadow: #666 1px 1px 1px;text-align: center; line-height: 1em;color: #FFF; padding: 3px 0; -webkit-border-radius: 3px;-moz-border-radius: 3px; border-radius: 3px;}
+.ShcArticle .ShcArticle_ModDate {float: right;display: inline-block;width: 10px; height: 10px; border: 2px dotted #666; background-color: #ddd;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;}
+.ShcArticle .ShcArticle_Title { display: block; margin: 0; padding: 10px 0 0 0;font: 24px/28px Arial,Helvetica,sans-serif;color: #011234;}
 .ShcArticle .ShcArticle_Teaser { font-size: 16px; color:#666; font-style: italic; margin: 10px 0 0 0;}
-.ShcArticle .ShcArticle_Text { font-size: 14px; margin: 20px 0 10px 0px; padding: 10px; border-left: 1px solid #aaa; border-top: 1px solid #aaa;}
+.ShcArticle .ShcArticle_Text { font-size: 14px; margin: 20px 0 10px 0px; padding: 10px; }
 
 
-.ShcoderMain .ShcArticle_Text { font-size: 14px; font-family: Arial,Helvetica,sans-serif;}
+.ShcoderMain .ShcArticle_Text { font-size: 14px; font-family: Arial,Helvetica,sans-serif; line-height: 1.5em;}
 /*
 *	BBCodes
 */
@@ -24,13 +36,14 @@
 .ShcoderMain .bbc_h2 { font-weight: bold; font: 20px/24px Arial,Helvetica,sans-serif; color:#007399; margin: 10px 0 10px 0;}
 .ShcoderMain .bbc_h3 { font-weight: bold; font: 16px/20px Arial,Helvetica,sans-serif; color:#007399; margin: 10px 0 10px 0;}
 .ShcoderMain .bbc_tt { padding: 0 4px; background-color: #eee; color:#333;-webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 2px;}
-.ShcoderMain .bbc_codemark { padding: 15px;  border-left: 3px solid #555; color: #777;}
+.ShcoderMain .bbc_ttr {background-color: #FDF7F8; padding: 2px;border: 1px solid #F5E0E4;border-radius: 4px;}
+.ShcoderMain .bbc_codemark { padding: 15px;  border-left: 3px solid #aaa; color: #777; line-height: 1.3em;}
 .ShcoderMain .bbc_codemark .bbc_tt {padding: 0; font-weight: bold; background-color: none;}
 .ShcoderMain fieldset { border: none; margin: 0 !important; padding: 0 !important; }
 .ShcoderMain blockquote {padding: 20px 10px 20px 30px; background-color: #eaeaea; color:#666;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;}
 .ShcoderMain blockquote .bbc_tt {background-color:#fafafa;}
-.ShcoderMain .bbc_minimark { padding: 0;}
-.ShcoderMain .bbc_minimark .bbc_minimark_block { width: 10px; height: 6px; background-color: #00F; display: inline-block; margin: 0 10px 0 0;}
+.ShcoderMain .bbc_minimark { padding: 0;font-weight: bold;}
+.ShcoderMain .bbc_minimark .bbc_minimark_block { width: 10px; height: 16px; background-color: #c14040; display: inline-block; margin: 0 10px 0 0;}
 .ShcoderMain .bbc_bg1 { }
 .ShcoderMain .bbc_bg1 .bbc_bg_text {background-color: #D9FFB3; color:#194D19;}
 .ShcoderMain .bbc_bg2 { }
@@ -41,6 +54,7 @@
 *	Edit
 */
 .ShcEdit {}
+.ShcEdit .ShcEdit_Reader { min-height: 20px;}
 /* edit inputs */
 .ShcEdit .ShcEdit_Line { margin: 20px 0 5px 0; padding: 4px;width: 90%;}
 .ShcEdit .ShcEdit_Line .ShcEdit_Line_Title { font-weight: bold; margin: 0 0 0 0;  font: 18px/20px Arial,Helvetica,sans-serif;}

@@ -32,6 +32,10 @@ bbc_blockquote = {
 		'[tt]please quote me[/tt]',
 		:tt
 	],
+	'ttr' => [
+		/\[ttr\](.*?)\[\/ttr\1?\]/mi,
+		'<span class="bbc_ttr">\1</span>',
+	],
 	'br' => [
 		/\[_br\]/mi,
 		'<br>'
@@ -58,8 +62,18 @@ bbc_blockquote = {
 <div class='ShcoderMain'>
 
 	<div class='ShcArticle'>
-		<div class='ShcArticle_Date'><%= @article.date %> <%= @article.lastDateDate.nil? ? '' : "(последнее изменение #{@article.lastDate} - #{@article.lastAutor})" %></div>
+		<div class='ShcArticle_Date'>
+			<div class="ShcArticle_Date_Days"><%= @article.dateDate.strftime('%d/%m') %></div>
+			<div class="ShcArticle_Date_Year"><%= @article.dateDate.strftime('%Y') %></div>
+			<div class="clear"></div>
+		</div>
+		<% if (!@article.lastDateDate.nil?) %>
+			<span class="ShcArticle_ModDate" title="<%= "последнее обновление #{@article.lastDate} - #{@article.lastAutor}" %>"> </span>
+		<% end %>
+
 		<h1 class='ShcArticle_Title page_title'><%= @article.title %></h1>	
+		<div class="clear"></div>
+		
 		<div class='ShcArticle_Teaser'><%= @article.teaser %></div>
 
 		<div class='ShcArticle_Text'>

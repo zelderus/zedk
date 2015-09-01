@@ -11,6 +11,7 @@ Blog2::Application.routes.draw do
 	# shcoder
 	get    "shcoder" => "shcoder#index", :as => :Shcoder
 	get    "shcoder/article(/:idname)" => "shcoder#article"
+	get    "shcoder/category(/:idname)" => "shcoder#category"
 	get    "shcoder/srv/edit(/:idname)" => "shcoder#edit_article"
 	post   "shcoder/srv/editdo" => "shcoder#edit_article_do"
 

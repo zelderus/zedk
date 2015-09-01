@@ -14,9 +14,9 @@
 	<div class='ShcList'>
 		<% @lastArticles.each do |article| %>
 			<div class='ShcList_Block'>
-				<div class='ShcBlock_Date'><%= article.date %></div>
-				<a class='ShcBlock_Link' href='<%=url_for controller: 'shcoder', action: 'article', idname: article.idname %>'><%= article.title %></a>	
-				<div class='ShcBlock_Teaser'><%= article.teaser %></div>
+				<a class='ShcBlock_Link' href='<%= article.get_link() %>'><%= article.title %></a>	
+				<a class='ShcBlock_Category' href='<%= article.get_category_link() %>'><%= article.category %></a>
+				<span class='ShcBlock_Date'><%= article.date %></span>
 				<div class='clear'></div>
 			</div>
 		<% end %>

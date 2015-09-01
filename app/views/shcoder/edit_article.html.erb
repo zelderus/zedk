@@ -18,6 +18,12 @@
 	</div>
 
 
+	<div class="ShcEdit_Reader">
+		<div class="ShcEdit_Reader_LinkWrapper" style="display:<%=@article.isNew ? 'none;' : 'block;' %>">
+			<a class="ShcEdit_Reader_Link" href="<%=@article.get_link() %>">Читать статью</a>
+		</div>
+	</div>
+
 	
 	<div class="ShcEdit_Line">
 		<div class="ShcEdit_Line_Title">Название</div>
