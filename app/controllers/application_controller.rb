@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require "protocols/json"
+require "helpers/string_helper"
 
 class ApplicationController < AuthController
 	# Prevent CSRF attacks by raising an exception.

@@ -1,5 +1,4 @@
 require "helpers/validator_helper"
-require "helpers/string_helper"
 
 class ShcoderController < ApplicationController
 
