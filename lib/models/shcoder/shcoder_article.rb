@@ -9,13 +9,13 @@ class ShcoderArticleTeaser
 					:title, 
 					:teaser, 
 					:idname, 
-					:category, :categoryIdname,
+					:categoryObj,
 					:autor, :lastAutor,
 					:dateDate, :date, :lastDateDate, :lastDate, 
 					:creatorId, :lastModificatorId
 
 	def initialize()
-
+		@categoryObj = ShcoderCategory.new
 	end
 
 	# на основе сущности
@@ -27,10 +27,8 @@ class ShcoderArticleTeaser
 		@creatorId = entity['UserCreator_ID']
 		@lastModificatorId = entity['UserLastModificator_ID']
 
-		# TODO
-		@category = "cat";
-		@categoryIdname = "cattest";
-
+		@categoryObj = ShcoderCategory.new entity
+		
 		@autor = entity['UserName']
 		@lastAutor = entity['LastUserName']
 
@@ -41,12 +39,17 @@ class ShcoderArticleTeaser
 		@lastDate = @lastDateDate.nil? ? '' : @lastDateDate.strftime('%d.%m.%Y')
 	end
 
+	def category
+		if (@categoryObj.nil?) then @categoryObj = ShcoderCategory.new end
+		return @categoryObj
+	end
+
 	# ссылка на статью внутри сайта
 	def get_link
 		Rails.application.routes.url_helpers.url_for(controller: 'shcoder', action: 'article', idname: @idname, only_path: true) 
 	end
 	def get_category_link
-		Rails.application.routes.url_helpers.url_for(controller: 'shcoder', action: 'category', idname: @categoryIdname, only_path: true) 
+		return @categoryObj.nil? ? "" : @categoryObj.get_link()
 	end
 
 end
@@ -60,6 +63,7 @@ class ShcoderArticle < ShcoderArticleTeaser
 	attr_accessor :isNew, :text
   
   	def initialize(entity = nil)
+  		super()
   		@isNew = true
   		if (!entity.nil?) then from_entity entity end
 
@@ -78,5 +82,33 @@ class ShcoderArticle < ShcoderArticleTeaser
 		return @creatorId == user.id
 	end
 
+
+end
+
+
+########################
+#
+# 	Категория
+#
+########################
+class ShcoderCategory
+	attr_accessor :id, :idname, :title
+
+	def initialize(entity = nil)
+  		if (!entity.nil?) then from_entity entity end
+
+	end
+
+  	# на основе сущности
+	def from_entity entity
+		@id = entity['CategoryId'];
+		@title = entity['CategoryTitle'];
+		@idname = entity['CategoryIdName'];
+	end
+
+	# ссылка на статью внутри сайта
+	def get_link
+		Rails.application.routes.url_helpers.url_for(controller: 'shcoder', action: 'category', idname: @idname, only_path: true) 
+	end
 
 end

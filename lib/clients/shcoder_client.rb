@@ -1,5 +1,6 @@
 require "datalayer/baseclient"
 require "models/shcoder/shcoder_article"
+require "models/pager"
 
 module Clients
 
@@ -11,14 +12,42 @@ module Clients
 		end
 
 
-		def get_last_articles(count = 10, onError=nil)
+		def get_last_articles(offset=0, count=10, categoryId=nil, onError=nil)
 			#lastArticles = Hash.new
-			sql = 'SELECT z.* FROM "tShcoder_Article" z order by "CreateDate" desc limit @top;'
+			#sql = 'SELECT z.* FROM "tShcoder_Article" z order by "CreateDate" desc limit @top;'
+			sql = get_sqlbody_findarticle();
+			if (!categoryId.nil?) then sql += ' AND c."Id"=@categoryId ' end
+			sql += 'order by "CreateDate" desc limit @top OFFSET @offset;'
+
 			req = DataLayer::Request.new
 			req.set sql
+			req.set_str("categoryId", categoryId)
 			req.set_int("top", count)
+			req.set_int("offset", offset)
 			dts = raw_sql(req, onError)
 			dts
+		end
+
+		def get_last_articles_pager(page=1, pageSize=10, categoryId=nil, onError=nil)
+			pager = ::Pager.new 
+			pager.init(page, pageSize);
+			# всего
+			total = 0;
+			sql = '
+			SELECT COUNT(*) AS "TotalCount" 
+			FROM public."tShcoder_Article" z 
+			LEFT JOIN public."tShcoder_Category" c ON z."Category_ID"= c."Id"
+			'
+			if (!categoryId.nil?) then sql += ' WHERE c."Id"=@categoryId; ' end
+			req = DataLayer::Request.new
+			req.set sql
+			req.set_str("categoryId", categoryId)
+
+			dts = one_sql(req, onError);
+			if (!dts.nil?) then total = dts['TotalCount'] end
+			# корректная модель
+			pager.init_total(total);
+			return pager
 		end
 		
 		
@@ -66,7 +95,8 @@ module Clients
    					"Teaser"=@teaser, 
    					"Text"=@text, 
        				"UserLastModificator_ID"=@modificatorId,
-       				"ModificateDate"=@modificateDate
+       				"ModificateDate"=@modificateDate,
+       				"Category_ID"=@categoryId
  				WHERE "Id"=@id;
 				'
 				req.set_str("id", article.id)
@@ -75,6 +105,7 @@ module Clients
 				req.set_str("teaser", article.teaser)
 				req.set_str("text", article.text)
 				req.set_str("modificatorId", article.lastModificatorId)
+				req.set_str("categoryId", article.category.id)
 
 				dts = raw_sql(req, onError)
 				if (is_succ_response(dts)) then return true end
@@ -90,7 +121,8 @@ module Clients
             		"Text", 
             		"IdName", 
             		"UserCreator_ID", 
-            		"UserLastModificator_ID")
+            		"UserLastModificator_ID",
+            		"Category_ID")
     			VALUES (
     				@id, 
     				@createDate, 
@@ -99,7 +131,8 @@ module Clients
     				@text, 
     				@idname, 
     				@creatorId, 
-            		@modificatorId
+            		@modificatorId,
+            		@categoryId
             	);
 				'
 				req.set_str("id", article.id)
@@ -110,6 +143,7 @@ module Clients
 				req.set_str("idname", article.idname)
 				req.set_str("creatorId", article.creatorId)
 				req.set_str("modificatorId", article.lastModificatorId)
+				req.set_str("categoryId", article.category.id)
 
 				dts = raw_sql(req, onError)
 				if (is_succ_response(dts)) then return true end
@@ -129,8 +163,83 @@ module Clients
 		end
 
 
+		# список категорий
+		def get_categories(onError=nil)
+			req = DataLayer::Request.new
+			sql = get_sqlbody_findcategory();
+			sql += 'ORDER BY c."Title" ASC;';
+			req.set sql
+			dts = raw_sql(req, onError)
+			return dts;
+		end
+
+		# категория
+		def get_category(id, onError=nil)
+			req = DataLayer::Request.new
+			sql = get_sqlbody_findcategory();
+			sql += 'AND c."Id" = @idname;';
+
+			req.set sql
+			req.set_str("idname", id)
+			dts = one_sql(req, onError)
+			return dts;
+		end
+		# существующая категория
+		def get_category_by_idname(idname, onError=nil)
+			req = DataLayer::Request.new
+			sql = get_sqlbody_findcategory();
+			sql += 'AND c."IdName" = @idname;';
+
+			req.set sql
+			req.set_str("idname", idname)
+			dts = one_sql(req, onError)
+			return dts;
+		end
+		# создание категории
+		# в случае неудачи - возвращает nil, иначе возвращает объект category
+		def create_category(category, onError=nil)
+			req = DataLayer::Request.new
+			req.set '
+			INSERT INTO "tShcoder_Category"(
+			  	"Id", 
+			  	"CreateDate", 
+			  	"Title", 
+			  	"IdName" )
+			VALUES (
+				@id, 
+				@createDate, 
+				@title, 
+				@idname
+        	);
+			'
+			req.set_str("id", category.id)
+			req.set_str("createDate", Time.now.strftime('%Y-%m-%d %H:%M:%S'))
+			req.set_str("title", category.title)
+			req.set_str("idname", category.idname)
+
+			dts = raw_sql(req, onError)
+			if (is_succ_response(dts)) then return category end
+			return nil;
+		end
+
+
 
 		private
+			# общее начало запроса для поиска категории
+			def get_sqlbody_findcategory
+				sql = '
+				SELECT 
+				  c."CreateDate" AS "CategoryCreateDate", 
+				  c."Id" AS "CategoryId",
+				  c."Title" AS "CategoryTitle",
+				  c."IdName" AS "CategoryIdName"
+				FROM 
+				  public."tShcoder_Category" c
+				WHERE
+				  1 = 1
+				'
+				return sql
+			end
 
 			# общее начало запроса для поиска статьи
 			def get_sqlbody_findarticle
@@ -146,17 +255,18 @@ module Clients
 				  z."UserLastModificator_ID", 
 				  z."ModificateDate", 
 				  u."Name" AS "UserName",
-				  mu."Name" AS "LastUserName"
+				  mu."Name" AS "LastUserName",
+				  c."Id" AS "CategoryId",
+				  c."Title" AS "CategoryTitle",
+				  c."IdName" AS "CategoryIdName"
 				FROM 
-				  --public."tShcoder_Article" z, 
-				  --public."tAuth_User" u
 				  public."tShcoder_Article" z
 				  INNER JOIN public."tAuth_User" u ON z."UserCreator_ID" = u."Id"
-				  JOIN public."tAuth_User" mu ON z."UserLastModificator_ID"= mu."Id"
+				  LEFT JOIN public."tAuth_User" mu ON z."UserLastModificator_ID"= mu."Id"
+				  LEFT JOIN public."tShcoder_Category" c ON z."Category_ID"= c."Id"
 
 				WHERE 
 				  1 = 1
-				  --AND z."UserCreator_ID" = u."Id"
 				'
 				return sql
 			end

@@ -27,7 +27,6 @@ module ShcoderHelper
 			@deb = ""
 			@client = Clients::ShcoderClient.new
 		end
-
 		# отладочная информация
 		def get_deb
 			#@client.get_errorno		
@@ -36,10 +35,11 @@ module ShcoderHelper
 
 
 		# последние добавленные статьи
-		def get_last_articles(count = 10)
-			dts = @client.get_last_articles(count, method(:on_error))
+		def get_last_articles(offset=0, count=10, categoryId=nil)
+			dts = @client.get_last_articles(offset, count, categoryId, method(:on_error))
 			# to model
 			lastArticles = Array.new
+			if (dts.nil?) then return lastArticles end
 			dts.each do |r| 
 				article = ::ShcoderArticleTeaser.new
 				article.from_entity r
@@ -47,6 +47,12 @@ module ShcoderHelper
 			end
 			return lastArticles
 		end
+
+		def get_last_articles_pager(page=1, pageSize=10, categoryId=nil)
+			return @client.get_last_articles_pager(page, pageSize, categoryId, method(:on_error))
+		end
+
+
 
 		# статья
 		def get_article_by_idname(idname)
@@ -83,7 +89,41 @@ module ShcoderHelper
 		end
 
 
-		
+		# список категорий
+		def get_categories()
+			dts = @client.get_categories(method(:on_error))
+			# to model
+			categories = Array.new
+			if (dts.nil?) then return categories end
+			dts.each do |r| 
+				category = ::ShcoderCategory.new r
+				categories.push category
+			end
+			return categories
+		end
+		# категория
+		def get_category id
+			exist = @client.get_category(id, method(:on_error))
+			if (exist.nil?) then return nil end
+			return ::ShcoderCategory.new exist;
+		end
+		# возвращает доступное уникальное название
+		def get_category_by_idname(idname)
+			idname = idname.downcase;
+			exist = @client.get_category_by_idname(idname, method(:on_error))
+			if (exist.nil?) then return nil end
+			return ::ShcoderCategory.new exist;
+		end
+		# создание категории
+		def create_category(idname, title)
+			category = ::ShcoderCategory.new;
+			category.idname = idname.downcase;
+			category.title = title;
+			category.id = SecureRandom.uuid;
+			return @client.create_category(category, method(:on_error))
+		end
+
+				
 	  
 	  private
 

@@ -30,6 +30,14 @@ module StringHelper
 	end
 
 
+    # С заглавной буквы
+    def self.capitalize(value)
+        if (value.nil?) then return value end
+        value = StringHelper.downcase value;
+        value = value.strip;
+        value = value.mb_chars.capitalize;
+        return value;
+    end
 
 
 
@@ -80,7 +88,7 @@ module StringHelper
         if (value.nil?) then return value end
         value = StringHelper.downcase value;
         value = value.gsub(/ /, "_");
-        value = value.gsub(/[^a-z- 0-9_\/]+/, "");
+        value = value.gsub(/[^a-z\- 0-9_\/]+/, "");
         value = value.gsub(/-+/, "_");
         value = value.gsub(/^-+|-+$/, "");
         return value;

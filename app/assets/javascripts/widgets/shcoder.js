@@ -104,11 +104,18 @@ shcoder._bbcodeCustomTags = {
 			'<a href="{HREF}">{TITLE}</a>':'[zlnk={HREF}]{TITLE}[/zlnk]'
 		}
     },
-    minimark: {
-		title: 'Mini mark',
-		buttonText: 'MK"',
+    minimarkbig: {
+		title: 'Mini mark big',
+		buttonText: 'MK"B',
 		transform: {
 			'<div class="bbc_minimark"><span class="bbc_minimark_block"> </span>{SELTEXT}</div>':'[minimark]{SELTEXT}[/minimark]'
+		}
+    },
+    minimarksmall: {
+		title: 'Mini mark small',
+		buttonText: 'MK"S',
+		transform: {
+			'<div class="bbc_minimark_sm"><span class="bbc_minimark_block"> </span>{SELTEXT}</div>':'[minimarksm]{SELTEXT}[/minimarksm]'
 		}
     },
     back1: {
@@ -150,7 +157,7 @@ shcoder.InitEditor = function(opts) {
 
 	//! Editor
 	var wbbOpt = {
-			buttons: "bold,italic,underline,tt,ttr,|,h1,h2,h3,|,zlink,|,br,|,quote,codemark,|,minimark,back1,back2,|,",
+			buttons: "bold,italic,underline,tt,ttr,|,h1,h2,h3,|,zlink,|,br,|,quote,codemark,|,minimarkbig,minimarksmall,|,back1,back2,|,",
 			allButtons: shcoder._bbcodeCustomTags 
 		};
 	$(".BodyArea").wysibb(wbbOpt);
@@ -167,12 +174,16 @@ shcoder.Edit = function(t, btn) {
  	var $inpTitle = $editMain.find("input[name='title']");
  	var $inpTeaser = $editMain.find("input[name='teaser']");
  	var $inpText = $editMain.find("textarea[name='text']");
+ 	var $inpCategoryTitle = $editMain.find("input[name='categoryTitle']");
+ 	var $inpCategory = $editMain.find("select[name='category']");
 
  	// data
  	dataSend = {
  		id: $inpId.val(),
  		title: $inpTitle.val(),
  		teaser: $inpTeaser.val(),
+ 		category: $inpCategoryTitle.val(),
+ 		categoryId: $inpCategory.val(),
  		text: $inpText.bbcode()	//$inpText.html()
  	};
  	//! отправляем
@@ -187,9 +198,16 @@ shcoder.Edit = function(t, btn) {
  				$(".ShcEdit_Reader_Link").attr("href", model.href);
  				$(".ShcEdit_Reader_LinkWrapper").show();
  			}
+ 			// category
+ 			var newCatId = model.categoryId;
+ 			var newCatTitle = model.category;
+ 			shcoder._placeNewCategory(newCatId, newCatTitle, true);
+ 			$inpCategoryTitle.val("");
+
  			zedk.ui.BtnEnable(btn);
  		}, 
  		function(msg, model){
+ 			//console.log(model);
  			var errMsg = model != null ? model.message : "Ошибка запроса";
  			zedk.ui.BtnEnable(btn);
  			zedk.ui.Message(errMsg, true);
@@ -197,6 +215,22 @@ shcoder.Edit = function(t, btn) {
  			shcoder._editShowErrors(model != null ? model.errors : null);
  		}
  	);
+};
+shcoder._placeNewCategory = function(newCatId, newCatTitle, isSelected) {
+ 	var $editMain = shcoder.$editMain;
+ 	var $inpCategory = $editMain.find("select[name='category']");
+	var catIsNew = true;
+	$inpCategory.find("option").each(function(i, v) {
+		if ($(v).val() == newCatId){
+			catIsNew = false;
+			return false;
+		}
+	});
+	if (catIsNew) {
+		var $opt = $("<option>").attr("value", newCatId).html(newCatTitle);
+		if (isSelected) $opt.attr("selected", "selected");
+		$inpCategory.append($opt);
+	}
 };
 shcoder._editShowErrors = function(errors) {
 	if (!errors || errors == null) return;

@@ -2,6 +2,7 @@
 
 .ShcoderMain { padding: 20px 0 20px 0;}
 .ShcoderMain .ShcTitle {}
+.ShcoderMain .ShcDesc {text-align: justify;margin: 0 0 60px 0;font-size: 16px; color: #666;font-family: Segoe UI;}
 
 /*
 *	List
@@ -32,7 +33,7 @@
 /*
 *	BBCodes
 */
-.ShcoderMain .bbc_h1 { font-weight: bold; font: 24px/28px Arial,Helvetica,sans-serif; color:#007399; margin: 40px 0 20px 0;}
+.ShcoderMain .bbc_h1 { font-weight: bold; font: 24px/28px Arial,Helvetica,sans-serif; color: #fff; margin: 40px 0 20px 0; background-color: #3a5795; padding: 10px; border: 1px solid #3a5795; display: inline-block;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;}
 .ShcoderMain .bbc_h2 { font-weight: bold; font: 20px/24px Arial,Helvetica,sans-serif; color:#007399; margin: 10px 0 10px 0;}
 .ShcoderMain .bbc_h3 { font-weight: bold; font: 16px/20px Arial,Helvetica,sans-serif; color:#007399; margin: 10px 0 10px 0;}
 .ShcoderMain .bbc_tt { padding: 0 4px; background-color: #eee; color:#333;-webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 2px;}
@@ -40,10 +41,12 @@
 .ShcoderMain .bbc_codemark { padding: 15px;  border-left: 3px solid #aaa; color: #777; line-height: 1.3em;}
 .ShcoderMain .bbc_codemark .bbc_tt {padding: 0; font-weight: bold; background-color: none;}
 .ShcoderMain fieldset { border: none; margin: 0 !important; padding: 0 !important; }
-.ShcoderMain blockquote {padding: 20px 10px 20px 70px; background-color: #eaeaea; color:#666;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;margin: 10px 0 20px 30px;background-image: image_url("left_quote.png");background-repeat: no-repeat;   background-position: -12px -4px;}
+.ShcoderMain blockquote { display: inline-block; padding: 20px 25px 20px 70px; background-color: #eaeaea; color:#666;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;margin: 10px 0 20px 30px;background-image: image_url("left_quote.png");background-repeat: no-repeat;   background-position: -12px -4px;}
 .ShcoderMain blockquote .bbc_tt {background-color:#fafafa;}
 .ShcoderMain .bbc_minimark { padding: 0;font-weight: bold;}
 .ShcoderMain .bbc_minimark .bbc_minimark_block { width: 10px; height: 16px; background-color: #c14040; display: inline-block; margin: 0 10px 0 0;}
+.ShcoderMain .bbc_minimark_sm { padding: 0;font-weight: bold;}
+.ShcoderMain .bbc_minimark_sm .bbc_minimark_block { width: 10px; height: 8px; background-color: #5274BC; display: inline-block; margin: 0 10px 0 0;}
 .ShcoderMain .bbc_bg1 { }
 .ShcoderMain .bbc_bg1 .bbc_bg_text {background-color: #D9FFB3; color:#194D19;}
 .ShcoderMain .bbc_bg2 { }

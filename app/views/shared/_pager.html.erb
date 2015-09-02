@@ -1,0 +1,25 @@
+
+<div class="Pager">
+	<% if (!pager.nil?) %>
+		<%
+		return; # !!!!!!!!!!!!!!!!!!! DEBUG !!!!!
+			i = 0
+			link = ''
+ 			if (defined? url) then link = url end
+		%>
+
+
+
+		<% until i >= pager.pageCount do 
+			page = i+1
+		%>
+			<a class="PagerPage" href="<%="#{link}?page=#{page}"%>"><%=page%></a>
+
+		<% 
+			i+=1;
+			end 
+		%>
+
+		<div class="clear"></div>
+	<% end %>
+</div>

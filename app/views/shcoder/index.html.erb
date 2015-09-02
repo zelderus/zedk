@@ -8,20 +8,16 @@
 	
 
 <div class='ShcoderMain'>
-	<h1 class='ShcTitle page_title'>Последние обновления</h1>
-	
-	
-	<div class='ShcList'>
-		<% @lastArticles.each do |article| %>
-			<div class='ShcList_Block'>
-				<a class='ShcBlock_Link' href='<%= article.get_link() %>'><%= article.title %></a>	
-				<a class='ShcBlock_Category' href='<%= article.get_category_link() %>'><%= article.category %></a>
-				<span class='ShcBlock_Date'><%= article.date %></span>
-				<div class='clear'></div>
-			</div>
-		<% end %>
+	<h1 class='ShcTitle page_title'>Проект "Шкодер"</h1>
+	<div class='ShcDesc'>
+		Данный раздел предназначен для кратких и наиболее полезных статей-заметок. Скорее личного характера и не претендует на полноту справочника.
+		В статьях даются как правило справочный материал в удобном и понятном виде, наиболее часто используемых возможностей.
+		Цель проекта, наиболее быстро добраться до нужной информации и применить ее.
 	</div>
 
+	<h1 class='ShcTitle page_title'>Последние обновления</h1>
+	<%= render "articles", articles: @lastArticles %>
+	<%= render "shared/pager", pager: @pager %>
 
 	<% if (ShcoderHelper.user_access(@user)) %>
 		<div><%= render "controls/button", name: 'addArticleBtn', href: url_for(controller: 'shcoder', action: 'edit_article'), title: 'Добавить статью', style: 'normal'  %></div>

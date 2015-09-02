@@ -31,6 +31,9 @@ ru:
   shcoder_headers_keyword: "Shcoder"
   shcoder_headers_desc: "Статьи, триксы и полезности в коде и не только."
   shcoder_menu_add: "Добавление статьи"
+  shcoder_cat_headers: "Категории статей"
+  shcoder_cat_headers_keyword: "Категории статей"
+  shcoder_cat_headers_desc: "Категории статей"
 
   projector_headers_title: "Projector"
   projector_headers_keyword: "Projector"

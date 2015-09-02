@@ -11,9 +11,12 @@ class ShcoderController < ApplicationController
 		add_js('shcoder')
 		set_menu([ ['Shcoder'] ])
 		# get articles
-		pageSize = 10
+		pageSize = get_opt_pagesize();
+		currPage = get_opt_page();
 		client = get_manager();
-		@lastArticles = client.get_last_articles(pageSize)
+		@pager = client.get_last_articles_pager(currPage, pageSize, nil);
+		@lastArticles = client.get_last_articles(@pager.offset, pageSize, nil)
+
 	end
 	
 	
@@ -23,7 +26,34 @@ class ShcoderController < ApplicationController
 	def category
 		# params
 		categoryIdName = params[:idname]
-		# TODO
+		client = get_manager();
+		if (categoryIdName.nil?)
+			# list
+			@categories = client.get_categories();
+			# page
+			set_title(t('shcoder_cat_headers'))
+			set_headers(t('shcoder_cat_headers_keyword'), t('shcoder_cat_headers_desc'))
+			set_menu([ ['Shcoder', '/shcoder'] ])
+			add_js('shcoder')
+			return
+		end
+		# get category
+		@category = client.get_category_by_idname(categoryIdName);
+		if (@category.nil?)
+			error_404()
+			return
+		end
+		# articles
+		pageSize = get_opt_pagesize();
+		currPage = get_opt_page();
+		@pager = client.get_last_articles_pager(currPage, pageSize, @category.id);
+		@articles = client.get_last_articles(@pager.offset, pageSize, @category.id);
+
+		# page
+		set_title(@category.title)
+		set_headers(@category.title.gsub(' ', ','), @category.title)
+		set_menu([ ['Shcoder', '/shcoder'], [@category.title, ''] ])
+		add_js('shcoder')
 
 	end
 
@@ -46,7 +76,7 @@ class ShcoderController < ApplicationController
 		set_autor(@article.autor)
 		set_headers(@article.title.gsub(' ', ','), @article.teaser)
 		add_js('shcoder')
-		set_menu([ ['Shcoder', '/shcoder'], [@article.title, ''] ])
+		set_menu([ ['Shcoder', '/shcoder'], [@article.category.title, @article.get_category_link()], [@article.title, ''] ])
 	end
 
 
@@ -60,11 +90,11 @@ class ShcoderController < ApplicationController
 			return
 		end
 		@article = ::ShcoderArticle.new
+		client = get_manager();
 		# params
 		articleIdName = params[:idname]
 		if (!articleIdName.nil?)
 			# get article
-			client = get_manager();
 			@article = client.get_article_by_idname(articleIdName)
 			if (@article.nil?)
 				error_404()
@@ -87,6 +117,10 @@ class ShcoderController < ApplicationController
 		add_js('shcoder')
 		add_js('jquery.wysibb.min', true)
 		add_css('wbbtheme', true)
+
+		# категории
+		@categories = client.get_categories();
+
 	end
 	
 
@@ -97,7 +131,7 @@ class ShcoderController < ApplicationController
 	def edit_article_do
 		response = JsonResponse.new
 		response.Success = false;
-		response.Model = { message: 'ok', isnew: false, id: '', idname: '', errors: Hash.new };
+		response.Model = { message: 'ok', isnew: false, id: '', idname: '', category: '', categoryId: '', errors: Hash.new };
 		# permission
 		if (!ShcoderHelper.user_access(@user))
 			response.Model[:message] = 'access denied'
@@ -134,6 +168,7 @@ class ShcoderController < ApplicationController
 
 		# генерируем необходимые данные
 		gen_article_data(article)
+
 		# отдаем клиенту новые данные
 		if (article.isNew)
 			response.Model[:isnew] = true;
@@ -142,6 +177,9 @@ class ShcoderController < ApplicationController
 			response.Model[:message] = 'created success.'
 			response.Model[:href] = article.get_link();
 		end 
+		# данные категории
+		response.Model[:category] = article.category.title;
+		response.Model[:categoryId] = article.category.id;
 
 		# применяем в базе
 		response.Success = client.edit_article(article)
@@ -163,6 +201,18 @@ class ShcoderController < ApplicationController
 			return @manager
 		end
 
+
+		# Текущая страница из запроса
+		def get_opt_page
+			page = params[:page];
+			if (page.nil?) then return 1 end
+			return page
+		end
+		def get_opt_pagesize
+			return 10
+		end
+
+
 		# статья из данных пришедших через форму
 		def bind_article
 			article = ShcoderArticle.new
@@ -177,6 +227,8 @@ class ShcoderController < ApplicationController
 			article.teaser = StringHelper.removeTags(article.teaser);
 			#article.text = StringHelper.cleanHtmlBehaviour(article.text);
 			article.text = article.text.gsub(/\n/, "[_br]");
+			# категория
+			article.category = get_category_fromform();
 
 			return article
 		end
@@ -186,6 +238,7 @@ class ShcoderController < ApplicationController
 			if (ValidatorHelper.stringIsNullOrEmpty(article.title)) then errorsHash['title'] = 'title must be' end
 			if (ValidatorHelper.stringIsNullOrEmpty(article.teaser)) then errorsHash['teaser'] = 'teaser must be' end
 			if (ValidatorHelper.stringIsNullOrEmpty(article.text)) then errorsHash['text'] = 'text must be' end
+			if (article.category.nil?) then errorsHash['category'] = 'category must be' end
 			return errorsHash.count <= 0
 		end
 
@@ -201,14 +254,51 @@ class ShcoderController < ApplicationController
 
 		# генерация url для статьи
 		def gen_url_title articleTitle
-			urlTitle = articleTitle
-			urlTitle = StringHelper.toUrlPath(urlTitle)
-			urlTitle = StringHelper.trimMaxSize(urlTitle, 90, '')
-			urlTitle = StringHelper.downcase urlTitle
+			urlTitle = gen_url(articleTitle)
 			urlTitle = "#{Time.now.strftime('%Y%m%d')}_#{urlTitle}"
 			# проверить в базе на совпадение
 			client = get_manager();
 			urlTitle = client.generate_article_idname(urlTitle);
+			return urlTitle
+		end
+
+		# url строка
+		def gen_url title
+			urlTitle = title
+			urlTitle = StringHelper.toUrlPath(urlTitle)
+			urlTitle = StringHelper.trimMaxSize(urlTitle, 90, '')
+			urlTitle = StringHelper.downcase urlTitle
+			return urlTitle
+		end
+
+		# категория
+		def get_category_fromform
+			categoryId = params[:categoryId];
+			categoryTitle = params[:category];
+			categoryTitle = categoryTitle.strip;
+			client = get_manager();
+			# новая категория
+			if (!ValidatorHelper.stringIsNullOrEmpty(categoryTitle))
+				# создание категории или поиск существующей
+				categoryUrl = gen_url_category(categoryTitle);
+				existCategory = client.get_category_by_idname(categoryUrl);
+				if (!existCategory.nil?) then return existCategory end
+				# создание
+				return client.create_category(categoryUrl, categoryTitle);
+			end
+			# существующая категория
+			if (!ValidatorHelper.stringIsNullOrEmpty(categoryId))
+				categoryExist = client.get_category(categoryId);
+				if (!categoryExist.nil?) then return categoryExist end
+			end
+			
+			return nil
+		end
+
+		# генерация url для категории
+		def gen_url_category title
+			#title = StringHelper.capitalize(title);
+			urlTitle = gen_url(title)
 			return urlTitle
 		end
 

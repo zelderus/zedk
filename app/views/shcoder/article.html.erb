@@ -48,6 +48,10 @@ bbc_blockquote = {
 		/\[minimark\](.*?)\[\/minimark\1?\]/mi,
 		'<div class="bbc_minimark"><span class="bbc_minimark_block"> </span>\1</div>'
 	],
+	'minimarksm' => [
+		/\[minimarksm\](.*?)\[\/minimarksm\1?\]/mi,
+		'<div class="bbc_minimark_sm"><span class="bbc_minimark_block"> </span>\1</div>'
+	],
 	'bg1' => [
 		/\[bg1\](.*?)\[\/bg1\1?\]/mi,
 		'<div class="bbc_bg1"><span class="bbc_bg_text">\1</span></div>'

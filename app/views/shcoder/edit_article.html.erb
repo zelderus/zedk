@@ -34,6 +34,28 @@
 	</div>
 
 	<div class="ShcEdit_Line">
+		<div class="ShcEdit_Line_Title">Категория</div>
+		<div class="ShcEdit_Line_ErrorWrapper"><div class="ShcEdit_Line_Error"></div></div>
+		<div class="ShcEdit_Line_Body">
+			<select class="ShcEditInp" name="category">
+				<option value="">- Выберите категорию -</option>
+				<% @categories.each do |category| %>
+					<option value="<%=category.id %>" <%=if (@article.category.id == category.id) then "selected='selected'" end %> ><%=category.title %></option>
+				<% end %>
+			</select>
+		</div>
+	</div>
+	<div class="ShcEdit_Line">
+		<div class="ShcEdit_Line_Title">Новая категория</div>
+		<div class="ShcEdit_Line_ErrorWrapper"><div class="ShcEdit_Line_Error"></div></div>
+		<div class="ShcEdit_Line_Body">
+			<input class="ShcEditInp" type="text" name="categoryTitle" value="" />
+		</div>
+	</div>
+
+
+
+	<div class="ShcEdit_Line">
 		<div class="ShcEdit_Line_Title">Тизер</div>
 		<div class="ShcEdit_Line_ErrorWrapper"><div class="ShcEdit_Line_Error"></div></div>
 		<div class="ShcEdit_Line_Body">
