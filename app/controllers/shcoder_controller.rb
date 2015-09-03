@@ -79,6 +79,8 @@ class ShcoderController < ApplicationController
 		set_autor(@article.autor)
 		set_headers(@article.title.gsub(' ', ','), @article.teaser)
 		add_js('shcoder')
+		add_js('codehl', true)
+		add_css('codehl', true)
 		set_menu([ ['Shcoder', '/shcoder'], [@article.category.title, @article.get_category_link()], [@article.title, ''] ])
 	end
 
@@ -120,6 +122,8 @@ class ShcoderController < ApplicationController
 		add_js('shcoder')
 		add_js('bbceditor', true)
 		add_css('bbceditor', true)
+		#add_js('codehl', true)
+		#add_css('codehl', true)
 
 		# категории
 		@categories = client.get_categories();

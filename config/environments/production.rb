@@ -66,7 +66,7 @@ Blog2::Application.configure do
 	config.assets.precompile += %w( zelder.css )
 	config.assets.precompile += %w( widgets/*.css )
   config.assets.precompile += %w( bbceditor.css )
-  
+  config.assets.precompile += %w( codehl.css )
 
 	config.assets.precompile += %w( jquery-last.js )
 	config.assets.precompile += %w( zelder.js )
@@ -74,6 +74,7 @@ Blog2::Application.configure do
 	config.assets.precompile += %w( widgets/*.js )
 
   config.assets.precompile += %w( bbceditor.js )
+  config.assets.precompile += %w( codehl.js )
 	config.assets.precompile += %w( testlib.js )
 
   # Ignore bad email addresses and do not raise email delivery errors.

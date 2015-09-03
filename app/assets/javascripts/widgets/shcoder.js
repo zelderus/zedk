@@ -13,10 +13,42 @@ this.shcoder = this.shcoder || {};
 shcoder.Init = function(opts) {
  	
 	
-	
 
 };
 
+
+
+/*
+*
+*	Статья
+*
+*/
+shcoder.InitArticle = function(opts) {
+ 	
+ 	shcoder._codeHightLight();
+
+};
+
+
+
+
+/*
+*
+*	Подсветка
+*
+*/
+shcoder._codeHightLight = function(opts) {
+ 	
+ 	//http://highlightjs.readthedocs.org/en/latest/api.html
+	hljs.configure({
+		useBR: true,
+		tabReplace: '    ' // 4 spaces
+	});
+	$('pre code').each(function(i, block) {
+		hljs.highlightBlock(block);
+	});
+
+};
 
 
 
@@ -131,7 +163,23 @@ shcoder._bbcodeCustomTags = {
 		transform: {
 			'<div class="bbc_bg2"><span class="bbc_bg_text">{SELTEXT}</span></div>':'[bg2]{SELTEXT}[/bg2]'
 		}
+    },
+
+    code_ruby: {
+		title: 'Code Ruby',
+		buttonText: 'CODE"RB',
+		transform: {
+			'<pre><code class="ruby">{SELTEXT}</code></pre>':'[cd_rb]{SELTEXT}[/cd_rb]'
+		}
+    },
+    code_sql: {
+		title: 'Code SQL',
+		buttonText: 'CODE"SQL',
+		transform: {
+			'<pre><code class="sql">{SELTEXT}</code></pre>':'[cd_sql]{SELTEXT}[/cd_sql]'
+		}
     }
+
 };
 shcoder._editOpts = {};
 shcoder.$editMain = null;
@@ -157,7 +205,7 @@ shcoder.InitEditor = function(opts) {
 
 	//! Editor
 	var wbbOpt = {
-			buttons: "bold,italic,underline,tt,ttr,|,h1,h2,h3,|,zlink,|,br,|,quote,codemark,|,minimarkbig,minimarksmall,|,back1,back2,|,",
+			buttons: "bold,italic,underline,tt,ttr,|,h1,h2,h3,|,zlink,|,br,|,quote,codemark,|,minimarkbig,minimarksmall,|,back1,back2,|,code_ruby,code_sql,|,",
 			allButtons: shcoder._bbcodeCustomTags 
 		};
 	$(".BodyArea").wysibb(wbbOpt);

@@ -2,16 +2,7 @@
 
 .ShcoderMain { padding: 20px 0 20px 0;}
 .ShcoderMain .ShcTitle {}
-.ShcoderMain .ShcDesc {    text-align: justify;
-    margin: 0 0 60px 0;
-    font-size: 18px;
-    color: #666;
-    border: 1px solid #eee;
-    padding: 20px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    border-radius: 8px;
-    box-shadow: #aaa 1px 1px 2px;}
+.ShcoderMain .ShcDesc {text-align: justify; margin: 0 0 60px 0; font-size: 18px; color: #666; border: 1px solid #eee; padding: 20px; -webkit-border-radius: 8px; -moz-border-radius: 8px; border-radius: 8px; box-shadow: #aaa 1px 1px 2px;}
 
 
 .ShcoderMain .ShcMainArticleList {float: left; overflow: hidden;}
@@ -72,6 +63,9 @@
 .ShcoderMain .bbc_bg1 .bbc_bg_text {background-color: #D9FFB3; color:#194D19;}
 .ShcoderMain .bbc_bg2 { }
 .ShcoderMain .bbc_bg2 .bbc_bg_text {background-color: #FFFFCC; color:#111;}
+.ShcoderMain pre {margin: 3px 0; padding: 0px; background-color: #aaa;white-space: pre-wrap;}
+.ShcoderMain pre code { background-color: #f7f7f7;}
+.ShcoderMain pre code.ruby {}
 
 
 /*
@@ -98,3 +92,7 @@
 .ShcEdit .ShcEdit_Line.Error .ShcEdit_Line_Body input { border:1px solid #CC3300; background-color: #FFECE5;}
 .ShcEdit .ShcEdit_Line.Error .ShcEdit_Line_Body select { border:1px solid #CC3300;background-color: #FFECE5;}
 .ShcEdit .ShcEdit_Line.Error .ShcEdit_Line_Body textarea { border:1px solid #CC3300;background-color: #FFECE5;}
+/*
+*	BBCodes in Edit
+*/
+.ShcEdit pre code { background-color: transparent !important;}

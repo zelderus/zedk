@@ -3,6 +3,7 @@
 <script type="text/javascript">
 	$(function () {
 		shcoder.Init({});
+		shcoder.InitArticle({});
 	});
 </script>
 	
@@ -59,6 +60,15 @@ bbc_blockquote = {
 	'bg2' => [
 		/\[bg2\](.*?)\[\/bg2\1?\]/mi,
 		'<div class="bbc_bg2"><span class="bbc_bg_text">\1</span></div>'
+	],
+
+	'cd_rb' => [
+		/\[cd_rb\](.*?)\[\/cd_rb\1?\]/mi,
+		'<pre><code class="ruby">\1</code></pre>'
+	],
+	'cd_sql' => [
+		/\[cd_sql\](.*?)\[\/cd_sql\1?\]/mi,
+		'<pre><code class="sql">\1</code></pre>'
 	]
 }
 

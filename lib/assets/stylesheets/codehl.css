@@ -3,5 +3,5 @@
 //  в него одного будут сжаты все нижеследующие стили
 
 
-//= require ./src/wbbtheme
-
+///// require_tree ./src/hl/
+//= require ./src/hl/vs.css
