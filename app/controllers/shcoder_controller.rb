@@ -115,8 +115,8 @@ class ShcoderController < ApplicationController
 		end
 		# page
 		add_js('shcoder')
-		add_js('jquery.wysibb.min', true)
-		add_css('wbbtheme', true)
+		add_js('bbceditor', true)
+		add_css('bbceditor', true)
 
 		# категории
 		@categories = client.get_categories();
