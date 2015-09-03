@@ -98,6 +98,7 @@ table td { padding: 4px; }
 .menu { margin: 0; padding: 0px;  background-color: #5274BC; color: #fefefe; border-top: 1px solid #7791CA;border-bottom: 1px solid #666699;overflow:hidden; font: 16px/20px Arial,Helvetica,sans-serif;color:#FFF;}
 .menu-line { /*max-width: 1500px; min-width: 820px!important;*/ height: 36px; padding: 6px 0 1px;  margin-bottom: 0px; }
 .menu .m-button { text-align: center; padding: 4px 2px; display: inline-block; color:#DDD;position: relative; top: -10px;}
+.menu .m-button:hover {color:#EEE;}
 .menu .m-path {display: inline-block; color:#FFF;position: relative; top: -10px;}
 .menu .m-separ-empty {display: inline-block; width: 1px; height:30px;}
 .menu .m-separ { display: inline-block; width: 10px; height:30px; border-right: 2px; color: #800;background-image: url(asset_path("m-separ.svg"));  background-position: 0 0;  color: transparent;  outline: 0;}
@@ -122,7 +123,7 @@ table td { padding: 4px; }
 /*
  *	Pager 
  */
-.Pager { margin: 10px 0 5px 0;overflow: hidden;}
+.Pager { margin: 10px 0 20px 0;overflow: hidden;}
 .Pager .block {float:left;margin:2px; padding:4px;text-decoration: none;}
 .Pager .block.divBlockFormat {vertical-align: top; text-decoration: none;   color: #292f33; background-color: #f5f8fa;   background-image: linear-gradient(#fff,#f5f8fa); background-repeat: no-repeat;    border: 1px solid #e1e8ed;    border-radius: 4px;    color: #66757f;    cursor: pointer;    display: inline-block;    font-size: 12px;    font-weight: bold;    line-height: normal;    padding: 6px 8px;    position: relative;}
 .Pager .block.divBlockFormat:HOVER {color: #292f33;    text-decoration: none;    background-color: #e1e8ed;    background-image: linear-gradient(#fff,#e1e8ed);   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)";    border-color: #e1e8ed;}

@@ -22,6 +22,7 @@ zedk.panel.UserLoginFromForm = function(btn) {
 	//! Dont work, just do form
 	//return true;
 	//! Dont work, just do form
+
 	var $btn = $(btn);
 	var $form = $btn.parents(".upanel-from-login");
 	// datas

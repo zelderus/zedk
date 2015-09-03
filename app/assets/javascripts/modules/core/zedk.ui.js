@@ -54,7 +54,7 @@ zedk.ui.BtnClick = function(btn) {
 	var runMethod = $btn.data("run");
 	if (!runMethod) return;
 	//- выполняем
-	return zedk.api.Execute(runMethod, window, this, $btn);
+	return zedk.api.Execute(runMethod, window, $btn);
 };
 
 /*

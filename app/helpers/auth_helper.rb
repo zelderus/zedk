@@ -48,6 +48,10 @@ module AuthHelper
 			# hash пароля
 			def pass_to_hash pass
 				ph = Digest::SHA256.base64digest(pass)
+				#sha256 = OpenSSL::Digest.new('MD5', 'digestdata')
+
+				#secret = "sss_zld_83";
+				#ph = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('md5'), secret, pass)
 				return ph
 			end
 
