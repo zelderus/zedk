@@ -15,10 +15,26 @@
 		Цель проекта, наиболее быстро добраться до нужной информации и применить ее.
 	</div>
 
-	<h1 class='ShcTitle page_title'>Последние обновления</h1>
-	<%= render "articles", articles: @lastArticles %>
-	<%= render "shared/pager", pager: @pager %>
 
+	<div class="ShcMainArticleList">
+		<h1 class='ShcTitle page_title'>Последние обновления</h1>
+		<%= render "articles", articles: @lastArticles %>
+		<%= render "shared/pager", pager: @pager %>
+	</div>
+	<div class="ShcMainCategoryList">
+		<h1 class='ShcTitle page_title'>Категории</h1>
+		<div class='ShcCategoryList'>
+			<% @categories.each do |category| %>
+				<div class='ShcList_Block'>
+					<a class='ShcBlock_Link' href='<%= category.get_link() %>'><%= category.title %></a>	
+					<div class='clear'></div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="clear"></div>
+	
+	
 	<% if (ShcoderHelper.user_access(@user)) %>
 		<div><%= render "controls/button", name: 'addArticleBtn', href: url_for(controller: 'shcoder', action: 'edit_article'), title: 'Добавить статью', style: 'normal'  %></div>
 	<% end %>

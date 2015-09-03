@@ -17,6 +17,9 @@ class ShcoderController < ApplicationController
 		@pager = client.get_last_articles_pager(currPage, pageSize, nil);
 		@lastArticles = client.get_last_articles(@pager.offset, pageSize, nil)
 
+		# категории
+		@categories = client.get_categories();
+
 	end
 	
 	
