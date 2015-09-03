@@ -46,7 +46,7 @@ class Pager
 		@offset = @offset < 0 ? 0 : @offset;
 
 		@havePrevPage = @page-1 > 0;
-		@haveNextPage = @page < @total;
+		@haveNextPage = @page < @pageCount;
 	end
 	
 

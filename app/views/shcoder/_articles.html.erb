@@ -2,17 +2,13 @@
 
 
 <div class='ShcList'>
-	<% articles.each do |_article| %>
-		<% if (!_article.nil?) 
-			if (_article.category.nil?) then _article.category = ShcoderCategory.new end
-			%>
+	<% articles.each do |article| %>
 		<div class='ShcList_Block'>
-			<a class='ShcBlock_Link' href='<%= _article.get_link() %>'><%= _article.title %></a>	
-			<a class='ShcBlock_Category' href='<%= _article.get_category_link() %>'><%= _article.category.title %></a>
-			<span class='ShcBlock_Date'><%= _article.date %></span>
+			<a class='ShcBlock_Link' href='<%= article.get_link() %>'><%= article.title %></a>	
+			<a class='ShcBlock_Category' href='<%= article.get_category_link() %>'><%= article.category.title %></a>
+			<span class='ShcBlock_Date'><%= article.date %></span>
 			<div class='clear'></div>
 		</div>
-		<% end %>
 	<% end %>
 </div>
 

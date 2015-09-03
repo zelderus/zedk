@@ -1,25 +1,102 @@
 
+<% if (pager.nil?) then return end %>
+
 <div class="Pager">
-	<% if (!pager.nil?) %>
-		<%
-		return; # !!!!!!!!!!!!!!!!!!! DEBUG !!!!!
-			i = 0
-			link = ''
- 			if (defined? url) then link = url end
-		%>
+	<%
+		startUrl = ''
+			if (defined? url) then startUrl = url end
+		startUrl += "?page=";
+		currentPage = pager.page;
+		pagesInRow = 6;
+		pagesInBlock = 2;
+	%>
 
 
-
-		<% until i >= pager.pageCount do 
-			page = i+1
-		%>
-			<a class="PagerPage" href="<%="#{link}?page=#{page}"%>"><%=page%></a>
-
-		<% 
-			i+=1;
-			end 
-		%>
-
-		<div class="clear"></div>
+	<% 	
+	# 
+	# => Назад
+	#
+    %>
+	<% if (pager.havePrevPage) %>
+		<a href="<%="#{startUrl}#{(currentPage - 1)}"%>" class="block divBlockFormat">Назад</a>
+	<% else %>
+		<div class="block divBlockDisabled">Назад</div>
 	<% end %>
+
+
+    <% 	
+	# 
+	# => все страницы БЕЗ разрывов 
+	#
+    %>
+    <% if (pager.pageCount < pagesInRow) %>
+        <% pageI = 1; until pageI > pager.pageCount do %>
+        	<% if (currentPage != pageI) %>
+            	<a href="<%="#{startUrl}#{pageI}"%>" class="block divBlockFormat"><%="#{pageI}"%></a>
+            <% else %>
+            	<div class="block divCurrentBlockFormat"><%="#{pageI}"%></div>
+            <% end %>
+        <% pageI+=1; end %>
+    <% 	
+	# 
+	# => все страницы С разрывами
+	#
+    %>
+    <% else %>
+        <% 
+    	# => начальный отрывок 
+        %>
+        <% if (currentPage - (pagesInBlock + 1) > 0) %>
+            <% if (currentPage != 1) %>
+            	<a href="<%="#{startUrl}1"%>" class="block divBlockFormat">1</a>
+            <% else %>
+            	<div class="block divCurrentBlockFormat">1</div>
+            <% end %>
+            <% if (currentPage - pagesInBlock > 1 + 1) %>
+            	<div class="block">..</div>
+            <% end %>
+        <% end %>
+        <% 
+    	# => центральный отрывок 
+        %>
+        <% first = currentPage - pagesInBlock; first = first < 1 ? 1 : first; %>
+        <% last = currentPage + pagesInBlock; last = last > pager.pageCount ? pager.pageCount : last; %>
+        <% p = first; until p > last do %>
+            <% if (p != currentPage) %>
+            	<a href="<%="#{startUrl}#{p}"%>" class="block divBlockFormat"><%="#{p}"%></a>
+            <% else %>
+            	<div class="block divCurrentBlockFormat"><%="#{p}"%></div>
+            <% end %>
+        <% p+=1; end %>
+        <% 
+    	# => конечный отрывок 
+        %>
+        <% if (currentPage + (pagesInBlock + 1) <= pager.pageCount) %>
+            <% if (currentPage + pagesInBlock < pager.pageCount - 1) %>
+            	<div class="block">..</div>
+        	<% end %>
+            <% if (currentPage != pager.pageCount)%>
+            	<a href="<%="#{startUrl}#{pager.pageCount}"%>" class="block divBlockFormat"><%="#{pager.pageCount}"%></a>
+        	<% else %>
+        		<div class="block divCurrentBlockFormat"><%="#{pager.pageCount}"%></div>
+            <% end %>
+            <% if (currentPage - pagesInBlock > 1 + 1) %>
+            	<div class="block">..</div>
+            <% end %>
+        <% end %>
+    <% end %>
+
+
+    <% 	
+	# 
+	# => Далее
+	#
+    %>
+    <% if (pager.haveNextPage) %>
+		<a href="<%="#{startUrl}#{(currentPage + 1)}"%>" class="block divBlockFormat">Далее</a>
+	<% else %>
+		<div class="block divBlockDisabled">Далее</div>
+	<% end %>
+
+	<div class="clear"></div>
 </div>

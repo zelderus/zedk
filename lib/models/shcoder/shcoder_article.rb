@@ -9,13 +9,13 @@ class ShcoderArticleTeaser
 					:title, 
 					:teaser, 
 					:idname, 
-					:categoryObj,
+					:category,
 					:autor, :lastAutor,
 					:dateDate, :date, :lastDateDate, :lastDate, 
 					:creatorId, :lastModificatorId
 
 	def initialize()
-		@categoryObj = ShcoderCategory.new
+		@category = ShcoderCategory.new
 	end
 
 	# на основе сущности
@@ -27,7 +27,7 @@ class ShcoderArticleTeaser
 		@creatorId = entity['UserCreator_ID']
 		@lastModificatorId = entity['UserLastModificator_ID']
 
-		@categoryObj = ShcoderCategory.new entity
+		@category = ShcoderCategory.new entity
 		
 		@autor = entity['UserName']
 		@lastAutor = entity['LastUserName']
@@ -39,17 +39,13 @@ class ShcoderArticleTeaser
 		@lastDate = @lastDateDate.nil? ? '' : @lastDateDate.strftime('%d.%m.%Y')
 	end
 
-	def category
-		if (@categoryObj.nil?) then @categoryObj = ShcoderCategory.new end
-		return @categoryObj
-	end
 
 	# ссылка на статью внутри сайта
 	def get_link
 		Rails.application.routes.url_helpers.url_for(controller: 'shcoder', action: 'article', idname: @idname, only_path: true) 
 	end
 	def get_category_link
-		return @categoryObj.nil? ? "" : @categoryObj.get_link()
+		return @category.get_link()
 	end
 
 end
