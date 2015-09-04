@@ -11,7 +11,7 @@ module ShcoderHelper
 		if (user.service.have_write(Conventions::ServiceNames::Shcoder)) then return true end
 		return false
 	end
-	# Пользователь имеет доступ к статье
+	# Пользователь имеет доступ к статье на запись
 	def self.user_access_article user, article
 		if (!user_access user) then return false end
 		if (user.have_grand_access()) then return true end

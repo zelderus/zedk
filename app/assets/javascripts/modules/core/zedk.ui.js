@@ -16,7 +16,7 @@ zedk.ui.About = function() {
 zedk.ui.InitOnPage = function() {
 	zedk.ui._initMessage();
 	zedk.ui._initButtons();
-
+	zedk.ui._initInputButtons();
 };
 
 // инициализация кнопок
@@ -24,6 +24,17 @@ zedk.ui._initButtons = function() {
 	$(".ctrl-btn").on("click", function(e) { 
 		var $btn = $(this);
 		return zedk.ui.BtnClick($btn);
+	});
+};
+// инициализация кнопок инпутов
+zedk.ui._initInputButtons = function() {
+	$(".ctrl-inp-run").on("keyup", function(e) { 
+		var code = e.which;
+	    if(code==13)e.preventDefault();
+	    if(code==13){
+	        var $btn = $(this);
+			return zedk.ui.BtnClick($btn);
+	    }
 	});
 };
 

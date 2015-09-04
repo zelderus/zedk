@@ -13,3 +13,12 @@
 
 .ModuleBlock { margin: 10px 0; padding: 20px; overflow: hidden;}
 .ModuleBlock .ModuleBlockLine { margin: 10px 0;}
+
+/*
+*	Search
+*/	
+.SearchBlock {}
+.SearchBlock .SearchBlock_Request { font-size: 16px;}
+.SearchBlock .SearchBlock_Request .SearchBlock_Request_Title { }
+.SearchBlock .SearchBlock_Request .SearchBlock_Request_Req {font-weight: bold;}
+.SearchBlock .SearchBlock_Content { margin: 20px 0 20px 0; padding: 10px;}

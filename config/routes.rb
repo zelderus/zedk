@@ -3,6 +3,10 @@ Blog2::Application.routes.draw do
 	get     "welcome/index"
 	root    'welcome#index'
 
+	# main
+	get		"search" => "welcome#search"
+
+
 	# auth
 	match	"usrlog" => "auth#user_login", via: [:get, :post]
 	get		"usrext" => "auth#user_destroy"

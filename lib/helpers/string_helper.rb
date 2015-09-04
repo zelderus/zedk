@@ -30,12 +30,20 @@ module StringHelper
 	end
 
 
-    # С заглавной буквы
+    # С заглавной буквы (все остальные маленькие)
     def self.capitalize(value)
         if (value.nil?) then return value end
         value = StringHelper.downcase value;
         value = value.strip;
         value = value.mb_chars.capitalize;
+        return value;
+    end
+
+    # С заглавной буквы (все остальные как есть)
+    def self.first_capitalize(value)
+        if (value.nil?) then return value end
+        value = value.strip;
+        value[0] = value[0,1].upcase
         return value;
     end
 

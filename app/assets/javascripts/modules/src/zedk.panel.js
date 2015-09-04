@@ -59,3 +59,17 @@ zedk.panel._piu = function(v, b) {
 	return v;
 };
 
+/*
+*	Поиск по сайту
+*/
+zedk.panel.Search = function(btn) {
+	var $btn = $(btn);
+
+	var link = $btn.data("link");
+	var txt = $btn.val();
+
+	var fullPath = link + "?txt=" + txt;
+	window.location.href = fullPath;
+
+};
+

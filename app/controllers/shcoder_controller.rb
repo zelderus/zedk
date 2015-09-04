@@ -254,6 +254,7 @@ class ShcoderController < ApplicationController
 			if (article.isNew)
 				article.id = SecureRandom.uuid;
 				article.creatorId = @user.id;
+				article.autor = @user.name;
 				article.idname = gen_url_title(article.title)
 			end
 			article.lastModificatorId = @user.id;
@@ -291,6 +292,7 @@ class ShcoderController < ApplicationController
 				existCategory = client.get_category_by_idname(categoryUrl);
 				if (!existCategory.nil?) then return existCategory end
 				# создание
+				categoryTitle = StringHelper.first_capitalize(categoryTitle);
 				return client.create_category(categoryUrl, categoryTitle);
 			end
 			# существующая категория
@@ -304,7 +306,6 @@ class ShcoderController < ApplicationController
 
 		# генерация url для категории
 		def gen_url_category title
-			#title = StringHelper.capitalize(title);
 			urlTitle = gen_url(title)
 			return urlTitle
 		end

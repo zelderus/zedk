@@ -12,7 +12,7 @@ class ShcoderArticleTeaser
 					:category,
 					:autor, :lastAutor,
 					:dateDate, :date, :lastDateDate, :lastDate, 
-					:creatorId, :lastModificatorId
+					:creatorId, :lastModificatorId, :creatorName
 
 	def initialize()
 		@category = ShcoderCategory.new
@@ -25,11 +25,14 @@ class ShcoderArticleTeaser
 		@title = entity['Title']
 		@teaser = entity['Teaser']
 		@creatorId = entity['UserCreator_ID']
+		@creatorName = entity['UserName']
 		@lastModificatorId = entity['UserLastModificator_ID']
 
 		@category = ShcoderCategory.new entity
 		
-		@autor = entity['UserName']
+		@autor = entity['AutorName']
+		if (@autor.nil?) then @autor = @creatorName end
+
 		@lastAutor = entity['LastUserName']
 
 		@dateDate = Date.parse(entity['CreateDate']);

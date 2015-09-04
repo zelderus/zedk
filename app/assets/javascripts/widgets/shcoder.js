@@ -59,6 +59,11 @@ shcoder._codeHightLight = function(opts) {
 */
 // кастомные стили для редактора
 // http://www.wysibb.com/docs/p3.html (https://github.com/wbb/wysibb/blob/master/jquery.wysibb.js)
+// 
+// При добавлении новых тэгов, также добавить во вьюшку логику к новому тэгу в файле 'views/shcoder/article.html.erb'
+//
+shcoder._bbcodeButtons = "bold,italic,underline,tt,ttr,|,h1,h2,h3,|,zlink,|,br,|,quote,codemark,|,minimarkbig,minimarksmall,|,back1,back2,|,code_ruby,code_sql,|,";
+//
 shcoder._bbcodeCustomTags = {
 	h1: {
 		hotkey: "ctrl+shift+4", //Add hotkey
@@ -205,7 +210,7 @@ shcoder.InitEditor = function(opts) {
 
 	//! Editor
 	var wbbOpt = {
-			buttons: "bold,italic,underline,tt,ttr,|,h1,h2,h3,|,zlink,|,br,|,quote,codemark,|,minimarkbig,minimarksmall,|,back1,back2,|,code_ruby,code_sql,|,",
+			buttons: shcoder._bbcodeButtons,
 			allButtons: shcoder._bbcodeCustomTags 
 		};
 	$(".BodyArea").wysibb(wbbOpt);

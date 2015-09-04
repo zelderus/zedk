@@ -1,8 +1,10 @@
 
 <%# 
-	name - имя
-	type - тип инпута
-	clss - имя классса стиля
+	name 	- имя
+	type 	- тип инпута
+	clss 	- имя классса стиля
+	run		- имя метода скрипта для выполнения (по нажатии Enter)
+	datas	- хэш данных, аля datas: {'txt'=>'some hello1', 'val'=>'vall2'}
 
 	Примеры:
 			= render "controls/input", type: 'hidden', name: 'ub'
@@ -10,9 +12,20 @@
  %>
 
  <%
+ 	haveRun = false
 	if (!defined? type) then type = 'text' end
 	if (!defined? clss) then clss = '' end
+	if (!defined? datas) then datas = Hash.new end
+	if (defined? run) then haveRun = true end
  %>
 
 
-<input class='ctrl-inp ctrl-inp-norm <%= clss %>' type='<%= type %>' name='<%= name %>'/>
+<input 
+	class='ctrl-inp ctrl-inp-norm <%= clss %> <%= (haveRun) ? "ctrl-inp-run" : "" %>' 
+	<% if (haveRun) %> data-run='<%=run%>' <% end %>
+	type='<%= type %>' 
+	name='<%= name %>'
+	<% datas.each {|key, value| %>
+		data-<%=key%>='<%=value%>'
+	<% } %> 
+/>

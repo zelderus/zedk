@@ -1,6 +1,6 @@
 
 
-<% if (has_menu) then
+<% #if (has_menu) then
 mmFirst = true
 %>
 
@@ -19,7 +19,13 @@ mmFirst = true
 			<% mmFirst = false; %>
 		<% end %>
 	</div>
+	<div class="menu-searcher">
+		<span class="menu-searcher-ic-look"></span>
+		<%= render "controls/input", type: 'text', name: 'search', run: 'zedk.panel.Search', datas: {'link'=>url_for(controller: 'welcome', action: 'search')  } %>
+	</div>
 </div>
-<% end %>
+<% 
+#end 
+%>
 
 

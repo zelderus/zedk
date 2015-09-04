@@ -122,7 +122,8 @@ module Clients
             		"IdName", 
             		"UserCreator_ID", 
             		"UserLastModificator_ID",
-            		"Category_ID")
+            		"Category_ID",
+            		"AutorName")
     			VALUES (
     				@id, 
     				@createDate, 
@@ -132,7 +133,8 @@ module Clients
     				@idname, 
     				@creatorId, 
             		@modificatorId,
-            		@categoryId
+            		@categoryId,
+            		@autor
             	);
 				'
 				req.set_str("id", article.id)
@@ -144,7 +146,8 @@ module Clients
 				req.set_str("creatorId", article.creatorId)
 				req.set_str("modificatorId", article.lastModificatorId)
 				req.set_str("categoryId", article.category.id)
-
+				req.set_str("autor", article.autor)
+				
 				dts = raw_sql(req, onError)
 				if (is_succ_response(dts)) then return true end
 			end
@@ -254,6 +257,7 @@ module Clients
 				  z."UserCreator_ID", 
 				  z."UserLastModificator_ID", 
 				  z."ModificateDate", 
+				  z."AutorName",
 				  u."Name" AS "UserName",
 				  mu."Name" AS "LastUserName",
 				  c."Id" AS "CategoryId",
