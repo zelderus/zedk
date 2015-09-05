@@ -1,5 +1,8 @@
 require "site/service"
+require "site/search_model"
+
 require "clients/site_client"
+
 
 
 
@@ -30,6 +33,9 @@ module WelcomeHelper
 			end
 			return services
 		end
+
+
+	
 
 
 

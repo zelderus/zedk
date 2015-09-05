@@ -1,6 +1,7 @@
 require "datalayer/baseclient"
 require "models/shcoder/shcoder_article"
 require "models/pager"
+require "helpers/string_helper"
 
 module Clients
 
@@ -223,6 +224,34 @@ module Clients
 			dts = raw_sql(req, onError)
 			if (is_succ_response(dts)) then return category end
 			return nil;
+		end
+
+
+
+
+		# поиск статей
+		def search_articles(txt, onError=nil)
+			sql = get_sqlbody_findarticle();
+			sql += ' AND (LOWER(z."Title") LIKE @srch OR LOWER(z."Teaser") LIKE @srch OR LOWER(z."Text") LIKE @srch)';
+			sql += 'order by "CreateDate" desc;'
+
+			req = DataLayer::Request.new
+			req.set sql
+			req.set_str("srch", "%#{StringHelper.downcase(txt)}%")
+
+			dts = raw_sql(req, onError)
+			return dts;
+		end
+		# поиск категорий статей
+		def search_article_categories(txt, onError=nil)
+			req = DataLayer::Request.new
+			sql = get_sqlbody_findcategory();
+			sql += ' AND (LOWER(c."Title") LIKE @srch)';
+			sql += ' ORDER BY c."Title" ASC;';
+			req.set sql
+			req.set_str("srch", "%#{StringHelper.downcase(txt)}%")
+			dts = raw_sql(req, onError)
+			return dts;
 		end
 
 

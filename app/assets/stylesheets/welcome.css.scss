@@ -22,3 +22,8 @@
 .SearchBlock .SearchBlock_Request .SearchBlock_Request_Title { }
 .SearchBlock .SearchBlock_Request .SearchBlock_Request_Req {font-weight: bold;}
 .SearchBlock .SearchBlock_Content { margin: 20px 0 20px 0; padding: 10px;}
+.SearchBlock .SearchBlock_Content .SearchBlock_Block { margin: 10px 0 20px 0;}
+.SearchBlock .SearchBlock_Content .SearchBlock_Block .SearchBlock_Content_Title { font-weight: bold;    font: 20px/26px Arial,Helvetica,sans-serif;  margin: 0 0 5px 0;}
+.SearchBlock .SearchBlock_Content .SearchBlock_Block .SearchBlock_Content_Founds {}
+.SearchBlock .SearchBlock_Content .SearchBlock_Block .SearchBlock_Content_Founds .SearchBlock_Item {margin: 2px 0 5px 0;font-size: 14px;}
+

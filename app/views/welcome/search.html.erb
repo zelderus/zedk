@@ -5,7 +5,23 @@
 	<div class="SearchBlock_Request"><span class="SearchBlock_Request_Title">Запрос: </span><span class="SearchBlock_Request_Req"><%= @txt %></span></div>
 
 	<div class="SearchBlock_Content">
-		не реализовано еще
+		<% @found.each do |f| %>
+			<% 
+			vals = f[:values]; 
+			if (!vals.nil? && vals.count > 0)
+			%>
+			<div class="SearchBlock_Block">
+				<div class="SearchBlock_Content_Title"><%= f[:title] %></div>
+				<div class="SearchBlock_Content_Founds">
+					<% vals.each do |ob| %>
+						<div class="SearchBlock_Item">
+							<a href="<%= ob.url %>" target="_blank"><%= ob.title %></a>
+						</div>
+					<% end %>
+				</div>
+			</div>
+			<% end %>
+		<% end %>
 	</div>
 	
 

@@ -68,6 +68,19 @@ zedk.panel.Search = function(btn) {
 	var link = $btn.data("link");
 	var txt = $btn.val();
 
+	var minSymb = 3;
+	if (txt.length < minSymb){
+		zedk.Debug("Запрос слишком короткий. Необходимо минимум символов в строке поиска: " + minSymb);
+		zedk.ui.Message("Слишком короткий запрос", true);
+		// анимация инпута
+		var bgc = $btn.css("background-color");
+		$btn
+			.animate({ backgroundColor: "#aa0000"}, 500 )
+			.animate({ backgroundColor: bgc }, 500 );
+
+		return false;
+	}
+
 	var fullPath = link + "?txt=" + txt;
 	window.location.href = fullPath;
 

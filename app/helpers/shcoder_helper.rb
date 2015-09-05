@@ -1,4 +1,5 @@
 require "clients/shcoder_client"
+require "site/search_model"
 require "models/shcoder/shcoder_article"
 
 module ShcoderHelper
@@ -121,6 +122,40 @@ module ShcoderHelper
 			category.title = title;
 			category.id = SecureRandom.uuid;
 			return @client.create_category(category, method(:on_error))
+		end
+
+
+
+
+		# поиск статей
+		def search_articles txt
+			dts = @client.search_articles(txt, method(:on_error))
+			found = Array.new
+			if (dts.nil?) then return found end
+			dts.each do |e| 
+				shc = ::ShcoderArticle.new e;
+				# у всех статей права разрешены для всех, в поиске отдаем все
+				ss = ::SearchModel.new
+				ss.title = shc.title;
+				ss.url = shc.get_link();
+				found.push ss
+			end
+			return found
+		end
+		# поиск категорий статей
+		def search_article_categories txt
+			dts = @client.search_article_categories(txt, method(:on_error))
+			found = Array.new
+			if (dts.nil?) then return found end
+			dts.each do |e| 
+				shc = ::ShcoderCategory.new e;
+				# у всех статей права разрешены для всех, в поиске отдаем все
+				ss = ::SearchModel.new
+				ss.title = shc.title;
+				ss.url = shc.get_link();
+				found.push ss
+			end
+			return found
 		end
 
 				

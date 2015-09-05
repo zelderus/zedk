@@ -4,7 +4,7 @@
 # => Модель найденыша
 #
 class SearchModel
-	attr_accessor :title, :url, :service
+	attr_accessor :title, :url
 
 	def initialize()
 		
