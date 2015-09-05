@@ -62,7 +62,7 @@ shcoder._codeHightLight = function(opts) {
 // 
 // При добавлении новых тэгов, также добавить во вьюшку логику к новому тэгу в файле 'views/shcoder/article.html.erb'
 //
-shcoder._bbcodeButtons = "bold,italic,underline,tt,ttr,|,h1,h2,h3,|,zlink,|,br,|,quote,codemark,|,minimarkbig,minimarksmall,|,back1,back2,|,code_ruby,code_sql,code_js,|,";
+shcoder._bbcodeButtons = "bold,italic,underline,tt,ttr,|,h1,h2,h3,|,zlink,|,br,|,quote,codemark,|,minimarkbig,minimarksmall,|,back1,back2,|,code_ruby,code_sql,code_js,code_ng,code_cs,|,";
 //
 shcoder._bbcodeCustomTags = {
 	h1: {
@@ -189,6 +189,20 @@ shcoder._bbcodeCustomTags = {
 		buttonText: 'CODE"JS',
 		transform: {
 			'<pre><code class="js">{SELTEXT}</code></pre>':'[cd_js]{SELTEXT}[/cd_js]'
+		}
+    },
+    code_ng: {
+		title: 'Code Nginx',
+		buttonText: 'CODE"NG',
+		transform: {
+			'<pre><code class="nginx">{SELTEXT}</code></pre>':'[cd_ng]{SELTEXT}[/cd_ng]'
+		}
+    },
+    code_cs: {
+		title: 'Code C#',
+		buttonText: 'CODE"CS',
+		transform: {
+			'<pre><code class="cs">{SELTEXT}</code></pre>':'[cd_cs]{SELTEXT}[/cd_cs]'
 		}
     }
 

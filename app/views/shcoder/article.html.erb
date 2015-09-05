@@ -74,6 +74,14 @@ bbc_blockquote = {
 	'cd_js' => [
 		/\[cd_js\](.*?)\[\/cd_js\1?\]/mi,
 		'<pre><code class="js">\1</code></pre>'
+	],
+	'cd_ng' => [
+		/\[cd_ng\](.*?)\[\/cd_ng\1?\]/mi,
+		'<pre><code class="nginx">\1</code></pre>'
+	],
+	'cd_cs' => [
+		/\[cd_cs\](.*?)\[\/cd_cs\1?\]/mi,
+		'<pre><code class="cs">\1</code></pre>'
 	]
 }
 
