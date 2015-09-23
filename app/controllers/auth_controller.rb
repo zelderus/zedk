@@ -94,7 +94,7 @@ class AuthController < BaseController
 		end
 		# очистка куков
 		def user_cookie_clear
-			cookies.delete :zka
+			cookies.delete :zka, :domain => :all
 		end
 		# id пользователя для кук
 		def cookie_user_parse_to
