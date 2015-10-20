@@ -117,6 +117,12 @@ class ShcoderController < ApplicationController
 			set_title(t('shcoder_headers_title'))
 			set_headers(t('shcoder_headers_keyword'), t('shcoder_headers_desc'))
 			set_menu([ ['Shcoder', '/shcoder'], [t('shcoder_menu_add'), ''] ])
+			# params
+			categoryIdName = params[:idcatname]
+			if (!categoryIdName.nil?)
+				@category = client.get_category_by_idname(categoryIdName);
+				
+			end
 		end
 		# page
 		add_js('shcoder')

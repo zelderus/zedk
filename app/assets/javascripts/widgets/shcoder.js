@@ -62,7 +62,8 @@ shcoder._codeHightLight = function(opts) {
 // 
 // При добавлении новых тэгов, также добавить во вьюшку логику к новому тэгу в файле 'views/shcoder/article.html.erb'
 //
-shcoder._bbcodeButtons = "bold,italic,underline,tt,ttr,|,h1,h2,h3,|,zlink,|,br,|,quote,codemark,|,minimarkbig,minimarksmall,|,back1,back2,|,code_ruby,code_sql,code_js,code_ng,code_cs,|,";
+shcoder._bbcodeButtons = "bold,italic,underline,tt,ttr,|,h1,h2,h3,|,zlink,|,br,|,quote,codemark,|,minimarkbig,minimarksmall,|,back1,back2,|,codes,|,";
+shcoder._bbcodeCodes = "code_ruby,code_sql,code_js,code_ng,code_cs,code_cpp";
 //
 shcoder._bbcodeCustomTags = {
 	h1: {
@@ -170,6 +171,11 @@ shcoder._bbcodeCustomTags = {
 		}
     },
 
+    codes: {
+		type: 'select',
+		title: 'Codes',
+		options: shcoder._bbcodeCodes
+	},
     code_ruby: {
 		title: 'Code Ruby',
 		buttonText: 'CODE"RB',
@@ -204,7 +210,15 @@ shcoder._bbcodeCustomTags = {
 		transform: {
 			'<pre><code class="cs">{SELTEXT}</code></pre>':'[cd_cs]{SELTEXT}[/cd_cs]'
 		}
+    },
+    code_cpp: {
+		title: 'Code C++',
+		buttonText: 'CODE"CP',
+		transform: {
+			'<pre><code class="cpp">{SELTEXT}</code></pre>':'[cd_cp]{SELTEXT}[/cd_cp]'
+		}
     }
+    
 
 };
 shcoder._editOpts = {};

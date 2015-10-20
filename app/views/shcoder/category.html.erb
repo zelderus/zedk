@@ -16,6 +16,10 @@
 			<%= render "articles", articles: @articles %>
 			<%= render "shared/pager", pager: @pager %>
 		</div>
+		<% if (ShcoderHelper.user_access(@user)) %>
+			<div><%= render "controls/button", name: 'addArticleBtn', href: url_for(controller: 'shcoder', action: 'edit_article', idname: '', idcatname: @category.idname), title: 'Добавить статью', style: 'normal'  %></div>
+		<% end %>
+
 	<% else %>
 		<div class='ShcCategories ShcList'>
 			<h1>Категории</h1>
@@ -27,6 +31,7 @@
 			<% end %>
 		</div>
 	<% end %>
+
 
 	
 </div>

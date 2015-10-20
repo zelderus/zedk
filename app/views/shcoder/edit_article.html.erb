@@ -40,7 +40,7 @@
 			<select class="ShcEditInp" name="category">
 				<option value="">- Выберите категорию -</option>
 				<% @categories.each do |category| %>
-					<option value="<%=category.id %>" <%=if (@article.category.id == category.id) then "selected='selected'" end %> ><%=category.title %></option>
+					<option value="<%=category.id %>" <%=if (@article.category.id == category.id || (!@category.nil? && @category.id == category.id)) then "selected='selected'" end %> ><%=category.title %></option>
 				<% end %>
 			</select>
 		</div>
