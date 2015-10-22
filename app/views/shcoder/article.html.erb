@@ -92,7 +92,13 @@ bbc_blockquote = {
 %>
 <div class='ShcoderMain'>
 
-	<div class='ShcArticle'>
+	<div class='ShcArticle' itemscope itemtype="http://schema.org/Article">
+		<div style="display:none;">
+			<div itemprop="author"><%= @article.autor %></div>
+			<div itemprop="dateCreated"><%= @article.dateDate.strftime('%Y-%m-%d') %></div>
+			<div itemprop="editor"><%= @article.lastAutor %></div>
+			<div itemprop="dateModified"><%= @article.modDate.strftime('%Y-%m-%d') %></div>
+		</div>
 		<div class='ShcArticle_Date'>
 			<div class="ShcArticle_Date_Days"><%= @article.dateDate.strftime('%d/%m') %></div>
 			<div class="ShcArticle_Date_Year"><%= @article.dateDate.strftime('%Y') %></div>
@@ -102,12 +108,12 @@ bbc_blockquote = {
 			<span class="ShcArticle_ModDate" title="<%= "последнее обновление #{@article.lastDate} - #{@article.lastAutor}" %>"> </span>
 		<% end %>
 
-		<h1 class='ShcArticle_Title page_title'><%= @article.title %></h1>	
+		<h1 class='ShcArticle_Title page_title' itemprop="name"><%= @article.title %></h1>	
 		<div class="clear"></div>
 
-		<div class='ShcArticle_Teaser'><%= @article.teaser %></div>
+		<div class='ShcArticle_Teaser' style="display:none;" itemprop="description"><%= @article.teaser %></div>
 
-		<div class='ShcArticle_Text'>
+		<div class='ShcArticle_Text' itemprop="articleBody">
 			<%= @article.text.bbcode_to_html(bbc_blockquote, true, :disable, :link).html_safe %>
 		</div>
 

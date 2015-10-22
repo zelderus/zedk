@@ -27,9 +27,39 @@ shcoder.InitArticle = function(opts) {
  	
  	shcoder._codeHightLight();
 
+ 	// go to the header
+ 	shcoder._goToHash();
+
+ 	// headers click
+ 	$(".ShcArticle .bbc_h1").on("click", function(){
+ 		var t = $(this).html();
+ 		shcoder._ancorToLink(t);
+ 		shcoder._goToAncor(t);
+ 	});
+
 };
 
 
+shcoder._goToHash = function() {
+ 	shcoder._goToAncor(window.location.hash);
+};
+shcoder._ancorToLink = function(ancorName) {
+ 	window.location.hash = ancorName;
+};
+shcoder._goToAncor = function(ancorName) {
+	if (zelder.validators.IsNullOrEmpty(ancorName)) return false;
+	if (zelder.library.StringStartsWith(ancorName, '#')) ancorName = ancorName.substr(1);
+	
+
+ 	$(".ShcArticle .bbc_h1").each(function(i, v){
+ 		if ($(v).html() == ancorName){
+ 			$('html, body').animate({
+		        scrollTop: $(v).offset().top
+		    }, 200);
+ 			return false;
+ 		}
+ 	});
+};
 
 
 /*

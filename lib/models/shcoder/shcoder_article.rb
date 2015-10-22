@@ -11,7 +11,7 @@ class ShcoderArticleTeaser
 					:idname, 
 					:category,
 					:autor, :lastAutor,
-					:dateDate, :date, :lastDateDate, :lastDate, 
+					:dateDate, :date, :lastDateDate, :lastDate, :modDate,
 					:creatorId, :lastModificatorId, :creatorName
 
 	def initialize()
@@ -40,6 +40,7 @@ class ShcoderArticleTeaser
 
 		@lastDateDate = entity['ModificateDate'].nil? ? nil : Date.parse(entity['ModificateDate']);
 		@lastDate = @lastDateDate.nil? ? '' : @lastDateDate.strftime('%d.%m.%Y')
+		@modDate = entity['ModificateDate'].nil? ? @dateDate : Date.parse(entity['ModificateDate']);
 	end
 
 
