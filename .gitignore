@@ -15,6 +15,9 @@
 /log/*.log
 /tmp
 
+# идентификация
+public/yandex*
+
 # Игнорирование прочих ненужных файлов.
 database.yml
 doc/
