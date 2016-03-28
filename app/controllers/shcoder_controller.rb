@@ -77,7 +77,8 @@ class ShcoderController < ApplicationController
 		# page
 		set_title(@article.title)
 		set_autor(@article.autor)
-		set_headers(@article.title.gsub(' ', ','), @article.teaser)
+		#set_headers(@article.title.gsub(' ', ','), @article.teaser)
+		set_headers(@article.teaser.gsub(' ', ','), @article.teaser)
 		add_js('shcoder')
 		add_js('codehl', true)
 		add_css('codehl', true)

@@ -50,7 +50,6 @@ shcoder._goToAncor = function(ancorName) {
 	if (zelder.validators.IsNullOrEmpty(ancorName)) return false;
 	if (zelder.library.StringStartsWith(ancorName, '#')) ancorName = ancorName.substr(1);
 	
-
  	$(".ShcArticle .bbc_h1").each(function(i, v){
  		if ($(v).html() == ancorName){
  			$('html, body').animate({
